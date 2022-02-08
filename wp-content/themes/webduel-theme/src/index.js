@@ -1,5 +1,6 @@
 import "../css/style.scss"
 import Splide from '@splidejs/splide';
+import Drift from 'drift-zoom';
 
 // form 
 import Form from './modules/Form/Form'
@@ -98,8 +99,13 @@ window.onload = function () {
   thumbnails.mount();
   // $('.flex-control-nav').addClass('splide__list')
   // $('.flex-control-nav li').addClass('splide__slide')
+  var demoTrigger = document.querySelector('.single-product-image');
+  var paneContainer = document.querySelector('.zoom-pane-container');
 
+  new Drift(demoTrigger, {
+    paneContainer: paneContainer,
 
+  });
   // enquiry modal 
   const enquiryModal = new EnquiryModal();
   // cart modal 

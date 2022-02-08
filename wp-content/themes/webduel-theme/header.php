@@ -13,11 +13,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
      <link rel="profile" href="https://gmpg.org/xfn/11"/>
     <?php wp_head(); ?>
-    
+   
     <!-- windcave --> 
     <script src="https://dev.windcave.com/js/windcavepayments-seamless-v1.js"></script>
         <!-- splide -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
+       <!-- zoom -->
+       <script src="https://unpkg.com/js-image-zoom@0.7.0/js-image-zoom.js" type="application/javascript"></script>
+
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -252,7 +255,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     
 
     </section>
-
 
 
 

@@ -45,14 +45,17 @@ add_action('woocommerce_before_single_product_summary', function(){
     echo '<div class="splide" id="main-slider">
     <div class="splide__track">
           <ul class="splide__list">
-              <li class="splide__slide"><img  alt="'.get_the_title().'" 
+              <li class="splide__slide"  id="main-woo-image">
+              <img class="single-product-image"  alt="'.get_the_title().'" 
               sizes="100vw"
               data-splide-lazy-srcset="'.wp_get_attachment_image_src($product->get_image_id(), "woocommerce_thumbnail")[0].' 500w, '.wp_get_attachment_image_src($product->get_image_id(), "woocommerce_single")[0].' 900w"
-              data-splide-lazy="'.wp_get_attachment_image_src($product->get_image_id(), "woocommerce_single")[0].'" /></li>'; 
+              data-splide-lazy="'.wp_get_attachment_image_src($product->get_image_id(), "woocommerce_single")[0].'" />
+              <div class="zoom-pane-container"> </div>
+              </li>'; 
                             foreach( $attachment_ids as $attachment_id ) 
                     {
                     
-                   echo ' <li class="splide__slide"> 
+                   echo ' <li class="splide__slide"  > 
                    <img  alt="'.get_the_title().'" 
                    sizes="100vw"
                    data-splide-lazy-srcset="'.wp_get_attachment_image_src($attachment_id, "woocommerce_thumbnail")[0].' 500w, '.wp_get_attachment_image_src($attachment_id, "woocommerce_single")[0].' 900w"
@@ -95,3 +98,11 @@ function my_remove_all_product_tabs( $tabs ) {
 
 // remove sku code
 remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
+
+
+// add zoom page under the title 
+// add_action('woocommerce_single_product_summary', function() { 
+//   echo '<div class="zoom-pane-container"> </div>';
+// }, 10);
+?>
+

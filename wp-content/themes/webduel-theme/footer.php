@@ -197,22 +197,18 @@
   <a href="#header"><i class="fal fa-angle-up"></i></a>
 </div>
 
-<?php wp_footer();?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/magnify/2.3.3/js/jquery.magnify.min.js"
-  integrity="sha512-YKxHqn7D0M5knQJO2xKHZpCfZ+/Ta7qpEHgADN+AkY2U2Y4JJtlCEHzKWV5ZE87vZR3ipdzNJ4U/sfjIaoHMfw=="
-  crossorigin="anonymous" defer></script>
+<!-- drift  -->
 
-<!-- Optional mobile plugin (uncomment the line below to enable): -->
-<!-- <script src="/js/jquery.magnify-mobile.js"></script> -->
+ 
+  <img class="demo-trigger" src="https://demos.imgix.net/wristwatch.jpg?w=200&ch=DPR&dpr=2&border=1,ddd" data-zoom="https://demos.imgix.net/wristwatch.jpg?w=1000&ch=DPR&dpr=2">
+  <div class="detail">
 
-<script>
+  </div>
   
-  jQuery(document).ready(function ($) {
-    $('.zoom').magnify({
-      magnifiedWidth: 1500
-    });
-  });
-</script>
+
+
+
+<?php wp_footer();?>
 
 </body>
 
