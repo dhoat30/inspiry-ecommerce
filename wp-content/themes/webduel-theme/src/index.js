@@ -99,13 +99,50 @@ window.onload = function () {
   thumbnails.mount();
   // $('.flex-control-nav').addClass('splide__list')
   // $('.flex-control-nav li').addClass('splide__slide')
-  var demoTrigger = document.querySelector('.single-product-image');
-  var paneContainer = document.querySelector('.zoom-pane-container');
 
-  new Drift(demoTrigger, {
-    paneContainer: paneContainer,
+  var paneContainer = document.querySelectorAll('#main-slider-list .splide__slide');
 
-  });
+  // demoTrigger.map(item => {
+  //   console.log(item)
+  //   new Drift(item, {
+  //     zoomFactor: 2
+  //   });
+  // })
+  // let drift
+  // $('.single-product-image').each(function (item, el) {
+  //   drift = new Drift(el, {
+  //     zoomFactor: 2
+  //   });
+  // })
+  let drift
+  var triggerEl = document.querySelectorAll(".single-product-image");
+  if (triggerEl.length > 1) {
+
+    $(triggerEl).each(function (i, el) {
+      drift = new Drift(el, {
+        paneContainer: paneContainer[i],
+        zoomFactor: 1.5,
+        containInline: true,
+        handleTouch: true,
+      });
+
+      main.on('moved', function (e) {
+        let newSrc
+        if (e === i) {
+          console.log(i)
+          console.log(e)
+          newSrc = $(el).attr('src')
+        }
+
+        drift.setZoomImageURL(newSrc);
+        el.setAttribute("data-zoom", newSrc);
+      });
+
+    })
+  }
+
+
+
   // enquiry modal 
   const enquiryModal = new EnquiryModal();
   // cart modal 

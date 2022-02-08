@@ -48,16 +48,19 @@ add_action('woocommerce_before_single_product_summary', function(){
               <li class="splide__slide"  id="main-woo-image">
               <img class="single-product-image"  alt="'.get_the_title().'" 
               sizes="100vw"
+              data-zoom="'.wp_get_attachment_image_src($product->get_image_id(), "woocommerce_single")[0].'"
               data-splide-lazy-srcset="'.wp_get_attachment_image_src($product->get_image_id(), "woocommerce_thumbnail")[0].' 500w, '.wp_get_attachment_image_src($product->get_image_id(), "woocommerce_single")[0].' 900w"
               data-splide-lazy="'.wp_get_attachment_image_src($product->get_image_id(), "woocommerce_single")[0].'" />
-              <div class="zoom-pane-container"> </div>
               </li>'; 
                             foreach( $attachment_ids as $attachment_id ) 
                     {
                     
                    echo ' <li class="splide__slide"  > 
-                   <img  alt="'.get_the_title().'" 
+                   <img  
+                   class="single-product-image"
+                   alt="'.get_the_title().'" 
                    sizes="100vw"
+                   data-zoom="'.wp_get_attachment_image_src($product->get_image_id(), "woocommerce_single")[0].'"
                    data-splide-lazy-srcset="'.wp_get_attachment_image_src($attachment_id, "woocommerce_thumbnail")[0].' 500w, '.wp_get_attachment_image_src($attachment_id, "woocommerce_single")[0].' 900w"
                    data-splide-lazy="'.wp_get_attachment_image_src($attachment_id, "woocommerce_single")[0].'" />
                    ';  
