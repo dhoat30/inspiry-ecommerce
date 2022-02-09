@@ -1,3 +1,5 @@
+let $ = jQuery;
+
 import "../css/style.scss"
 import Splide from '@splidejs/splide';
 import Drift from 'drift-zoom';
@@ -44,12 +46,19 @@ import FacetFilter from './modules/FacetFilter/FacetFilter'
 import CustomerServiceMenu from './modules/CustomerService/CustomerServiceMenu'
 import ContactForm from './modules/CustomerService/ContactForm'
 import FeedbackForm from './modules/CustomerService/FeedbackForm'
-let $ = jQuery;
 
+// woocommerce 
+import WooGallery from './modules/Woocommerce/WooGallery'
+
+
+// woo Gallery 
+const wooGallery = new WooGallery()
 window.onload = function () {
-  //send request to 
-  //create board function 
-  var main = new Splide('#main-slider', {
+  $('.woocommerce-product-gallery').addClass('splide')
+  $('.flex-viewport').addClass('splide__track')
+  $('.woocommerce-product-gallery__wrapper').addClass('splide__list')
+  $('.woocommerce-product-gallery__image').addClass('splide__slide')
+  var main = new Splide('.splide', {
     type: 'fade',
     rewind: true,
     pagination: false,
@@ -61,88 +70,7 @@ window.onload = function () {
       },
     }
   });
-
-  var thumbnails = new Splide('#thumbnail-slider', {
-    direction: 'ttb',
-    height: '10rem',
-    width: 150,
-    height: '70vh',
-    perPage: 7,
-    gap: 10,
-    rewind: true,
-    pagination: false,
-    cover: true,
-    isNavigation: true,
-    arrows: false,
-    pagination: true,
-    lazyLoad: 'nearby',
-    breakpoints: {
-      1520: {
-        perPage: 6,
-        height: '60vh',
-      },
-      1300: {
-        perPage: 5,
-        height: '50vh',
-      },
-      1100: {
-        direction: 'ltr',
-        perPage: 5,
-        height: '50vh',
-        destroy: true
-      },
-    }
-
-  });
-  main.sync(thumbnails);
   main.mount();
-  thumbnails.mount();
-  // $('.flex-control-nav').addClass('splide__list')
-  // $('.flex-control-nav li').addClass('splide__slide')
-
-  var paneContainer = document.querySelectorAll('#main-slider-list .splide__slide');
-
-  // demoTrigger.map(item => {
-  //   console.log(item)
-  //   new Drift(item, {
-  //     zoomFactor: 2
-  //   });
-  // })
-  // let drift
-  // $('.single-product-image').each(function (item, el) {
-  //   drift = new Drift(el, {
-  //     zoomFactor: 2
-  //   });
-  // })
-  let drift
-  var triggerEl = document.querySelectorAll(".single-product-image");
-  if (triggerEl.length > 1) {
-
-    $(triggerEl).each(function (i, el) {
-      drift = new Drift(el, {
-        paneContainer: paneContainer[i],
-        zoomFactor: 1.5,
-        containInline: true,
-        handleTouch: true,
-      });
-
-      main.on('moved', function (e) {
-        let newSrc
-        if (e === i) {
-          console.log(i)
-          console.log(e)
-          newSrc = $(el).attr('src')
-        }
-
-        drift.setZoomImageURL(newSrc);
-        el.setAttribute("data-zoom", newSrc);
-      });
-
-    })
-  }
-
-
-
   // enquiry modal 
   const enquiryModal = new EnquiryModal();
   // cart modal 

@@ -18,9 +18,8 @@
     <script src="https://dev.windcave.com/js/windcavepayments-seamless-v1.js"></script>
         <!-- splide -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
-       <!-- zoom -->
-       <script src="https://unpkg.com/js-image-zoom@0.7.0/js-image-zoom.js" type="application/javascript"></script>
-
+     <!-- font awesome  -->
+     <script src="https://kit.fontawesome.com/71827cc3f2.js" crossorigin="anonymous"></script>
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -255,9 +254,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     
 
     </section>
-
-
-
 
 
     <!-- gtag manager data -->

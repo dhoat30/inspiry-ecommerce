@@ -2952,6 +2952,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_CustomerService_CustomerServiceMenu__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./modules/CustomerService/CustomerServiceMenu */ "./src/modules/CustomerService/CustomerServiceMenu.js");
 /* harmony import */ var _modules_CustomerService_ContactForm__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./modules/CustomerService/ContactForm */ "./src/modules/CustomerService/ContactForm.js");
 /* harmony import */ var _modules_CustomerService_FeedbackForm__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./modules/CustomerService/FeedbackForm */ "./src/modules/CustomerService/FeedbackForm.js");
+/* harmony import */ var _modules_Woocommerce_WooGallery__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./modules/Woocommerce/WooGallery */ "./src/modules/Woocommerce/WooGallery.js");
+let $ = jQuery;
 
 
  // form 
@@ -2986,13 +2988,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+ // woocommerce 
 
-let $ = jQuery;
+ // woo Gallery 
+
+const wooGallery = new _modules_Woocommerce_WooGallery__WEBPACK_IMPORTED_MODULE_23__["default"]();
 
 window.onload = function () {
-  //send request to 
-  //create board function 
-  var main = new _splidejs_splide__WEBPACK_IMPORTED_MODULE_1__["default"]('#main-slider', {
+  $('.woocommerce-product-gallery').addClass('splide');
+  $('.flex-viewport').addClass('splide__track');
+  $('.woocommerce-product-gallery__wrapper').addClass('splide__list');
+  $('.woocommerce-product-gallery__image').addClass('splide__slide');
+  var main = new _splidejs_splide__WEBPACK_IMPORTED_MODULE_1__["default"]('.splide', {
     type: 'fade',
     rewind: true,
     pagination: false,
@@ -3004,81 +3011,7 @@ window.onload = function () {
       }
     }
   });
-  var thumbnails = new _splidejs_splide__WEBPACK_IMPORTED_MODULE_1__["default"]('#thumbnail-slider', {
-    direction: 'ttb',
-    height: '10rem',
-    width: 150,
-    height: '70vh',
-    perPage: 7,
-    gap: 10,
-    rewind: true,
-    pagination: false,
-    cover: true,
-    isNavigation: true,
-    arrows: false,
-    pagination: true,
-    lazyLoad: 'nearby',
-    breakpoints: {
-      1520: {
-        perPage: 6,
-        height: '60vh'
-      },
-      1300: {
-        perPage: 5,
-        height: '50vh'
-      },
-      1100: {
-        direction: 'ltr',
-        perPage: 5,
-        height: '50vh',
-        destroy: true
-      }
-    }
-  });
-  main.sync(thumbnails);
-  main.mount();
-  thumbnails.mount(); // $('.flex-control-nav').addClass('splide__list')
-  // $('.flex-control-nav li').addClass('splide__slide')
-
-  var paneContainer = document.querySelectorAll('#main-slider-list .splide__slide'); // demoTrigger.map(item => {
-  //   console.log(item)
-  //   new Drift(item, {
-  //     zoomFactor: 2
-  //   });
-  // })
-  // let drift
-  // $('.single-product-image').each(function (item, el) {
-  //   drift = new Drift(el, {
-  //     zoomFactor: 2
-  //   });
-  // })
-
-  let drift;
-  var triggerEl = document.querySelectorAll(".single-product-image");
-
-  if (triggerEl.length > 1) {
-    $(triggerEl).each(function (i, el) {
-      drift = new drift_zoom__WEBPACK_IMPORTED_MODULE_2__["default"](el, {
-        paneContainer: paneContainer[i],
-        zoomFactor: 1.5,
-        containInline: true,
-        handleTouch: true
-      });
-      main.on('moved', function (e) {
-        let newSrc;
-
-        if (e === i) {
-          console.log(i);
-          console.log(e);
-          newSrc = $(el).attr('src');
-        }
-
-        drift.setZoomImageURL(newSrc);
-        el.setAttribute("data-zoom", newSrc);
-      });
-    });
-  } // enquiry modal 
-
+  main.mount(); // enquiry modal 
 
   const enquiryModal = new _modules_EnquiryModal_EnquiryModal__WEBPACK_IMPORTED_MODULE_14__["default"](); // cart modal 
 
@@ -5438,6 +5371,108 @@ class CheckoutInputValidation {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (CheckoutInputValidation);
+
+/***/ }),
+
+/***/ "./src/modules/Woocommerce/WooGallery.js":
+/*!***********************************************!*\
+  !*** ./src/modules/Woocommerce/WooGallery.js ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _splidejs_splide__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @splidejs/splide */ "./node_modules/@splidejs/splide/dist/js/splide.esm.js");
+/* harmony import */ var drift_zoom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! drift-zoom */ "./node_modules/drift-zoom/es/Drift.js");
+const $ = jQuery;
+
+
+
+class WooGallery {
+  constructor() {// this.events()
+  }
+
+  events() {
+    this.slideShow();
+  }
+
+  slideShow() {
+    var main = new _splidejs_splide__WEBPACK_IMPORTED_MODULE_0__["default"]('#main-slider', {
+      type: 'fade',
+      rewind: true,
+      pagination: false,
+      arrows: true,
+      lazyLoad: 'sequential',
+      breakpoints: {
+        1100: {
+          pagination: true
+        }
+      }
+    });
+    var thumbnails = new _splidejs_splide__WEBPACK_IMPORTED_MODULE_0__["default"]('#thumbnail-slider', {
+      direction: 'ttb',
+      height: '10rem',
+      width: 150,
+      height: '70vh',
+      perPage: 7,
+      gap: 10,
+      rewind: true,
+      pagination: false,
+      cover: true,
+      isNavigation: true,
+      arrows: false,
+      pagination: true,
+      lazyLoad: 'nearby',
+      breakpoints: {
+        1520: {
+          perPage: 6,
+          height: '60vh'
+        },
+        1300: {
+          perPage: 5,
+          height: '50vh'
+        },
+        1100: {
+          direction: 'ltr',
+          perPage: 5,
+          height: '50vh',
+          destroy: true
+        }
+      }
+    });
+    main.sync(thumbnails);
+    main.mount();
+    thumbnails.mount(); // drift 
+
+    let drift;
+    var triggerEl = document.querySelectorAll(".single-product-image");
+
+    if (triggerEl.length > 1) {
+      $(triggerEl).each(function (i, el) {
+        drift = new drift_zoom__WEBPACK_IMPORTED_MODULE_1__["default"](el, {
+          zoomFactor: 1.5,
+          containInline: true,
+          handleTouch: true
+        });
+        main.on('moved', function (e) {
+          let newSrc;
+
+          if (e === i) {
+            console.log(i);
+            console.log(e);
+            newSrc = $(el).attr('src');
+          }
+
+          drift.setZoomImageURL(newSrc);
+          el.setAttribute("data-zoom", newSrc);
+        });
+      });
+    }
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (WooGallery);
 
 /***/ }),
 

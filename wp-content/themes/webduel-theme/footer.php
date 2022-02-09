@@ -111,99 +111,11 @@
 </footer>
 
 
-<!--design board container-->
-<div class="overlay"></div>
-<div class="board-overlay">
-  <div class="choose-board-container" data-post-id="value" data-post-title="value">
-    <div class="choose-board">Choose Board</div>
-    <div class="close-icon">X</div>
-    <ul class="board-list">
-      <?php 
-                                        
-                                        //wp query to get parent title of boards 
-                                        
-                                        $boardLoop = new WP_Query(array(
-                                            'post_type' => 'boards', 
-                                            'post_parent' => 0,
-                                            'author' => get_current_user_id()
-                                        ));
-                                        
-                                        while($boardLoop->have_posts()){
-                                            $boardLoop->the_post(); 
-                                            
-                                        }
-                                    
-                                            while($boardLoop->have_posts()){ 
-                                                $boardLoop->the_post(); 
-                                                global $product;
-                                                // $productImage = wp_get_attachment_url( $product->get_image_id() );
-                                                ?>
-      <li class="board-list-item" data-boardID='<?php echo get_the_id(); ?>' 
-      data-boardID='<?php echo $productImage; ?>'
-        data-postStatus='<?php echo get_post_status();?>'>
-
-        <?php 
-                                                            
-                                                        the_title();?>
-        <div class="custom-loader"></div>
-
-      </li>
-
-      <?php
-                                                wp_reset_postdata(  );
-                                            }
-                                        ?>
-    </ul>
-    <div class="create-new-board"><i class="fal fa-plus"></i> Create New Board</div>
-  </div>
-
-  <div class="project-save-form-section">
-
-    <div class="project-save-form-container">
-      <div class="poppins-font regular form-title medium-font-size">Create Board</div>
-      <div class="form-underline"></div>
-      <div class="form">
-        <form id="new-board-form">
-          <label for="name">Give your board a title*</label>
-          <input type="text" name="board-name" id="board-name" required>
-          <label for="description">Description</label>
-          <textarea name="board-description" id="board-description" cols="30" rows="10"></textarea>
-          <div class="toggle-btn-container">
-            <label class="tgl tgl-gray" style="font-size:30px">
-              <input type="checkbox" checked />
-              <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
-            </label>
-            <div class="toggle-status poppins-font thin"><i class="fal fa-lock"></i> Private
-            </div>
-
-          </div>
-          <div class="toggle-status-info poppins-font paragraph-font-size regular">
-            Private boards cannot be shared with the general public.
-          </div>
-
-          <div class="btn-container">
-            <button type="button" class="cancel-btn btn"> Cancel</button>
-            <button type="submit" class="save-btn btn btn-dk-green archive-save-btn"> Save</button>
-
-            <div class="custom-loader"></div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="go-to-header hide" id='go-to-header'>
   <a href="#header"><i class="fal fa-angle-up"></i></a>
 </div>
 
-<!-- drift  -->
 
- 
-  <img class="demo-trigger" src="https://demos.imgix.net/wristwatch.jpg?w=200&ch=DPR&dpr=2&border=1,ddd" data-zoom="https://demos.imgix.net/wristwatch.jpg?w=1000&ch=DPR&dpr=2">
-  <div class="detail">
-
-  </div>
   
 
 

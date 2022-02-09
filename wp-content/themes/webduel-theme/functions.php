@@ -45,7 +45,9 @@ require get_theme_file_path('/inc/windcave-session.php');
 
 // woocommerce 
 require get_theme_file_path('/inc/woocommerce/image-size.php');
-require get_theme_file_path('/inc/woocommerce/single-product.php');
+require get_theme_file_path('/inc/woocommerce/single-product/image-gallery.php');
+require get_theme_file_path('/inc/woocommerce/single-product/product-summary.php');
+require get_theme_file_path('/inc/woocommerce/single-product/related-product.php');
 
 
 
@@ -54,13 +56,11 @@ require get_theme_file_path('/inc/woocommerce/single-product.php');
 
   
    wp_enqueue_script('main-university-js', get_theme_file_uri('/build/index.js'), array('jquery'), '1.0', true);
-   wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
    wp_enqueue_style('university_main_styles', get_theme_file_uri('/build/style-index.css'));
    wp_enqueue_style('university_extra_styles', get_theme_file_uri('/build/index.css'));
 
    wp_enqueue_script("jQuery");
-   wp_enqueue_script('font-awesome', 'https://kit.fontawesome.com/f3cb7ab01f.js', NULL, '1.0', false);
-   wp_enqueue_script('font-awesome', 'https://kit.fontawesome.com/f3cb7ab01f.js', NULL, '1.0', false);
+  //  wp_enqueue_script('font-awesome', 'https://kit.fontawesome.com/f3cb7ab01f.js', NULL, '1.0', false);
     
     wp_localize_script("main", "inspiryData", array(
       "root_url" => get_site_url(),
