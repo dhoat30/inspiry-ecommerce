@@ -54,23 +54,7 @@ import WooGallery from './modules/Woocommerce/WooGallery'
 // woo Gallery 
 const wooGallery = new WooGallery()
 window.onload = function () {
-  $('.woocommerce-product-gallery').addClass('splide')
-  $('.flex-viewport').addClass('splide__track')
-  $('.woocommerce-product-gallery__wrapper').addClass('splide__list')
-  $('.woocommerce-product-gallery__image').addClass('splide__slide')
-  var main = new Splide('.splide', {
-    type: 'fade',
-    rewind: true,
-    pagination: false,
-    arrows: true,
-    lazyLoad: 'sequential',
-    breakpoints: {
-      1100: {
-        pagination: true,
-      },
-    }
-  });
-  main.mount();
+
   // enquiry modal 
   const enquiryModal = new EnquiryModal();
   // cart modal 

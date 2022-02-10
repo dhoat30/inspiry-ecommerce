@@ -2995,24 +2995,7 @@ let $ = jQuery;
 const wooGallery = new _modules_Woocommerce_WooGallery__WEBPACK_IMPORTED_MODULE_23__["default"]();
 
 window.onload = function () {
-  $('.woocommerce-product-gallery').addClass('splide');
-  $('.flex-viewport').addClass('splide__track');
-  $('.woocommerce-product-gallery__wrapper').addClass('splide__list');
-  $('.woocommerce-product-gallery__image').addClass('splide__slide');
-  var main = new _splidejs_splide__WEBPACK_IMPORTED_MODULE_1__["default"]('.splide', {
-    type: 'fade',
-    rewind: true,
-    pagination: false,
-    arrows: true,
-    lazyLoad: 'sequential',
-    breakpoints: {
-      1100: {
-        pagination: true
-      }
-    }
-  });
-  main.mount(); // enquiry modal 
-
+  // enquiry modal 
   const enquiryModal = new _modules_EnquiryModal_EnquiryModal__WEBPACK_IMPORTED_MODULE_14__["default"](); // cart modal 
 
   const cartModal = new _modules_CartModal_CartModal__WEBPACK_IMPORTED_MODULE_15__["default"](); // form data processing 
@@ -5382,90 +5365,43 @@ class CheckoutInputValidation {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _splidejs_splide__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @splidejs/splide */ "./node_modules/@splidejs/splide/dist/js/splide.esm.js");
-/* harmony import */ var drift_zoom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! drift-zoom */ "./node_modules/drift-zoom/es/Drift.js");
+/* harmony import */ var owl_carousel_dist_assets_owl_carousel_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! owl.carousel/dist/assets/owl.carousel.css */ "./node_modules/owl.carousel/dist/assets/owl.carousel.css");
+/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! owl.carousel */ "./node_modules/owl.carousel/dist/owl.carousel.js");
+/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(owl_carousel__WEBPACK_IMPORTED_MODULE_1__);
 const $ = jQuery;
 
 
 
 class WooGallery {
-  constructor() {// this.events()
+  constructor() {
+    this.events();
   }
 
   events() {
+    // owl  carousel for single product page
     this.slideShow();
   }
 
   slideShow() {
-    var main = new _splidejs_splide__WEBPACK_IMPORTED_MODULE_0__["default"]('#main-slider', {
-      type: 'fade',
-      rewind: true,
-      pagination: false,
-      arrows: true,
-      lazyLoad: 'sequential',
-      breakpoints: {
-        1100: {
-          pagination: true
-        }
-      }
-    });
-    var thumbnails = new _splidejs_splide__WEBPACK_IMPORTED_MODULE_0__["default"]('#thumbnail-slider', {
-      direction: 'ttb',
-      height: '10rem',
-      width: 150,
-      height: '70vh',
-      perPage: 7,
-      gap: 10,
-      rewind: true,
-      pagination: false,
-      cover: true,
-      isNavigation: true,
-      arrows: false,
-      pagination: true,
-      lazyLoad: 'nearby',
-      breakpoints: {
-        1520: {
-          perPage: 6,
-          height: '60vh'
-        },
-        1300: {
-          perPage: 5,
-          height: '50vh'
-        },
-        1100: {
-          direction: 'ltr',
-          perPage: 5,
-          height: '50vh',
-          destroy: true
-        }
-      }
-    });
-    main.sync(thumbnails);
-    main.mount();
-    thumbnails.mount(); // drift 
+    var x = window.matchMedia("(max-width: 800px)");
 
-    let drift;
-    var triggerEl = document.querySelectorAll(".single-product-image");
-
-    if (triggerEl.length > 1) {
-      $(triggerEl).each(function (i, el) {
-        drift = new drift_zoom__WEBPACK_IMPORTED_MODULE_1__["default"](el, {
-          zoomFactor: 1.5,
-          containInline: true,
-          handleTouch: true
-        });
-        main.on('moved', function (e) {
-          let newSrc;
-
-          if (e === i) {
-            console.log(i);
-            console.log(e);
-            newSrc = $(el).attr('src');
+    if (x.matches) {
+      $('.woocommerce-product-gallery__wrapper').addClass('owl-carousel');
+      $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        responsive: {
+          0: {
+            items: 1
+          },
+          600: {
+            items: 1
+          },
+          1000: {
+            items: 1
           }
-
-          drift.setZoomImageURL(newSrc);
-          el.setAttribute("data-zoom", newSrc);
-        });
+        }
       });
     }
   }
