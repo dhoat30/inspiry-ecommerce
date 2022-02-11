@@ -28,7 +28,7 @@
 @import "modules/second-front-page";
 
 /* woocommerce form css */
-@import "modules/woocommerce/enquire-form";
+@import "modules/woocommerce/single-product/enquire-form";
 @import "modules/woocommerce/single-product/single-product";
 @import "modules/woocommerce/single-product/image";
 @import "modules/woocommerce/single-product/product-summary";
@@ -56,8 +56,10 @@
   --offWhite: #f2f2f2;
   --beige: #f7f6f2;
   --darkBeige: #fde6ce;
-  --lightGrey: #888888;
+  --lightGrey: #dfdfdf;
   --blue: #007272;
+  --green: #1fac75;
+  --orange: #d69400;
   --grey: #636363;
   --darkGrey: #474747;
   --black: #303030;
@@ -66,7 +68,6 @@
   --transition: 500ms ease-in-out;
   --boxShadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px !important;
   --cardBorderRadius: 16px;
-  --blue: #007272;
   --red: #e60023;
   --white: rgb(255, 255, 255);
 

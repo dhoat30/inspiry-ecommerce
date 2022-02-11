@@ -2953,6 +2953,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_CustomerService_ContactForm__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./modules/CustomerService/ContactForm */ "./src/modules/CustomerService/ContactForm.js");
 /* harmony import */ var _modules_CustomerService_FeedbackForm__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./modules/CustomerService/FeedbackForm */ "./src/modules/CustomerService/FeedbackForm.js");
 /* harmony import */ var _modules_Woocommerce_WooGallery__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./modules/Woocommerce/WooGallery */ "./src/modules/Woocommerce/WooGallery.js");
+/* harmony import */ var _modules_Woocommerce_singleProductAccordion__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./modules/Woocommerce/singleProductAccordion */ "./src/modules/Woocommerce/singleProductAccordion.js");
 let $ = jQuery;
 
 
@@ -2990,9 +2991,14 @@ let $ = jQuery;
 
  // woocommerce 
 
- // woo Gallery 
 
-const wooGallery = new _modules_Woocommerce_WooGallery__WEBPACK_IMPORTED_MODULE_23__["default"]();
+ // add to cart and remove from cart class 
+
+const popUpCart = new _modules_PopUpCart__WEBPACK_IMPORTED_MODULE_12__["default"](); // woo Gallery 
+
+const wooGallery = new _modules_Woocommerce_WooGallery__WEBPACK_IMPORTED_MODULE_23__["default"](); // single product page accordion 
+
+const singleProductAccordion = new _modules_Woocommerce_singleProductAccordion__WEBPACK_IMPORTED_MODULE_24__["default"]();
 
 window.onload = function () {
   // enquiry modal 
@@ -3008,8 +3014,7 @@ window.onload = function () {
   const shopFav = new _modules_ShopFav__WEBPACK_IMPORTED_MODULE_10__["default"]();
   const topnav = new _modules_TopNav__WEBPACK_IMPORTED_MODULE_9__["default"]();
   const overlay = new _modules_overlay__WEBPACK_IMPORTED_MODULE_8__["default"]();
-  const designBoardSaveBtn = new _modules_DesignBoardSaveBtn__WEBPACK_IMPORTED_MODULE_7__["default"]();
-  const popUpCart = new _modules_PopUpCart__WEBPACK_IMPORTED_MODULE_12__["default"](); //Tool tip 
+  const designBoardSaveBtn = new _modules_DesignBoardSaveBtn__WEBPACK_IMPORTED_MODULE_7__["default"](); //Tool tip 
 
   const toolTip = new _modules_ToolTip__WEBPACK_IMPORTED_MODULE_11__["default"](); // login 
 
@@ -4570,12 +4575,19 @@ class PopUpCart {
   }
 
   events() {
+    $('.variable-item').on('click', () => {
+      console.log('clicked');
+      let formData = $('form.cart').data('product_variations');
+      console.log(formData);
+    });
     $('.header .shopping-cart .cart-items-header').on('click', this.openCart);
     $(document).on('click', '.cart-box .cont-shopping a', this.closeCart); // $('.cart-popup-container .fa-times').on('click', this.closeCart)
 
     $(document).on('click', '.single_add_to_cart_button', this.ajaxAddToCart); // remove item from cart ajax 
 
-    $(document).on('click', '.cart-popup-container .fa-times', this.removeItem);
+    $(document).on('click', '.cart-popup-container .fa-times', this.removeItem); // plus minus quantity button 
+
+    $('form.cart').on('click', ' .plus, .minus', this.plusMinusButtons);
   } //remove item from cart function 
 
 
@@ -4663,6 +4675,29 @@ class PopUpCart {
         }
       }
     });
+  }
+
+  plusMinusButtons() {
+    // Get current quantity values
+    var qty = $(this).closest('form.cart').find('.qty');
+    var val = parseFloat(qty.val());
+    var max = parseFloat(qty.attr('max'));
+    var min = parseFloat(qty.attr('min'));
+    var step = parseFloat(qty.attr('step')); // Change the value if plus or minus
+
+    if ($(this).is('.plus')) {
+      if (max && max <= val) {
+        qty.val(max);
+      } else {
+        qty.val(val + step);
+      }
+    } else {
+      if (min && min >= val) {
+        qty.val(min);
+      } else if (val > 1) {
+        qty.val(val - step);
+      }
+    }
   }
 
 }
@@ -5409,6 +5444,39 @@ class WooGallery {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (WooGallery);
+
+/***/ }),
+
+/***/ "./src/modules/Woocommerce/singleProductAccordion.js":
+/*!***********************************************************!*\
+  !*** ./src/modules/Woocommerce/singleProductAccordion.js ***!
+  \***********************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const $ = jQuery;
+
+class SingleProductAccordion {
+  constructor() {
+    this.events();
+  }
+
+  events() {
+    $('.single-product .accordion-container .item .title').on('click', this.toggleAccordion);
+  }
+
+  toggleAccordion(e) {
+    // console.log($(e.target).closest('.title').siblings('.content'))
+    $(e.target).closest('.title').siblings('.content').slideToggle();
+    let currentIcon = $(e.target).find('span').html();
+    $(e.target).find('span').html(currentIcon === "+" ? "–" : "+");
+    console.log($(e.target));
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (SingleProductAccordion);
 
 /***/ }),
 

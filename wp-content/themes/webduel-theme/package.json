@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "preview": "npm-run-all --parallel sync start ",
     "build": "wp-scripts build",
     "start": "wp-scripts start",
-    "sync": "browser-sync start -p 'localhost/inspirynew' --files '**/*.php' 'build/*.js' 'build/*.css'",
     "dev": "wp-scripts start",
     "devFast": "wp-scripts start",
     "test": "echo \"Error: no test specified\" && exit 1"

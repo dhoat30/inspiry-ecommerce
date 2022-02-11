@@ -67,3 +67,201 @@
     margin: 5px 0;
   }
 }
+
+// variable swatches
+.variations {
+  .woo-selected-variation-item-name {
+    font-size: var(--paragraphSize);
+    color: var(--darkGrey);
+  }
+  tr:nth-child(1) {
+    margin-bottom: 15px !important;
+    display: block;
+  }
+  .woo-variation-items-wrapper {
+    margin-top: 0px;
+  }
+  .color-variable-wrapper {
+    .variable-item {
+      border-radius: 100% !important;
+      margin-right: 15px !important;
+      margin-left: 1px !important;
+
+      span {
+        border-radius: 100% !important;
+      }
+    }
+  }
+
+  .button-variable-wrapper {
+    li {
+      border-radius: 0 !important;
+      padding: 0 !important;
+      margin-right: 15px !important;
+      margin-left: 1px !important;
+      span {
+        background-color: var(--beige);
+        border-radius: 0;
+        padding: 0 30px !important;
+        font-size: var(--paragraphSize);
+        line-height: 1.9rem;
+      }
+    }
+  }
+}
+
+.single-product {
+  .woocommerce-variation-price {
+    margin: 0 0 10px 0;
+  }
+  .deal-section {
+    margin: 0 0 0 0;
+    background-color: var(--beige);
+    padding: 20px 10px;
+    .title {
+      font-size: var(--columnSize);
+      font-weight: var(--medium);
+    }
+    .subtitle {
+      font-size: var(--paragraphSize);
+      margin-top: 5px;
+      font-weight: var(--regular);
+    }
+  }
+}
+
+// add to cart section
+.single-product {
+  .single_add_to_cart_button {
+    display: block;
+    width: 100%;
+    background-color: var(--black) !important;
+    text-transform: uppercase;
+    font-size: var(--paragraphSize) !important;
+    padding: 15px 0 !important;
+    border-radius: 0 !important;
+    &:hover {
+      background-color: rgba(0, 0, 0, 1) !important;
+    }
+  }
+  .summary {
+    .cart {
+      margin-bottom: 0 !important;
+
+      .quantity {
+        display: block;
+        margin: 20px 0 10px 0 !important;
+        .input-text {
+          height: 40px;
+          width: 60px;
+          position: relative;
+          top: -3px;
+          left: -4px;
+          border-radius: 0;
+          border: 1px solid var(--lightGrey);
+        }
+        .minus,
+        .plus {
+          background-color: var(--beige);
+          width: 40px;
+          height: 40px;
+          font-size: 1.5rem;
+          font-weight: 100;
+          line-height: 0;
+          border: 1px solid var(--lightGrey);
+        }
+        .minus {
+          border-right: 0 !important;
+          border-top-left-radius: 3px;
+          border-bottom-left-radius: 3px;
+        }
+        .plus {
+          position: relative;
+          left: -8px !important;
+          border-left: 0 !important;
+          border-top-right-radius: 3px;
+          border-bottom-right-radius: 3px;
+        }
+      }
+    }
+  }
+}
+
+// stock availability section
+.single-product {
+  .availability {
+    margin: 20px 0;
+    background-color: var(--offWhite);
+    padding: 20px 10px;
+    .title {
+      font-size: var(--columnSize);
+      font-weight: var(--medium);
+      text-transform: uppercase;
+    }
+    .content {
+      margin-left: 26px;
+
+      .subtitle {
+        font-size: var(--mediumSize);
+        font-weight: var(--bold);
+        margin: 5px 0 3px 0;
+      }
+      .delivery-info {
+        font-size: var(--paragraphSize);
+        font-weight: var(--regular);
+      }
+    }
+  }
+}
+
+// product attributes section
+.accordion-container {
+  .item:last-child {
+    border-bottom: none;
+  }
+  .item {
+    cursor: pointer;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--grey);
+
+    .title {
+      font-size: var(--medium);
+      font-weight: var(--medium);
+      color: var(--darkGrey);
+      position: relative;
+      padding: 8px 0;
+      span {
+        font-size: var(--rowSize);
+        font-weight: var(--light);
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translate(0, -50%);
+        z-index: -1;
+      }
+    }
+    .content {
+      display: none;
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: var(--paragraphSize);
+      font-weight: var(--light);
+      letter-spacing: 0.03rem;
+      color: var(--grey);
+      table {
+        th {
+          font-size: var(--paragraphSize);
+          text-align: left;
+          padding: 8px 0;
+          color: var(--grey);
+        }
+        td {
+          font-size: var(--paragraphSize);
+          font-style: normal;
+          padding-left: 5px;
+          color: var(--grey);
+        }
+      }
+    }
+  }
+}

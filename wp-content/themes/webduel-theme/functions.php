@@ -48,7 +48,7 @@ require get_theme_file_path('/inc/woocommerce/image-size.php');
 require get_theme_file_path('/inc/woocommerce/single-product/image-gallery.php');
 require get_theme_file_path('/inc/woocommerce/single-product/product-summary.php');
 require get_theme_file_path('/inc/woocommerce/single-product/related-product.php');
-
+require get_theme_file_path('/inc/woocommerce/single-product/product-summary-accordion.php');
 
 
  //enqueue scripts

@@ -21,10 +21,5 @@ add_action('woocommerce_before_single_product_summary', function(){
       echo '</div>';
 }, 20);
 
-
-
-
-
-
 ?>
 

@@ -100,59 +100,80 @@ function singleProductQuery($categorySlug){
     wp_reset_postdata();
 }
 
-// add to cart  quantity input 
-add_action( 'woocommerce_after_add_to_cart_quantity', 'ts_quantity_plus_sign' );
- 
-function ts_quantity_plus_sign() {
-   echo '<button type="button" class="plus" >+</button>';
-}
- 
-add_action( 'woocommerce_before_add_to_cart_quantity', 'ts_quantity_minus_sign' );
-function ts_quantity_minus_sign() {
-   echo '<button type="button" class="minus" >-</button>';
-}
- 
-add_action( 'wp_footer', 'ts_quantity_plus_minus' );
- 
-function ts_quantity_plus_minus() {
-   // To run this on the single product page
-   if ( ! is_product() ) return;
-   ?>
-   <script type="text/javascript">
-          
-      jQuery(document).ready(function($){   
-          
-            $('form.cart').on( 'click', 'button.plus, button.minus', function() {
- 
-            // Get current quantity values
-            var qty = $( this ).closest( 'form.cart' ).find( '.qty' );
-            var val   = parseFloat(qty.val());
-            var max = parseFloat(qty.attr( 'max' ));
-            var min = parseFloat(qty.attr( 'min' ));
-            var step = parseFloat(qty.attr( 'step' ));
- 
-            // Change the value if plus or minus
-            if ( $( this ).is( '.plus' ) ) {
-               if ( max && ( max <= val ) ) {
-                  qty.val( max );
-               } 
-            else {
-               qty.val( val + step );
-                 }
-            } 
-            else {
-               if ( min && ( min >= val ) ) {
-                  qty.val( min );
-               } 
-               else if ( val > 1 ) {
-                  qty.val( val - step );
-               }
+// add to cart  Ajax -------------------------------------------------------------
+add_action('wp_ajax_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
+add_action('wp_ajax_nopriv_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
+        
+function woocommerce_ajax_add_to_cart() {
+
+            $product_id = apply_filters('woocommerce_add_to_cart_product_id', absint($_POST['product_id']));
+            $quantity = empty($_POST['quantity']) ? 1 : wc_stock_amount($_POST['quantity']);
+            $variation_id = absint($_POST['variation_id']);
+            $passed_validation = apply_filters('woocommerce_add_to_cart_validation', true, $product_id, $quantity);
+            $product_status = get_post_status($product_id);
+
+            if ($passed_validation && WC()->cart->add_to_cart($product_id, $quantity, $variation_id) && 'publish' === $product_status) {
+
+                do_action('woocommerce_ajax_added_to_cart', $product_id);
+
+                if ('yes' === get_option('woocommerce_cart_redirect_after_add')) {
+                    wc_add_to_cart_message(array($product_id => $quantity), true);
+                }
+
+                WC_AJAX :: get_refreshed_fragments();
+            } else {
+
+                $data = array(
+                    'error' => true,
+                    'product_url' => apply_filters('woocommerce_cart_redirect_after_error', get_permalink($product_id), $product_id));
+
+                echo wp_send_json($data);
             }
-             
-         });
-          
-      });
-          
-   </script>
-   <?php
-}
+
+            wp_die();
+        }
+
+    
+
+// availability section _--------------------------------------------------------------
+
+add_action('woocommerce_single_product_summary', function (){ 
+    global $product;    
+    // Available on backorder
+    $countryOfOrigin = $product->get_attribute( 'pa_country-of-origin' );
+    $deliveryETA = $product->get_attribute( 'pa_delivery' );
+    if($countryOfOrigin){ 
+        $countryOfOrigin = 'Country Of Origin: '.$countryOfOrigin; 
+    }
+    echo '
+    <div class="availability">
+        <h3 class="title">'; 
+        if($product->get_availability()['class'] === 'in-stock'){ 
+           echo ' 
+            <i class="fa-solid fa-circle-check" style="color: var(--green); "></i>
+            <span  style="color: var(--green); ">
+            IN STOCK
+            </span>
+            '; 
+
+        }
+        else{ 
+            echo ' 
+            <i class="fa-solid fa-circle-check" style="color: var(--orange); "></i>
+            <span  style="color: var(--orange); ">
+            Available on backorder
+            </span>
+            '; 
+        }
+        echo '
+        <h3>
+        <div class="content">
+            <h4 class="subtitle">
+                '.$countryOfOrigin.'
+            </h4>
+            <h5 class="delivery-info">
+                '.$deliveryETA.'
+            </h5>
+        </div>
+    </div>'; 
+}, 60) ; 

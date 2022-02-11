@@ -7,12 +7,21 @@ class PopUpCart {
     }
 
     events() {
+        $('.variable-item').on('click', () => {
+            console.log('clicked')
+            let formData = $('form.cart').data('product_variations')
+            console.log(formData)
+        })
+
         $('.header .shopping-cart .cart-items-header').on('click', this.openCart)
         $(document).on('click', '.cart-box .cont-shopping a', this.closeCart)
         // $('.cart-popup-container .fa-times').on('click', this.closeCart)
         $(document).on('click', '.single_add_to_cart_button', this.ajaxAddToCart)
         // remove item from cart ajax 
         $(document).on('click', '.cart-popup-container .fa-times', this.removeItem)
+
+        // plus minus quantity button 
+        $('form.cart').on('click', ' .plus, .minus', this.plusMinusButtons)
     }
 
     //remove item from cart function 
@@ -99,6 +108,33 @@ class PopUpCart {
                 }
             },
         });
+    }
+
+    plusMinusButtons() {
+        // Get current quantity values
+        var qty = $(this).closest('form.cart').find('.qty');
+        var val = parseFloat(qty.val());
+        var max = parseFloat(qty.attr('max'));
+        var min = parseFloat(qty.attr('min'));
+        var step = parseFloat(qty.attr('step'));
+
+        // Change the value if plus or minus
+        if ($(this).is('.plus')) {
+            if (max && (max <= val)) {
+                qty.val(max);
+            }
+            else {
+                qty.val(val + step);
+            }
+        }
+        else {
+            if (min && (min >= val)) {
+                qty.val(min);
+            }
+            else if (val > 1) {
+                qty.val(val - step);
+            }
+        }
     }
 }
 

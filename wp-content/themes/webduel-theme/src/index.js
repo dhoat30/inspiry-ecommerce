@@ -49,11 +49,19 @@ import FeedbackForm from './modules/CustomerService/FeedbackForm'
 
 // woocommerce 
 import WooGallery from './modules/Woocommerce/WooGallery'
+import SingleProductAccordion from "./modules/Woocommerce/singleProductAccordion";
 
+// add to cart and remove from cart class 
+const popUpCart = new PopUpCart();
 
 // woo Gallery 
 const wooGallery = new WooGallery()
+// single product page accordion 
+const singleProductAccordion = new SingleProductAccordion()
+
+
 window.onload = function () {
+
 
   // enquiry modal 
   const enquiryModal = new EnquiryModal();
@@ -71,7 +79,7 @@ window.onload = function () {
   const topnav = new TopNav();
   const overlay = new Overlay();
   const designBoardSaveBtn = new DesignBoardSaveBtn();
-  const popUpCart = new PopUpCart();
+
 
 
 

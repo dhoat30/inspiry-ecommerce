@@ -1,6 +1,9 @@
 // product page layout
 
 .single-product {
+  #main {
+    padding: 50px 0;
+  }
   .product {
     display: flex;
     justify-content: space-between;
@@ -16,9 +19,14 @@
       .woocommerce-product-gallery {
         width: 100%;
       }
+
+      .woocommerce-breadcrumb {
+        margin-bottom: 30px;
+      }
     }
     .entry-summary {
       width: 500px !important;
+      margin-top: 40px;
       position: relative;
       @media (max-width: 1200px) {
         width: 100%;
@@ -45,10 +53,9 @@
 
 // images container
 
-/* product gallery */
-
 // product summary
 .flex-control-nav {
+  max-width: 100px;
   @media (max-width: 800px) {
     display: none;
   }
@@ -65,66 +72,4 @@
   width: 100%;
   padding-top: 0;
   padding-bottom: 5px;
-}
-
-// variable swatches
-.variations {
-  .woo-selected-variation-item-name {
-    font-size: var(--paragraphSize);
-    color: var(--darkGrey);
-  }
-  tr:nth-child(1) {
-    margin-bottom: 15px !important;
-    display: block;
-  }
-  .woo-variation-items-wrapper {
-    margin-top: 0px;
-  }
-  .color-variable-wrapper {
-    .variable-item {
-      border-radius: 100% !important;
-      margin-right: 15px !important;
-      margin-left: 1px !important;
-
-      span {
-        border-radius: 100% !important;
-      }
-    }
-  }
-
-  .button-variable-wrapper {
-    li {
-      border-radius: 0 !important;
-      padding: 0 !important;
-      margin-right: 15px !important;
-      margin-left: 1px !important;
-      span {
-        background-color: var(--beige);
-        border-radius: 0;
-        padding: 0 30px !important;
-        font-size: var(--paragraphSize);
-        line-height: 1.9rem;
-      }
-    }
-  }
-}
-
-.single-product {
-  .woocommerce-variation-price {
-    margin: 0 0 10px 0;
-  }
-  .deal-section {
-    margin: 0 0 20px 0;
-    background-color: var(--beige);
-    padding: 20px 10px;
-    .title {
-      font-size: var(--columnSize);
-      font-weight: var(--medium);
-    }
-    .subtitle {
-      font-size: var(--paragraphSize);
-      margin-top: 5px;
-      font-weight: var(--regular);
-    }
-  }
 }
