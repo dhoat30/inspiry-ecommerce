@@ -2998,7 +2998,9 @@ const popUpCart = new _modules_PopUpCart__WEBPACK_IMPORTED_MODULE_12__["default"
 
 const wooGallery = new _modules_Woocommerce_WooGallery__WEBPACK_IMPORTED_MODULE_23__["default"](); // single product page accordion 
 
-const singleProductAccordion = new _modules_Woocommerce_singleProductAccordion__WEBPACK_IMPORTED_MODULE_24__["default"]();
+const singleProductAccordion = new _modules_Woocommerce_singleProductAccordion__WEBPACK_IMPORTED_MODULE_24__["default"](); // every owl carousel
+
+const everyOwlCarousel = new _modules_OwlCarousel_EveryOwlCarousel__WEBPACK_IMPORTED_MODULE_4__["default"]();
 
 window.onload = function () {
   // enquiry modal 
@@ -3008,9 +3010,7 @@ window.onload = function () {
 
   const form = new _modules_Form_Form__WEBPACK_IMPORTED_MODULE_3__["default"](); //get product data and show in the quick view
 
-  const product = new _modules_Product__WEBPACK_IMPORTED_MODULE_13__["default"](); // every owl carousel
-
-  const everyOwlCarousel = new _modules_OwlCarousel_EveryOwlCarousel__WEBPACK_IMPORTED_MODULE_4__["default"]();
+  const product = new _modules_Product__WEBPACK_IMPORTED_MODULE_13__["default"]();
   const shopFav = new _modules_ShopFav__WEBPACK_IMPORTED_MODULE_10__["default"]();
   const topnav = new _modules_TopNav__WEBPACK_IMPORTED_MODULE_9__["default"]();
   const overlay = new _modules_overlay__WEBPACK_IMPORTED_MODULE_8__["default"]();
@@ -4387,7 +4387,6 @@ class GeneralFormProcessor {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _OwlCarousel__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./OwlCarousel */ "./src/modules/OwlCarousel/OwlCarousel.js");
-/* harmony import */ var _OwlCarousel__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_OwlCarousel__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var owl_carousel_dist_assets_owl_carousel_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! owl.carousel/dist/assets/owl.carousel.css */ "./node_modules/owl.carousel/dist/assets/owl.carousel.css");
 /* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! owl.carousel */ "./node_modules/owl.carousel/dist/owl.carousel.js");
 /* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(owl_carousel__WEBPACK_IMPORTED_MODULE_2__);
@@ -4399,14 +4398,13 @@ let $ = jQuery;
 class EveryOwlCarousel {
   constructor() {
     this.events();
-    console.log('running ');
   }
 
   events() {
     //trending section carousel 
-    // this.trendingCarousel();
-    // this.brandLogoHomePageCarousel();
+    this.trendingCarousel(); // this.brandLogoHomePageCarousel();
     // product gallery on single product page
+
     this.productGallery(); // // banner carousel 
     // this.banner();
   } // banner carousel 
@@ -4430,7 +4428,7 @@ class EveryOwlCarousel {
         }
       }
     };
-    const banner = new (_OwlCarousel__WEBPACK_IMPORTED_MODULE_0___default())(args, className);
+    const banner = new _OwlCarousel__WEBPACK_IMPORTED_MODULE_0__["default"](args, className);
   }
 
   productGallery() {
@@ -4463,6 +4461,7 @@ class EveryOwlCarousel {
     let className = '.brand-logo-section .owl-carousel';
     let args = {
       loop: true,
+      navText: "G",
       margin: 20,
       lazyLoad: true,
       autoplay: true,
@@ -4494,7 +4493,7 @@ class EveryOwlCarousel {
         }
       }
     };
-    const trendingNow = new (_OwlCarousel__WEBPACK_IMPORTED_MODULE_0___default())(args, className);
+    const trendingNow = new _OwlCarousel__WEBPACK_IMPORTED_MODULE_0__["default"](args, className);
   }
 
   trendingCarousel() {
@@ -4502,34 +4501,36 @@ class EveryOwlCarousel {
     let className = '.trending-section .owl-carousel';
     let args = {
       loop: true,
+      navText: ['<i class="fa-thin fa-arrow-left-long"></i>', '<i class="fa-thin fa-arrow-right-long"></i>'],
       margin: 20,
+      center: true,
       lazyLoad: true,
-      autoplay: true,
-      autoplayTimeout: 2000,
-      autoplayHoverPause: true,
       responsiveBaseElement: ".row-container",
       responsiveClass: true,
       rewind: true,
+      mouseDrag: true,
+      touchDrag: true,
+      nav: true,
       responsive: {
         0: {
           items: 1,
-          dots: true
+          dots: false
         },
         600: {
           items: 2,
-          dots: true
+          dots: false
         },
         900: {
           items: 3,
-          dots: true
+          dots: false
         },
-        1200: {
-          items: 4,
-          dots: true
+        1440: {
+          items: 3,
+          dots: false
         }
       }
     };
-    const trendingNow = new (_OwlCarousel__WEBPACK_IMPORTED_MODULE_0___default())(args, className);
+    const trendingNow = new _OwlCarousel__WEBPACK_IMPORTED_MODULE_0__["default"](args, className);
   }
 
 }
@@ -4542,20 +4543,29 @@ class EveryOwlCarousel {
 /*!************************************************!*\
   !*** ./src/modules/OwlCarousel/OwlCarousel.js ***!
   \************************************************/
-/***/ (function() {
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-// let $ = jQuery;
-// import 'owl.carousel/dist/assets/owl.carousel.css';
-// import 'owl.carousel';
-// class OwlCarousel {
-//     constructor(args, className) {
-//         this.events(args, className);
-//     }
-//     events(args, className) {
-//         $(className).owlCarousel(args);
-//     }
-// }
-// export default OwlCarousel;
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var owl_carousel_dist_assets_owl_carousel_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! owl.carousel/dist/assets/owl.carousel.css */ "./node_modules/owl.carousel/dist/assets/owl.carousel.css");
+/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! owl.carousel */ "./node_modules/owl.carousel/dist/owl.carousel.js");
+/* harmony import */ var owl_carousel__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(owl_carousel__WEBPACK_IMPORTED_MODULE_1__);
+let $ = jQuery;
+
+
+
+class OwlCarousel {
+  constructor(args, className) {
+    this.events(args, className);
+  }
+
+  events(args, className) {
+    $(className).owlCarousel(args);
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (OwlCarousel);
 
 /***/ }),
 

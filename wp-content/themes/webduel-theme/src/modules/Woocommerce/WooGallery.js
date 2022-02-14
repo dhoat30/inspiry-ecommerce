@@ -9,6 +9,7 @@ class WooGallery {
     events() {
         // owl  carousel for single product page
         this.slideShow()
+
     }
     slideShow() {
         var x = window.matchMedia("(max-width: 800px)")
@@ -32,8 +33,6 @@ class WooGallery {
                 }
             })
         }
-
-
     }
 
 }

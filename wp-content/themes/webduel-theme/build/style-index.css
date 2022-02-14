@@ -3463,12 +3463,14 @@ body {
   margin-bottom: 30px;
 }
 .single-product .product .entry-summary {
-  width: 500px !important;
+  width: 100% !important;
+  max-width: 500px;
   margin-top: 40px;
   position: relative;
 }
 @media (max-width: 1200px) {
   .single-product .product .entry-summary {
+    max-width: 500px;
     width: 100%;
   }
 }
@@ -3511,38 +3513,15 @@ body {
   padding-bottom: 5px;
 }
 
+.single-product .product {
+  border-bottom: 1px solid var(--lightGrey);
+  padding-bottom: 20px;
+}
 .single-product .product_title {
   font-size: var(--rowSize);
   font-weight: var(--regular);
   color: var(--black);
   margin-bottom: 0;
-}
-.single-product .price {
-  font-size: var(--columnSize) !important;
-}
-.single-product .price del {
-  color: var(--black);
-}
-.single-product .price del .amount {
-  color: var(--black) !important;
-}
-.single-product .price del .amount bdi {
-  color: var(--black) !important;
-}
-.single-product .price del .amount bdi span {
-  color: var(--black) !important;
-}
-.single-product .price ins {
-  text-decoration: none;
-}
-.single-product .price ins .amount bdi {
-  font-weight: var(--medium);
-}
-.single-product .price ins .amount bdi {
-  color: var(--red) !important;
-}
-.single-product .price ins .amount bdi span {
-  color: var(--red) !important;
 }
 .single-product .price {
   -ms-grid-column: 1;
@@ -3578,6 +3557,10 @@ body {
   grid-column: 1/3;
   font-size: var(--paragraphSize);
   margin: 5px 0;
+}
+
+.woocommerce-variation-availability {
+  display: none;
 }
 
 .variations .woo-selected-variation-item-name {
@@ -3705,6 +3688,9 @@ body {
   font-weight: var(--regular);
 }
 
+.accordion-container {
+  width: 100%;
+}
 .accordion-container .item:last-child {
   border-bottom: none;
 }
@@ -3749,6 +3735,106 @@ body {
   font-style: normal;
   padding-left: 5px;
   color: var(--grey);
+}
+
+.social-share-container {
+  display: flex;
+  font-size: var(--mediumSize);
+  font-weight: var(--medium);
+  margin: 20px 0 0 0;
+}
+.social-share-container .social-share a {
+  text-decoration: none;
+  margin-left: 10px;
+}
+.social-share-container .social-share a .fa-facebook-f {
+  color: #385898;
+}
+.social-share-container .social-share a .fa-pinterest-p {
+  color: #e60023;
+}
+
+.price {
+  font-size: var(--columnSize) !important;
+}
+
+.price del {
+  color: var(--black);
+}
+
+.price del .amount {
+  color: var(--black) !important;
+}
+
+.price del .amount bdi {
+  color: var(--black) !important;
+}
+
+.price del .amount bdi span {
+  color: var(--black) !important;
+}
+
+.price ins {
+  text-decoration: none;
+}
+
+.price ins .amount bdi {
+  font-weight: var(--medium);
+}
+
+.price ins .amount bdi {
+  color: var(--red) !important;
+}
+
+.price ins .amount bdi span {
+  color: var(--red) !important;
+}
+
+.single-product .trending-section .related-product-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.single-product .trending-section .related-product-section .title {
+  font-size: var(--mediumSize);
+  font-weight: var(--medium);
+  color: var(--darkGrey);
+}
+.single-product .trending-section .related-product-section .owl-item {
+  border: 1px solid var(--lightGrey) !important;
+  padding: 10px 10px 10px 10px;
+}
+.single-product .trending-section .related-product-section .card {
+  text-decoration: none !important;
+}
+.single-product .trending-section .related-product-section .card img {
+  width: 100%;
+  height: 100%;
+}
+.single-product .trending-section .related-product-section .card h5 {
+  font-size: var(--paragraphSize);
+  font-weight: var(--regular);
+  letter-spacing: 0.03rem;
+}
+.single-product .trending-section .related-product-section .card h6 {
+  font-size: var(--mediumSize) !important;
+  font-weight: var(--medium) !important;
+}
+.single-product .trending-section .owl-nav button {
+  width: 40px;
+  height: 40px;
+  background-color: var(--black) !important;
+}
+.single-product .trending-section .owl-nav button i {
+  color: white;
+  font-weight: var(--light) !important;
+}
+.single-product .trending-section .owl-nav button:nth-child(1) {
+  left: -10px !important;
+}
+.single-product .trending-section .owl-nav button:nth-child(2) {
+  right: -10px !important;
 }
 
 /* customer service css  */

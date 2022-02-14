@@ -38,7 +38,6 @@ require get_theme_file_path('/inc/enquiry-modal.php');
 require get_theme_file_path('/inc/nav-registeration.php');
 require get_theme_file_path('/inc/rest-acf.php');
 require get_theme_file_path('/inc/users.php');
-require get_theme_file_path('/inc/webduel-short-code.php');
 // windcave 
 require get_theme_file_path('/inc/windcave-payment.php');
 require get_theme_file_path('/inc/windcave-session.php');
@@ -47,8 +46,12 @@ require get_theme_file_path('/inc/windcave-session.php');
 require get_theme_file_path('/inc/woocommerce/image-size.php');
 require get_theme_file_path('/inc/woocommerce/single-product/image-gallery.php');
 require get_theme_file_path('/inc/woocommerce/single-product/product-summary.php');
-require get_theme_file_path('/inc/woocommerce/single-product/related-product.php');
+require get_theme_file_path('/inc/woocommerce/single-product/related-products.php');
 require get_theme_file_path('/inc/woocommerce/single-product/product-summary-accordion.php');
+
+// shortcodes
+require get_theme_file_path('/inc/short-codes/social-share.php');
+require get_theme_file_path('/inc/short-codes/related-products-shortcode.php');
 
 
  //enqueue scripts

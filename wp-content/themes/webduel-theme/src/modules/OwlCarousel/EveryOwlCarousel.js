@@ -5,11 +5,10 @@ let $ = jQuery;
 class EveryOwlCarousel {
     constructor() {
         this.events();
-        console.log('running ')
     }
     events() {
         //trending section carousel 
-        // this.trendingCarousel();
+        this.trendingCarousel();
 
         // this.brandLogoHomePageCarousel();
         // product gallery on single product page
@@ -87,6 +86,7 @@ class EveryOwlCarousel {
         let className = '.brand-logo-section .owl-carousel';
         let args = {
             loop: true,
+            navText: "G",
             margin: 20,
             lazyLoad: true,
             autoplay: true,
@@ -129,34 +129,32 @@ class EveryOwlCarousel {
         let className = '.trending-section .owl-carousel';
         let args = {
             loop: true,
+            navText: ['<i class="fa-thin fa-arrow-left-long"></i>', '<i class="fa-thin fa-arrow-right-long"></i>'],
             margin: 20,
-
+            center: true,
             lazyLoad: true,
-            autoplay: true,
-            autoplayTimeout: 2000,
-            autoplayHoverPause: true,
             responsiveBaseElement: ".row-container",
             responsiveClass: true,
             rewind: true,
+            mouseDrag: true,
+            touchDrag: true,
+            nav: true,
             responsive: {
                 0: {
                     items: 1,
-
-                    dots: true
+                    dots: false
                 },
                 600: {
                     items: 2,
-
-                    dots: true
+                    dots: false
                 },
                 900: {
                     items: 3,
-
-                    dots: true
+                    dots: false
                 },
-                1200: {
-                    items: 4,
-                    dots: true
+                1440: {
+                    items: 3,
+                    dots: false
                 }
             }
         }

@@ -60,6 +60,10 @@ const wooGallery = new WooGallery()
 const singleProductAccordion = new SingleProductAccordion()
 
 
+// every owl carousel
+const everyOwlCarousel = new EveryOwlCarousel();
+
+
 window.onload = function () {
 
 
@@ -71,9 +75,6 @@ window.onload = function () {
   const form = new Form();
   //get product data and show in the quick view
   const product = new Product();
-  // every owl carousel
-  const everyOwlCarousel = new EveryOwlCarousel();
-
 
   const shopFav = new ShopFav();
   const topnav = new TopNav();

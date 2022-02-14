@@ -177,3 +177,13 @@ add_action('woocommerce_single_product_summary', function (){
         </div>
     </div>'; 
 }, 60) ; 
+
+// social share -----------------------------------------------------------
+add_action('woocommerce_single_product_summary', function(){
+    echo '
+    <div class="social-share-container">
+        <p>Share:</p>
+    ';  
+    echo do_shortcode('[webduelSocialShare]');
+    echo '</div>';
+}, 80); 

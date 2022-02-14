@@ -1,40 +1,15 @@
 .single-product {
+  .product {
+    border-bottom: 1px solid var(--lightGrey);
+    padding-bottom: 20px;
+  }
   .product_title {
     font-size: var(--rowSize);
     font-weight: var(--regular);
     color: var(--black);
     margin-bottom: 0;
   }
-  .price {
-    font-size: var(--columnSize) !important;
-  }
 
-  //   sale price
-  .price del {
-    color: var(--black);
-  }
-  .price del .amount {
-    color: var(--black) !important;
-  }
-  .price del .amount bdi {
-    color: var(--black) !important;
-  }
-  .price del .amount bdi span {
-    color: var(--black) !important;
-  }
-  .price ins {
-    text-decoration: none;
-  }
-  .price ins .amount bdi {
-    font-weight: var(--medium);
-  }
-
-  .price ins .amount bdi {
-    color: var(--red) !important;
-  }
-  .price ins .amount bdi span {
-    color: var(--red) !important;
-  }
   //   regular price
   .price {
     grid-column: 1/2;
@@ -69,6 +44,9 @@
 }
 
 // variable swatches
+.woocommerce-variation-availability {
+  display: none;
+}
 .variations {
   .woo-selected-variation-item-name {
     font-size: var(--paragraphSize);
@@ -216,6 +194,7 @@
 
 // product attributes section
 .accordion-container {
+  width: 100%;
   .item:last-child {
     border-bottom: none;
   }
@@ -264,4 +243,53 @@
       }
     }
   }
+}
+
+.social-share-container {
+  display: flex;
+  font-size: var(--mediumSize);
+  font-weight: var(--medium);
+  margin: 20px 0 0 0;
+  .social-share {
+    a {
+      text-decoration: none;
+      margin-left: 10px;
+      .fa-facebook-f {
+        color: #385898;
+      }
+      .fa-pinterest-p {
+        color: #e60023;
+      }
+    }
+  }
+}
+.price {
+  font-size: var(--columnSize) !important;
+}
+
+//   sale price
+.price del {
+  color: var(--black);
+}
+.price del .amount {
+  color: var(--black) !important;
+}
+.price del .amount bdi {
+  color: var(--black) !important;
+}
+.price del .amount bdi span {
+  color: var(--black) !important;
+}
+.price ins {
+  text-decoration: none;
+}
+.price ins .amount bdi {
+  font-weight: var(--medium);
+}
+
+.price ins .amount bdi {
+  color: var(--red) !important;
+}
+.price ins .amount bdi span {
+  color: var(--red) !important;
 }
