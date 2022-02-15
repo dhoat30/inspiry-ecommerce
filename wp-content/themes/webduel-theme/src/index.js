@@ -65,7 +65,7 @@ const everyOwlCarousel = new EveryOwlCarousel();
 
 
 window.onload = function () {
-
+  $('.wvs-archive-variation-wrapper').on('click', (e) => { e.preventDefault() })
 
   // enquiry modal 
   const enquiryModal = new EnquiryModal();

@@ -48,10 +48,13 @@ require get_theme_file_path('/inc/woocommerce/single-product/image-gallery.php')
 require get_theme_file_path('/inc/woocommerce/single-product/product-summary.php');
 require get_theme_file_path('/inc/woocommerce/single-product/related-products.php');
 require get_theme_file_path('/inc/woocommerce/single-product/product-summary-accordion.php');
+require get_theme_file_path('/inc/woocommerce/product-archive/product-archive.php');
+require get_theme_file_path('/inc/woocommerce/product-archive/archive-product.php');
 
 // shortcodes
 require get_theme_file_path('/inc/short-codes/social-share.php');
 require get_theme_file_path('/inc/short-codes/related-products-shortcode.php');
+require get_theme_file_path('/inc/short-codes/archive-page-shortcode.php');
 
 
  //enqueue scripts
@@ -71,3 +74,40 @@ require get_theme_file_path('/inc/short-codes/related-products-shortcode.php');
     ));
 }
 add_action( "wp_enqueue_scripts", "inspiry_scripts" ); 
+
+
+/**
+ * Track product views. Always.
+ */
+function wc_track_product_view_always() {
+  if ( ! is_singular( 'product' ) /* xnagyg: remove this condition to run: || ! is_active_widget( false, false, 'woocommerce_recently_viewed_products', true )*/ ) {
+      return;
+  }
+
+  global $post;
+
+  if ( empty( $_COOKIE['woocommerce_recently_viewed'] ) ) { // @codingStandardsIgnoreLine.
+      $viewed_products = array();
+  } else {
+      $viewed_products = wp_parse_id_list( (array) explode( '|', wp_unslash( $_COOKIE['woocommerce_recently_viewed'] ) ) ); // @codingStandardsIgnoreLine.
+  }
+
+  // Unset if already in viewed products list.
+  $keys = array_flip( $viewed_products );
+
+  if ( isset( $keys[ $post->ID ] ) ) {
+      unset( $viewed_products[ $keys[ $post->ID ] ] );
+  }
+
+  $viewed_products[] = $post->ID;
+
+  if ( count( $viewed_products ) > 15 ) {
+      array_shift( $viewed_products );
+  }
+
+  // Store for session only.
+  wc_setcookie( 'woocommerce_recently_viewed', implode( '|', $viewed_products ) );
+}
+
+remove_action('template_redirect', 'wc_track_product_view', 20);
+add_action( 'template_redirect', 'wc_track_product_view_always', 20 );

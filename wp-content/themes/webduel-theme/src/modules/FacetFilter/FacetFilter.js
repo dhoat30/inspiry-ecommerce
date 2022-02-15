@@ -2,10 +2,14 @@ const $ = jQuery
 
 class FacetFilter {
     constructor() {
+        // mobile and desktop filter show/hide
         this.mobileFilterButton = $('.mobile .filter-title')
         this.fixedFilterButton = $('.fixed-filter-button')
         this.closeButton = $('.mobile-filter-container .close-button')
         this.closeIcon = $('.mobile-filter-container .close-icon')
+
+        // facet label button
+        this.labelButton = $('.facet-wp-container .facet-label-button')
         this.events()
 
     }
@@ -24,6 +28,9 @@ class FacetFilter {
         this.fixedFilterButton.on('click', this.showMobileFilterContainer)
         this.closeButton.on('click', this.closeMobileFilterContainer)
         this.closeIcon.on('click', this.closeMobileFilterContainer)
+
+        // show filter when clicked on label desktop 
+        this.labelButton.on('click', this.showFilter)
     }
 
     showMobileFilterContainer() {
@@ -32,6 +39,12 @@ class FacetFilter {
     }
     closeMobileFilterContainer() {
         $('.facet-wp-container').slideUp()
+    }
+
+    showFilter(e) {
+        $(this).siblings('.facetwp-facet').slideToggle('fast')
+        $(this).find('i').toggleClass('fa-plus')
+        $(this).find('i').toggleClass('fa-minus')
     }
 }
 

@@ -8,9 +8,8 @@ class PopUpCart {
 
     events() {
         $('.variable-item').on('click', () => {
-            console.log('clicked')
+
             let formData = $('form.cart').data('product_variations')
-            console.log(formData)
         })
 
         $('.header .shopping-cart .cart-items-header').on('click', this.openCart)

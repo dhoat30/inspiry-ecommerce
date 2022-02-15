@@ -9,6 +9,10 @@ add_action('woocommerce_after_single_product', function(){
     echo do_shortcode('[related_product_loop_short_code]');
 }, 80);
 
+// add recently viewed products 
+add_action('woocommerce_after_single_product', function(){
+    echo do_shortcode('[recently_viewed_products]');
+ }, 90);
 
 // add categories buttons 
 add_action('woocommerce_after_single_product', function(){ 
@@ -32,7 +36,7 @@ add_action('woocommerce_after_single_product', function(){
         <h3 class="title">Related Categories</h3>
         <div class="flex">'; 
         foreach($buttonDataArray as $button){ 
-            print_r($button['category_name']); 
+           
             echo '
             <a href="'.$button['category_link'].'">
             '.$button['category_name'].'

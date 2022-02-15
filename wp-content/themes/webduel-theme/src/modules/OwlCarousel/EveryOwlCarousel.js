@@ -17,6 +17,9 @@ class EveryOwlCarousel {
         // // banner carousel 
         // this.banner();
 
+        // recently viewed carousel 
+        this.recentlyViewedCarousel()
+
     }
 
     // banner carousel 
@@ -159,6 +162,44 @@ class EveryOwlCarousel {
             }
         }
         const trendingNow = new OwlCarousel(args, className);
+    }
+
+    recentlyViewedCarousel() {
+
+        // owl carousel 
+        let className = '.recently-viewed-section .owl-carousel';
+        let args = {
+            loop: true,
+            navText: ['<i class="fa-thin fa-arrow-left-long"></i>', '<i class="fa-thin fa-arrow-right-long"></i>'],
+            margin: 20,
+            center: true,
+            lazyLoad: true,
+            responsiveBaseElement: ".row-container",
+            responsiveClass: true,
+            rewind: true,
+            mouseDrag: true,
+            touchDrag: true,
+            nav: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    dots: false
+                },
+                600: {
+                    items: 2,
+                    dots: false
+                },
+                900: {
+                    items: 3,
+                    dots: false
+                },
+                1440: {
+                    items: 3,
+                    dots: false
+                }
+            }
+        }
+        const recentlyViewed = new OwlCarousel(args, className);
     }
 }
 export default EveryOwlCarousel;

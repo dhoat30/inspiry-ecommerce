@@ -3003,7 +3003,10 @@ const singleProductAccordion = new _modules_Woocommerce_singleProductAccordion__
 const everyOwlCarousel = new _modules_OwlCarousel_EveryOwlCarousel__WEBPACK_IMPORTED_MODULE_4__["default"]();
 
 window.onload = function () {
-  // enquiry modal 
+  $('.wvs-archive-variation-wrapper').on('click', e => {
+    e.preventDefault();
+  }); // enquiry modal 
+
   const enquiryModal = new _modules_EnquiryModal_EnquiryModal__WEBPACK_IMPORTED_MODULE_14__["default"](); // cart modal 
 
   const cartModal = new _modules_CartModal_CartModal__WEBPACK_IMPORTED_MODULE_15__["default"](); // form data processing 
@@ -4163,10 +4166,13 @@ const $ = jQuery;
 
 class FacetFilter {
   constructor() {
+    // mobile and desktop filter show/hide
     this.mobileFilterButton = $('.mobile .filter-title');
     this.fixedFilterButton = $('.fixed-filter-button');
     this.closeButton = $('.mobile-filter-container .close-button');
-    this.closeIcon = $('.mobile-filter-container .close-icon');
+    this.closeIcon = $('.mobile-filter-container .close-icon'); // facet label button
+
+    this.labelButton = $('.facet-wp-container .facet-label-button');
     this.events();
   }
 
@@ -4183,7 +4189,9 @@ class FacetFilter {
     this.mobileFilterButton.on('click', this.showMobileFilterContainer);
     this.fixedFilterButton.on('click', this.showMobileFilterContainer);
     this.closeButton.on('click', this.closeMobileFilterContainer);
-    this.closeIcon.on('click', this.closeMobileFilterContainer);
+    this.closeIcon.on('click', this.closeMobileFilterContainer); // show filter when clicked on label desktop 
+
+    this.labelButton.on('click', this.showFilter);
   }
 
   showMobileFilterContainer() {
@@ -4193,6 +4201,12 @@ class FacetFilter {
 
   closeMobileFilterContainer() {
     $('.facet-wp-container').slideUp();
+  }
+
+  showFilter(e) {
+    $(this).siblings('.facetwp-facet').slideToggle('fast');
+    $(this).find('i').toggleClass('fa-plus');
+    $(this).find('i').toggleClass('fa-minus');
   }
 
 }
@@ -4407,6 +4421,9 @@ class EveryOwlCarousel {
 
     this.productGallery(); // // banner carousel 
     // this.banner();
+    // recently viewed carousel 
+
+    this.recentlyViewedCarousel();
   } // banner carousel 
 
 
@@ -4533,6 +4550,43 @@ class EveryOwlCarousel {
     const trendingNow = new _OwlCarousel__WEBPACK_IMPORTED_MODULE_0__["default"](args, className);
   }
 
+  recentlyViewedCarousel() {
+    // owl carousel 
+    let className = '.recently-viewed-section .owl-carousel';
+    let args = {
+      loop: true,
+      navText: ['<i class="fa-thin fa-arrow-left-long"></i>', '<i class="fa-thin fa-arrow-right-long"></i>'],
+      margin: 20,
+      center: true,
+      lazyLoad: true,
+      responsiveBaseElement: ".row-container",
+      responsiveClass: true,
+      rewind: true,
+      mouseDrag: true,
+      touchDrag: true,
+      nav: true,
+      responsive: {
+        0: {
+          items: 1,
+          dots: false
+        },
+        600: {
+          items: 2,
+          dots: false
+        },
+        900: {
+          items: 3,
+          dots: false
+        },
+        1440: {
+          items: 3,
+          dots: false
+        }
+      }
+    };
+    const recentlyViewed = new _OwlCarousel__WEBPACK_IMPORTED_MODULE_0__["default"](args, className);
+  }
+
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (EveryOwlCarousel);
@@ -4586,9 +4640,7 @@ class PopUpCart {
 
   events() {
     $('.variable-item').on('click', () => {
-      console.log('clicked');
       let formData = $('form.cart').data('product_variations');
-      console.log(formData);
     });
     $('.header .shopping-cart .cart-items-header').on('click', this.openCart);
     $(document).on('click', '.cart-box .cont-shopping a', this.closeCart); // $('.cart-popup-container .fa-times').on('click', this.closeCart)
