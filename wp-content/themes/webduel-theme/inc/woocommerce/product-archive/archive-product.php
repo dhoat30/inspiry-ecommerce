@@ -1,4 +1,22 @@
 <?php 
+
+// add result count in header on archive page for flex box 
+remove_action('woocommerce_before_shop_loop', 'woocommerce_result_count', 20); 
+add_action('woocommerce_archive_title', 'woocommerce_result_count', 10);
+
+// add sort by and filter--------------------------------------------
+remove_action('woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30); 
+add_action('woocommerce_archive_description', function(){ 
+    echo '<div class="filter-sort-container"> '; 
+}, 20);
+
+    // add sort form 
+    add_action('woocommerce_archive_description', 'woocommerce_catalog_ordering', 40);
+    add_action('woocommerce_archive_description', function(){ 
+        echo '<button class="filter-button secondary-button"><i class="fa-light fa-filter-list"></i> <span>Show Filters</span></div>';
+        echo '</div"> '; 
+    }, 60);
+
 // remove add to cart button on loop product page
 add_action( 'woocommerce_after_shop_loop_item', 'remove_add_to_cart_buttons', 1 );
     function remove_add_to_cart_buttons() {
@@ -44,3 +62,5 @@ function webduel_show_sale_percentage_loop() {
    }
    if ( $max_percentage > 0 ) echo "<div class='sale-perc'>(" . round($max_percentage) . "% OFF)</div>"; 
 }
+
+

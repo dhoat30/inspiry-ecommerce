@@ -47,6 +47,8 @@ require get_theme_file_path('/inc/woocommerce/image-size.php');
 require get_theme_file_path('/inc/woocommerce/single-product/image-gallery.php');
 require get_theme_file_path('/inc/woocommerce/single-product/product-summary.php');
 require get_theme_file_path('/inc/woocommerce/single-product/related-products.php');
+require get_theme_file_path('/inc/woocommerce/single-product/ajax-operations.php');
+
 require get_theme_file_path('/inc/woocommerce/single-product/product-summary-accordion.php');
 require get_theme_file_path('/inc/woocommerce/product-archive/product-archive.php');
 require get_theme_file_path('/inc/woocommerce/product-archive/archive-product.php');

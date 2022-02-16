@@ -9,11 +9,10 @@ class Product {
     }
     //events
     events() {
-        $('.shopping-cart').on('click', this.getProduct);
+        // $('.shopping-cart').on('click', this.getProduct);
     }
     //get product datea
     getProduct() {
-
         //show loader icon
         $.ajax({
             beforeSend: (xhr) => {

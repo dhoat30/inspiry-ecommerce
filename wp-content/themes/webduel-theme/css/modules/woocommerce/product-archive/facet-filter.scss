@@ -21,13 +21,13 @@
 }
 /* facet filter */
 .facet-wp-container {
-  width: 100%;
   max-width: 280px;
   margin-bottom: 30px;
-  display: block;
   background: white;
   align-self: flex-start;
   display: none;
+  width: 100%;
+  margin-right: 40px;
   /* position: sticky;
   top: 0; */
 }

@@ -26,27 +26,40 @@ class PopUpCart {
     //remove item from cart function 
     removeItem(e) {
         e.preventDefault();
-        console.log("sending remove request")
-        let productID = $(e.target).attr('data-productID');
-        let url = 'https://inspiry.co.nz/wp-admin/admin-ajax.php';
-        if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-            url = 'http://localhost/inspirynew/wp-admin/admin-ajax.php';
-        }
+        var productId = $(this).attr("data-productid"),
+            cart_item_key = $(this).attr("data-cart_item_key"),
+            product_container = $(this).parents('.product-card');
+        console.log(productId)
+        console.log(cart_item_key)
+        // Add loader
+        product_container.block({
+            message: null,
+            overlayCSS: {
+                cursor: 'none'
+            }
+        });
 
         $.ajax({
-            type: "POST",
-            url: url,
-            data: { action: 'remove_item_from_cart', 'product_id': productID },
-            beforeSend: function () {
-                $(e.target).removeClass('fa-times fal');
-                $(e.target).addClass('loader-icon');
-                $(e.target).show();
+            type: 'POST',
+            dataType: 'json',
+            url: wc_add_to_cart_params.ajax_url,
+            data: {
+                action: "product_remove",
+                product_id: productId,
+                cart_item_key: cart_item_key
             },
-            success: function (res) {
-                console.log(res)
-                if (res) {
-                    $(e.target).closest('.product-card').hide();
-                    location.reload();
+            success: function (response) {
+                console.log(response)
+                if (!response || response.error)
+                    return;
+
+                var fragments = response.fragments;
+
+                // Replace fragments
+                if (fragments) {
+                    $.each(fragments, function (key, value) {
+                        $(key).replaceWith(value);
+                    });
                 }
             }
         });

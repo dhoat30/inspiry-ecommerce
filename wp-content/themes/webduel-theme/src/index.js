@@ -50,7 +50,7 @@ import FeedbackForm from './modules/CustomerService/FeedbackForm'
 // woocommerce 
 import WooGallery from './modules/Woocommerce/WooGallery'
 import SingleProductAccordion from "./modules/Woocommerce/singleProductAccordion";
-
+import ProductArchive from "./modules/Woocommerce/ProductArchive";
 // add to cart and remove from cart class 
 const popUpCart = new PopUpCart();
 
@@ -63,9 +63,11 @@ const singleProductAccordion = new SingleProductAccordion()
 // every owl carousel
 const everyOwlCarousel = new EveryOwlCarousel();
 
+// product archive
+const productArchive = new ProductArchive()
+
 
 window.onload = function () {
-  $('.wvs-archive-variation-wrapper').on('click', (e) => { e.preventDefault() })
 
   // enquiry modal 
   const enquiryModal = new EnquiryModal();
@@ -388,3 +390,4 @@ async function validateTransaction() {
     });
   });
 })(jQuery);
+

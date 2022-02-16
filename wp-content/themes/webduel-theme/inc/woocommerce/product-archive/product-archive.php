@@ -44,39 +44,41 @@ function add_category_banner_webduel(){
 }
 
 // add filter side bar section 
-add_action('woocommerce_before_main_content', function(){ 
+add_action('woocommerce_before_shop_loop', function(){ 
     if(is_product_category() || is_shop() || is_archive() ){ 
-        echo '<div class="facet-wp-container">' ;
-        // echo do_shortcode('[add_filter_button]');
-          echo '<div class="desktop">';   
-             
-              echo do_shortcode('[facetwp facet="categories"]');  
-              echo do_shortcode('[facetwp facet="brand"]');  
-              echo do_shortcode('[facetwp facet="collection"]');  
-              echo do_shortcode('[facetwp facet="design_style"]');  
-              echo do_shortcode('[facetwp facet="colour_family"]');  
-              echo do_shortcode('[facetwp facet="pattern"]');  
-              echo do_shortcode('[facetwp facet="composition"]');  
-              echo do_shortcode('[facetwp facet="availability"]');  
-            //   echo do_shortcode('[facetwp facet="price_range"]');  
-            echo '<button class="facet-reset-btn" onclick="FWP.reset()">Reset All Filter</button>'; 
-          echo '</div>'; 
-    
-          echo '<div class="mobile-filter-container">';   
-            echo do_shortcode('[facetwp facet="categories_m"]');  
-            echo do_shortcode('[facetwp facet="brand_m"]');  
-            echo do_shortcode('[facetwp facet="collection_m"]');  
-            echo do_shortcode('[facetwp facet="design_style_m"]');  
-            echo do_shortcode('[facetwp facet="colour_family_m"]');  
-            echo do_shortcode('[facetwp facet="pattern_m"]');  
-            echo do_shortcode('[facetwp facet="composition_m"]');  
-            echo do_shortcode('[facetwp facet="availability_m"]');  
-            // echo do_shortcode('[facetwp facet="price_range_m"]');   
-            echo '<button class="close-button show-results"> Show All Results </button>';
-            echo '<button class="facet-reset-btn" onclick="FWP.reset()">Reset All Filter</button>'; 
-            echo '<i class="fal fa-times close-icon"></i>'; 
-          echo '</div>'; 
-        echo '</div>';
+        echo '
+        <div class="facet-product-container">
+            <div class="facet-wp-container">' ;
+            // echo do_shortcode('[add_filter_button]');
+            echo '<div class="desktop">';   
+                
+                echo do_shortcode('[facetwp facet="categories"]');  
+                echo do_shortcode('[facetwp facet="brand"]');  
+                echo do_shortcode('[facetwp facet="collection"]');  
+                echo do_shortcode('[facetwp facet="design_style"]');  
+                echo do_shortcode('[facetwp facet="colour_family"]');  
+                echo do_shortcode('[facetwp facet="pattern"]');  
+                echo do_shortcode('[facetwp facet="composition"]');  
+                echo do_shortcode('[facetwp facet="availability"]');  
+                //   echo do_shortcode('[facetwp facet="price_range"]');  
+                echo '<button class="facet-reset-btn" onclick="FWP.reset()">Reset All Filter</button>'; 
+            echo '</div>'; 
+        
+            echo '<div class="mobile-filter-container">';   
+                echo do_shortcode('[facetwp facet="categories_m"]');  
+                echo do_shortcode('[facetwp facet="brand_m"]');  
+                echo do_shortcode('[facetwp facet="collection_m"]');  
+                echo do_shortcode('[facetwp facet="design_style_m"]');  
+                echo do_shortcode('[facetwp facet="colour_family_m"]');  
+                echo do_shortcode('[facetwp facet="pattern_m"]');  
+                echo do_shortcode('[facetwp facet="composition_m"]');  
+                echo do_shortcode('[facetwp facet="availability_m"]');  
+                // echo do_shortcode('[facetwp facet="price_range_m"]');   
+                echo '<button class="close-button show-results"> Show All Results </button>';
+                echo '<button class="facet-reset-btn" onclick="FWP.reset()">Reset All Filter</button>'; 
+                echo '<i class="fal fa-times close-icon"></i>'; 
+            echo '</div>'; 
+            echo '</div>';
     }
    
 }, 10); 
@@ -106,9 +108,12 @@ function fwp_add_facet_labels() {
     add_action( 'wp_head', 'fwp_add_facet_labels', 100 );
 
 // add product loop container
-add_action('woocommerce_before_main_content', function(){ 
+add_action('woocommerce_before_shop_loop', function(){ 
     echo '<div class="product-loop-container">';
-}, 30); 
+}, 20); 
 add_action('woocommerce_after_main_content', function(){ 
-    echo '</div>';
+
+    echo '
+        </div>
+    </div>';
 }, 10); 
