@@ -32,17 +32,7 @@ add_action('woocommerce_before_cart', function(){
 
             foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
                 $product = $cart_item['data'];
-                foreach ( $product->get_available_variations() as $key ) {
-                    print_r($key);
-                    // $variation = wc_get_product( $key['variation_id'] );
-                    // $stock = $variation->get_availability();
-                    // $stock_string = $stock['availability'] ? $stock['availability'] : __( 'In stock', 'woocommerce' );
-                    // $attr_string = array();
-                    // foreach ( $key['attributes'] as $attr_name => $attr_value ) {
-                    //     $attr_string[] = $attr_value;
-                    // }
-                    // echo '<br/>' . implode( ', ', $attr_string ) . ': ' . $stock_string;
-                }
+                
                 $delivery = wc_get_product_terms( $cart_item['product_id'], 'pa_delivery' )[0]->name;
                 $availability = ""; 
                 $product_id = ''; 
@@ -74,6 +64,9 @@ add_action('woocommerce_before_cart', function(){
                         <a href="<?php echo $link?>" class="product-title">
                             <?php echo $product->name?>
                         </a>
+                        <?php 
+          
+                        ?>
                         <div class="availability-container">
                             
                             <div class="availability">
@@ -127,3 +120,5 @@ add_action('woocommerce_before_cart', function(){
     </table>
     <?php 
 }, 30); 
+
+
