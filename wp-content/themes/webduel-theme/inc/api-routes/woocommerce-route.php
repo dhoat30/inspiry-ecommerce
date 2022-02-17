@@ -18,7 +18,7 @@ function getProduct($data){
    if(is_user_logged_in()){
       $boards = new WP_Query(array(
          'post_type' => 'product',
-         'p' => 15033
+         'p' => $postID
       )); 
       
       $boardsResult = array(); 
@@ -27,7 +27,7 @@ function getProduct($data){
          $boards->the_post(); 
          global $product; 
          array_push($boardsResult, array(
-            'price' =>  $product->get_price()
+            'product' =>  $product->get_attributes('availability')
          )); 
       }
       return $boardsResult; 

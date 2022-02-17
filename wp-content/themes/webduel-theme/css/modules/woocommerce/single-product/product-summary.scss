@@ -1,4 +1,7 @@
 .single-product {
+  .stock {
+    display: none;
+  }
   .product {
     border-bottom: 1px solid var(--lightGrey);
     padding-bottom: 20px;

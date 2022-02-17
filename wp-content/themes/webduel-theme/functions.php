@@ -53,6 +53,8 @@ require get_theme_file_path('/inc/woocommerce/single-product/product-summary-acc
 require get_theme_file_path('/inc/woocommerce/product-archive/product-archive.php');
 require get_theme_file_path('/inc/woocommerce/product-archive/archive-product.php');
 
+require get_theme_file_path('/inc/woocommerce/cart/cart.php');
+
 // shortcodes
 require get_theme_file_path('/inc/short-codes/social-share.php');
 require get_theme_file_path('/inc/short-codes/related-products-shortcode.php');
@@ -63,7 +65,7 @@ require get_theme_file_path('/inc/short-codes/archive-page-shortcode.php');
  function inspiry_scripts(){ 
 
   
-   wp_enqueue_script('main-university-js', get_theme_file_uri('/build/index.js'), array('jquery'), '1.0', true);
+   wp_enqueue_script('main', get_theme_file_uri('/build/index.js'), array('jquery'), '1.0', true);
    wp_enqueue_style('university_main_styles', get_theme_file_uri('/build/style-index.css'));
    wp_enqueue_style('university_extra_styles', get_theme_file_uri('/build/index.css'));
 

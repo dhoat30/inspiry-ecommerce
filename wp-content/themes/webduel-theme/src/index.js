@@ -51,6 +51,7 @@ import FeedbackForm from './modules/CustomerService/FeedbackForm'
 import WooGallery from './modules/Woocommerce/WooGallery'
 import SingleProductAccordion from "./modules/Woocommerce/singleProductAccordion";
 import ProductArchive from "./modules/Woocommerce/ProductArchive";
+import SingleProduct from "./modules/Woocommerce/SingleProduct";
 // add to cart and remove from cart class 
 const popUpCart = new PopUpCart();
 
@@ -58,7 +59,8 @@ const popUpCart = new PopUpCart();
 const wooGallery = new WooGallery()
 // single product page accordion 
 const singleProductAccordion = new SingleProductAccordion()
-
+// single product 
+const singleProduct = new SingleProduct()
 
 // every owl carousel
 const everyOwlCarousel = new EveryOwlCarousel();

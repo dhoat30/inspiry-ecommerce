@@ -2955,6 +2955,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_Woocommerce_WooGallery__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./modules/Woocommerce/WooGallery */ "./src/modules/Woocommerce/WooGallery.js");
 /* harmony import */ var _modules_Woocommerce_singleProductAccordion__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./modules/Woocommerce/singleProductAccordion */ "./src/modules/Woocommerce/singleProductAccordion.js");
 /* harmony import */ var _modules_Woocommerce_ProductArchive__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./modules/Woocommerce/ProductArchive */ "./src/modules/Woocommerce/ProductArchive.js");
+/* harmony import */ var _modules_Woocommerce_SingleProduct__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./modules/Woocommerce/SingleProduct */ "./src/modules/Woocommerce/SingleProduct.js");
 let $ = jQuery;
 
 
@@ -2994,13 +2995,16 @@ let $ = jQuery;
 
 
 
+
  // add to cart and remove from cart class 
 
 const popUpCart = new _modules_PopUpCart__WEBPACK_IMPORTED_MODULE_12__["default"](); // woo Gallery 
 
 const wooGallery = new _modules_Woocommerce_WooGallery__WEBPACK_IMPORTED_MODULE_23__["default"](); // single product page accordion 
 
-const singleProductAccordion = new _modules_Woocommerce_singleProductAccordion__WEBPACK_IMPORTED_MODULE_24__["default"](); // every owl carousel
+const singleProductAccordion = new _modules_Woocommerce_singleProductAccordion__WEBPACK_IMPORTED_MODULE_24__["default"](); // single product 
+
+const singleProduct = new _modules_Woocommerce_SingleProduct__WEBPACK_IMPORTED_MODULE_26__["default"](); // every owl carousel
 
 const everyOwlCarousel = new _modules_OwlCarousel_EveryOwlCarousel__WEBPACK_IMPORTED_MODULE_4__["default"](); // product archive
 
@@ -4168,14 +4172,13 @@ const $ = jQuery;
 class FacetFilter {
   constructor() {
     // mobile and desktop filter show/hide
-    this.mobileFilterButton = $('.mobile .filter-title');
-    this.fixedFilterButton = $('.fixed-filter-button');
     this.closeButton = $('.mobile-filter-container .close-button');
-    this.closeIcon = $('.mobile-filter-container .close-icon'); // desktop filter show 
+    this.closeIcon = $('.mobile-filter-container .close-icon');
+    this.showResultsButton = $('.mobile-filter-container .primary-button'); // desktop filter show 
 
     this.filterButton = $('.filter-sort-container .filter-button'); // facet label button
 
-    this.labelButton = $('.facet-product-container .facet-wp-container .desktop .facet-label-button');
+    this.labelButton = $('.facet-label-button');
     this.events();
   }
 
@@ -4188,35 +4191,35 @@ class FacetFilter {
       } else {
         $('.fixed-filter-button').slideUp();
       }
-    }); // this.mobileFilterButton.on('click', this.showMobileFilterContainer)
-    // this.fixedFilterButton.on('click', this.showMobileFilterContainer)
-    // this.closeButton.on('click', this.closeMobileFilterContainer)
-    // this.closeIcon.on('click', this.closeMobileFilterContainer)
-    // show filter container when button is clicked 
+    }); // show filter container
 
-    this.filterButton.on('click', this.showDesktopContainer); // show filter when clicked on label desktop 
+    this.filterButton.on('click', this.showDesktopContainer); // hide filter container
+
+    this.closeIcon.on('click', this.hideDesktopContainer);
+    this.showResultsButton.on('click', this.hideDesktopContainer); // show filter when clicked on label desktop 
 
     this.labelButton.on('click', this.showFilter);
-  }
-
-  showMobileFilterContainer() {
-    console.log('filter button clicked');
-    $('.facet-wp-container').slideDown();
-  }
-
-  closeMobileFilterContainer() {
-    $('.facet-wp-container').slideUp();
   } // show desktop filter container on button click
 
 
   showDesktopContainer() {
-    $('.facet-wp-container').slideToggle('slow');
+    if (window.matchMedia("(max-width: 1100px)").matches) {
+      $('.facet-wp-container').slideDown('slow');
+    } else {
+      $('.facet-wp-container').slideToggle('slow');
+    }
 
     if ($('.filter-sort-container .filter-button span').text() === 'Show Filters') {
       $('.filter-sort-container .filter-button span').text('Hide Filters');
     } else {
       $('.filter-sort-container .filter-button span').text('Show Filters');
     }
+  }
+
+  hideDesktopContainer() {
+    console.log('clicked close button');
+    $('.filter-sort-container .filter-button span').text('Show Filters');
+    $('.facet-wp-container').hide('slow');
   }
 
   showFilter(e) {
@@ -5499,6 +5502,63 @@ class ProductArchive {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (ProductArchive);
+
+/***/ }),
+
+/***/ "./src/modules/Woocommerce/SingleProduct.js":
+/*!**************************************************!*\
+  !*** ./src/modules/Woocommerce/SingleProduct.js ***!
+  \**************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const $ = jQuery;
+
+class SingleProduct {
+  constructor() {
+    this.variationProduct = $('.single-product .variations_form .variation_id');
+    this.events();
+  }
+
+  events() {
+    this.variationProduct.on('change', this.getVariationValue);
+  }
+
+  getVariationValue(e) {
+    const variationID = $(this).val();
+    const variationData = JSON.parse($('.single-product .variations_form .variation-availability-data').attr('data-variation_availability'));
+
+    if (variationID > 0) {
+      console.log(variationData);
+      const selectedVariation = variationData.filter(item => item.variation_id === Number(variationID));
+      console.log(selectedVariation[0].availability);
+
+      if (selectedVariation[0].availability === "in-stock") {
+        $('.single-product .availability .title span').text('In Stock');
+        $('.single-product .availability .title span').css({
+          'color': '#1fac75'
+        });
+        $('.single-product .availability .title .fa-circle-check').css({
+          'color': '#1fac75'
+        });
+      } else {
+        $('.single-product .availability .title span').text('Pre Order');
+        $('.single-product .availability .title span').css({
+          'color': '#d69400'
+        });
+        $('.single-product .availability .title .fa-circle-check').css({
+          'color': '#d69400'
+        });
+      }
+    } else {
+      console.log('id is zero ');
+    }
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (SingleProduct);
 
 /***/ }),
 

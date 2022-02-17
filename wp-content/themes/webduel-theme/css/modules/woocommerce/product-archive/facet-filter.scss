@@ -28,6 +28,14 @@
   display: none;
   width: 100%;
   margin-right: 40px;
+  .desktop {
+    .secondary-button {
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+    }
+  }
+
   /* position: sticky;
   top: 0; */
 }
@@ -96,46 +104,7 @@
 .facetwp-checkbox:hover span {
   color: var(--darkGrey);
 }
-/* mobile styling */
-.facet-wp-container .mobile-filter-container .facet-label {
-  font-size: 0.8rem;
-}
-.facet-wp-container .mobile-filter-container .facetwp-facet {
-  margin: 5px 0 5px 0 !important;
-  height: 100%;
-  overflow-y: scroll;
-  max-height: 150px;
-  position: relative;
-}
-.facet-wp-container .mobile-filter-container .facet-wrap {
-  border-bottom: none;
-  margin: 0 0 10px 0;
-}
-.facet-wp-container .mobile-filter-container .facetwp-facet {
-  overflow: visible;
-}
-.fs-option-label {
-  font-family: var(--poppins);
-  font-weight: 300;
-  color: var(--grey);
-  padding-right: 10px;
-  font-size: 0.9rem;
-}
-.facet-wp-container .mobile-filter-container .fs-label {
-  font-family: var(--poppins);
-  font-weight: 300;
-  color: var(--grey);
-  padding-right: 10px;
-  font-size: 0.9rem;
-}
-.facet-wp-container .mobile-filter-container .fs-checkbox i {
-  border-radius: 0 !important;
-  width: 20px !important;
-  height: 20px !important;
-}
-.facet-wp-container .mobile-filter-container .fs-option {
-  margin: 0 0 10px 0;
-}
+
 /* dropdown styling  */
 .fs-dropdown {
   width: 100% !important;
@@ -154,22 +123,22 @@
 .facetwp-slider-reset {
   display: none;
 }
-.facet-reset-btn {
-  margin-top: 20px;
-  display: block;
-  width: 100%;
-  background: none;
-  font-size: 1rem;
-  padding: 10px 0;
-  text-transform: uppercase;
-  color: var(--darkGrey);
-  border: 1px solid var(--darkGrey);
-  font-size: var(--paragraphSize);
-}
-.facet-reset-btn:hover {
-  background: var(--darkGrey);
-  color: white;
-}
+// .facet-reset-btn {
+//   margin-top: 20px;
+//   display: block;
+//   width: 100%;
+//   background: none;
+//   font-size: 1rem;
+//   padding: 10px 0;
+//   text-transform: uppercase;
+//   color: var(--darkGrey);
+//   border: 1px solid var(--darkGrey);
+//   font-size: var(--paragraphSize);
+// }
+// .facet-reset-btn:hover {
+//   background: var(--darkGrey);
+//   color: white;
+// }
 /* section title */
 .filter-title i {
   color: white;
@@ -224,6 +193,9 @@
   flex-wrap: wrap;
   align-items: center;
 }
+.mobile-filter-container {
+  display: none;
+}
 @media (max-width: 1110px) {
   .facet-wp-container {
     position: fixed;
@@ -233,7 +205,7 @@
     top: 0;
     left: 0;
     padding: 30px 10px;
-    height: 100%;
+    height: auto;
     overflow: auto;
     display: none;
   }
@@ -245,10 +217,64 @@
     position: sticky !important;
     top: 0;
   }
+  .mobile-filter-container {
+    display: block !important;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+
+    top: 0;
+    left: 0;
+    overflow: auto;
+    background-color: var(--white);
+    padding: 0;
+    .close-icon {
+      color: var(--darkGrey);
+      position: absolute;
+      top: 20px;
+    }
+    .mobile-filters {
+      margin-top: 70px;
+      .button-containers {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 15px;
+        flex-wrap: wrap;
+        button {
+          margin: 5px 5px;
+          text-transform: uppercase;
+        }
+      }
+    }
+    /* mobile styling */
+    .facet-label {
+      font-size: 0.8rem;
+    }
+    .facetwp-facet {
+      margin: 5px 0 5px 0 !important;
+      background-color: var(--beige);
+
+      .fs-label-wrap {
+        border: none;
+        .fs-label {
+          color: var(--grey);
+          padding: 10px 10px;
+          font-size: var(--mediumSize);
+          background-color: var(--beige);
+          font-weight: var(--medium);
+        }
+
+        .fs-checkbox i {
+          border-radius: 0 !important;
+          width: 20px !important;
+          height: 20px !important;
+        }
+      }
+    }
+  }
 }
-.mobile-filter-container {
-  display: none;
-}
+
 @media (min-width: 1100px) {
   .container .facet-wp-container .mobile-filter-container {
     display: block;
@@ -271,14 +297,6 @@
   color: white;
 }
 
-.mobile-filter-container .close-icon {
-  color: var(--darkGrey);
-  position: absolute;
-  top: 35px;
-}
-.mobile-filter-container .close-icon:hover {
-  transform: translate(0, 0);
-}
 /* fixed filter button */
 
 .fixed-filter-button {

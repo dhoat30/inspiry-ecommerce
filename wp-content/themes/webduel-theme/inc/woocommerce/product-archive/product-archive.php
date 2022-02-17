@@ -61,10 +61,13 @@ add_action('woocommerce_before_shop_loop', function(){
                 echo do_shortcode('[facetwp facet="composition"]');  
                 echo do_shortcode('[facetwp facet="availability"]');  
                 //   echo do_shortcode('[facetwp facet="price_range"]');  
-                echo '<button class="facet-reset-btn" onclick="FWP.reset()">Reset All Filter</button>'; 
+                echo '<button class="facet-reset-btn secondary-button" onclick="FWP.reset()">Reset All Filter</button>'; 
             echo '</div>'; 
         
-            echo '<div class="mobile-filter-container">';   
+            echo '<div class="mobile-filter-container"> 
+                <div class="mobile-filters">
+            ';
+
                 echo do_shortcode('[facetwp facet="categories_m"]');  
                 echo do_shortcode('[facetwp facet="brand_m"]');  
                 echo do_shortcode('[facetwp facet="collection_m"]');  
@@ -74,8 +77,14 @@ add_action('woocommerce_before_shop_loop', function(){
                 echo do_shortcode('[facetwp facet="composition_m"]');  
                 echo do_shortcode('[facetwp facet="availability_m"]');  
                 // echo do_shortcode('[facetwp facet="price_range_m"]');   
-                echo '<button class="close-button show-results"> Show All Results </button>';
-                echo '<button class="facet-reset-btn" onclick="FWP.reset()">Reset All Filter</button>'; 
+
+                echo '
+                <div class="button-containers">
+                    <button class="primary-button"> Show Results </button>
+                    <button class="facet-reset-btn secondary-button" onclick="FWP.reset()">Reset All Filter</button>
+                </div>
+                    '; 
+                echo '</div>';
                 echo '<i class="fal fa-times close-icon"></i>'; 
             echo '</div>'; 
             echo '</div>';
@@ -89,17 +98,19 @@ function fwp_add_facet_labels() {
     <script>
     (function($) {
         $(document).on('facetwp-loaded', function() {
-            $('.facetwp-facet').each(function() {
-                var $facet = $(this);
-                var facet_name = $facet.attr('data-name');
-                var facet_label = FWP.settings.labels[facet_name];
-    
-                if ($facet.closest('.facet-wrap').length < 1 && $facet.closest('.facetwp-flyout').length < 1 ) {
-                    $facet.wrap('<div class="facet-wrap"></div>');
-                    $facet.before('<div class="facet-label-button"><button class="facet-label">' + facet_label + '<i class="fa-regular fa-plus"></i></button></div>');
-                }
-                
-            });
+            if (window.matchMedia("(min-width: 1100px)").matches) {
+                $('.facetwp-facet').each(function() {
+                    var $facet = $(this);
+                    var facet_name = $facet.attr('data-name');
+                    var facet_label = FWP.settings.labels[facet_name];
+        
+                    if ($facet.closest('.facet-wrap').length < 1 && $facet.closest('.facetwp-flyout').length < 1 ) {
+                        $facet.wrap('<div class="facet-wrap"></div>');
+                        $facet.before('<div class="facet-label-button"><button class="facet-label">' + facet_label + '<i class="fa-regular fa-plus"></i></button></div>');
+                    }
+                    
+                });
+            }
         });
     })(jQuery);
     </script>
@@ -109,11 +120,14 @@ function fwp_add_facet_labels() {
 
 // add product loop container
 add_action('woocommerce_before_shop_loop', function(){ 
-    echo '<div class="product-loop-container">';
+    echo '
+    <div class="product-loop-container">
+        <div class="facetwp-template">
+    ';
 }, 20); 
 add_action('woocommerce_after_main_content', function(){ 
-
     echo '
+            </div>
         </div>
     </div>';
 }, 10); 

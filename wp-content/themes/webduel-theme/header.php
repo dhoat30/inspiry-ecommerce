@@ -262,13 +262,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                 foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
                         $product = $cart_item['data'];
-                        $product_id = ''; 
-                        if($cart_item['data']->post_type ==='product_variation'){ 
-                            $product_id =  $cart_item['variation_id']; 
-                        }
-                        else{ 
-                            $product_id = $cart_item['product_id'];
-                        }
+                        $product_id = $product_id = $cart_item['product_id'];
+                        
                         $quantity = $cart_item['quantity'];
                         $price = WC()->cart->get_product_price( $product );
                         $subtotal = WC()->cart->get_product_subtotal( $product, $cart_item['quantity'] );
@@ -321,10 +316,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 </div>    
                             </a>
                             <?php
-                        }
+                        }?>
+                    </div>
+                        <?php 
                 }   
                         ?>
-                    </div>
+                    
 
                     <div class="pop-up-footer">
                         <div class="total-container">

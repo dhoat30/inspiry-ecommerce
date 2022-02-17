@@ -37,7 +37,7 @@
 @import "modules/woocommerce/single-product/related-products";
 @import "modules/woocommerce/product-archive/facet-filter";
 @import "modules/woocommerce/product-archive/product-archive";
-
+@import "modules/woocommerce/cart/cart";
 // /* modal css  */
 // @import "modules/modal/modal";
 
@@ -329,7 +329,7 @@ h3 {
   cursor: pointer;
   font-weight: var(--regular);
   border-radius: 0 !important;
-  border: none;
+  border: 1px solid var(--black);
   background: var(--black);
   color: white !important;
   text-transform: uppercase;
@@ -339,7 +339,7 @@ h3 {
 }
 .secondary-button {
   line-height: 1.3em;
-  padding: 7px 30px 7px 30px;
+  padding: 10px 30px 10px 30px;
   border: 1px solid var(--black);
   cursor: pointer;
   font-weight: var(--regular);
@@ -347,7 +347,7 @@ h3 {
   background-color: white;
   color: var(--black);
   text-transform: uppercase;
-  font-size: var(--medium);
+  font-size: var(--paragraphSize);
   transition: var(--transition);
 }
 .secondary-button span {

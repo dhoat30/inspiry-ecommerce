@@ -1,0 +1,92 @@
+.woocommerce-cart {
+  .cart-items-table {
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    border: 1px solid var(--lightGrey);
+    width: 100%;
+    thead {
+      tr {
+        border-bottom: 1px solid var(--lightGrey);
+        th {
+          text-align: left;
+          padding: 15px 15px;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid var(--lightGrey);
+        td {
+          letter-spacing: 0.03rem;
+          padding: 15px;
+          .img-container {
+            img {
+              width: 100px;
+              height: 100px;
+            }
+          }
+        }
+        .image-column {
+        }
+        .product-info-column {
+          .product-title {
+            font-size: var(--mediumSize);
+            text-decoration: none;
+            letter-spacing: 0.03rem;
+            display: block;
+            color: var(--darkGrey);
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+          .availability-container {
+            background-color: var(--beige);
+            padding: 10px 20px;
+            margin: 10px 0;
+            display: inline-block;
+            div {
+              margin-left: 25px;
+              font-size: var(--paragraphSize);
+              font-weight: var(--semiBold);
+              span {
+                font-weight: var(--regular);
+              }
+            }
+            .availability {
+              position: relative;
+
+              i {
+                position: absolute;
+                left: -25px;
+                top: 5px;
+                color: var(--grey);
+              }
+            }
+          }
+        }
+        .quantity-column {
+        }
+        .price-column {
+          .price-container {
+            display: flex;
+            .regular-price {
+              font-size: 0.9rem;
+              font-weight: var(--bold);
+            }
+            .striked {
+              text-decoration: line-through;
+              color: var(--grey);
+            }
+            .sale-price {
+              font-size: 0.9rem;
+              font-weight: var(--bold);
+              color: var(--red);
+              margin-left: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

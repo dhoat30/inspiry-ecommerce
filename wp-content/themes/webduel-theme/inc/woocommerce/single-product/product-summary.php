@@ -126,7 +126,7 @@ add_action('woocommerce_single_product_summary', function (){
             echo ' 
             <i class="fa-solid fa-circle-check" style="color: var(--orange); "></i>
             <span  style="color: var(--orange); ">
-            Available on backorder
+            Pre Order
             </span>
             '; 
         }
@@ -152,3 +152,34 @@ add_action('woocommerce_single_product_summary', function(){
     echo do_shortcode('[webduelSocialShare]');
     echo '</div>';
 }, 80); 
+
+// add variation availability data before add to cart button ---------------------------------
+function iconic_output_engraving_field() {
+	
+    global $product;
+    echo $product->get_stock_quantity();
+
+    // $product->is_type( $type ) checks the product type, string/array $type ( 'simple', 'grouped', 'variable', 'external' ), returns boolean
+    
+    if ( $product->is_type( 'variable' ) ) {
+        $dataArray = array(); 
+        foreach($product->get_available_variations() as $key){
+            $variation = wc_get_product( $key['variation_id'] );
+            $stock = $variation->get_availability();
+            
+            array_push($dataArray, array(
+                "variation_id" => $key['variation_id'], 
+                "availability"=>$stock['class']
+             )); 
+        }
+        
+        ?>
+        <div class="variation-availability-data" 
+        data-variation_availability='<?php   print_r(json_encode($dataArray)); ?>'>
+        </div>
+        <?php
+       
+    }
+}
+
+add_action( 'woocommerce_before_add_to_cart_button', 'iconic_output_engraving_field', 10 );
