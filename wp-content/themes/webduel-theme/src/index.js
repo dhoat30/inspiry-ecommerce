@@ -1,8 +1,6 @@
 let $ = jQuery;
 
 import "../css/style.scss"
-import Splide from '@splidejs/splide';
-import Drift from 'drift-zoom';
 
 // form 
 import Form from './modules/Form/Form'
@@ -52,6 +50,7 @@ import WooGallery from './modules/Woocommerce/WooGallery'
 import SingleProductAccordion from "./modules/Woocommerce/singleProductAccordion";
 import ProductArchive from "./modules/Woocommerce/ProductArchive";
 import SingleProduct from "./modules/Woocommerce/SingleProduct";
+import Cart from './modules/Woocommerce/Cart'
 // add to cart and remove from cart class 
 const popUpCart = new PopUpCart();
 
@@ -68,7 +67,8 @@ const everyOwlCarousel = new EveryOwlCarousel();
 // product archive
 const productArchive = new ProductArchive()
 
-
+// cart 
+const cart = new Cart()
 window.onload = function () {
 
   // enquiry modal 

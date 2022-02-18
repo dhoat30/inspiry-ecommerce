@@ -56,6 +56,7 @@
 // @import "modules/trade-directory/single-board";
 // @import "modules/trade-directory/board-archive-page"; */
 // @import "modules/trade-directory/save-baord";
+/* Chrome, Safari, Edge, Opera */
 
 :root {
   --letterSpacing: 0.04rem;
@@ -480,6 +481,14 @@ h3 {
   z-index: 2000;
   background: rgba(0, 0, 0, 0.5);
   display: none;
+  .fa-loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: var(--white);
+  }
 }
 
 .white-overlay {

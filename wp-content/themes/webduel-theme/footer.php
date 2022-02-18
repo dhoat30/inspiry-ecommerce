@@ -117,7 +117,9 @@
 
 
 
-<div class="overlay"></div>
+<div class="overlay">
+  <i class="fa-duotone fa-loader fa-spin"></i>
+</div>
 <?php wp_footer();?>
 
 </body>

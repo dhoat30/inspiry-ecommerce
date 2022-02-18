@@ -40,6 +40,18 @@
               text-decoration: underline;
             }
           }
+          .variation-attributes {
+            .item {
+              margin: 5px 0;
+              font-size: var(--paragraphSize);
+              font-weight: var(--bold);
+              letter-spacing: 0.02rem;
+              span {
+                font-weight: var(--regular);
+                text-transform: capitalize;
+              }
+            }
+          }
           .availability-container {
             background-color: var(--beige);
             padding: 10px 20px;
@@ -66,6 +78,50 @@
           }
         }
         .quantity-column {
+          .quantity-container {
+            display: flex;
+            align-items: center;
+            .minus,
+            .plus {
+              background-color: var(--beige);
+              width: 40px;
+              height: 40px;
+              font-size: 1.5rem;
+              font-weight: 100;
+              line-height: 0;
+              border: 1px solid var(--lightGrey);
+              cursor: pointer;
+            }
+            .minus {
+              border-right: 0 !important;
+              border-top-left-radius: 3px;
+              border-bottom-left-radius: 3px;
+            }
+            .plus {
+              position: relative;
+              border-left: 0 !important;
+              border-top-right-radius: 3px;
+              border-bottom-right-radius: 3px;
+            }
+            #cart-quantity {
+              display: inline-block;
+              text-align: center;
+              width: 50px;
+              height: 40px;
+              border-radius: 0;
+              border: 1px solid var(--lightGrey);
+            }
+            #cart-quantity::-webkit-outer-spin-button,
+            #cart-quantity::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
+
+            /* Firefox */
+            #cart-quantity[type="number"] {
+              -moz-appearance: textfield;
+            }
+          }
         }
         .price-column {
           .price-container {

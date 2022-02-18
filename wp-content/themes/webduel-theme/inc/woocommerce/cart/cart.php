@@ -36,10 +36,15 @@ add_action('woocommerce_before_cart', function(){
                 $delivery = wc_get_product_terms( $cart_item['product_id'], 'pa_delivery' )[0]->name;
                 $availability = ""; 
                 $product_id = ''; 
+                $colourAttribute = ''; 
+                $sizeAttribute = '';  
                         if($cart_item['data']->post_type ==='product_variation'){ 
                             $product_id =  $cart_item['variation_id']; 
                             $variation = wc_get_product( $product_id );
                             $availability = $variation->get_availability();
+                            $colourAttribute = $product->get_attributes()['pa_colour'];
+                            $sizeAttribute = $product->get_attributes()['pa_sizes'];
+                            
                         }
                         else{ 
                             $product_id = $cart_item['product_id'];
@@ -49,7 +54,7 @@ add_action('woocommerce_before_cart', function(){
                 $regularPrice = $product->regular_price; 
                 $subtotal = WC()->cart->get_product_subtotal( $product, $cart_item['quantity'] );
                 $link = $product->get_permalink( $cart_item );
-                  
+           
                 ?>
                 <tr>
                     <td class="image-column">
@@ -64,9 +69,27 @@ add_action('woocommerce_before_cart', function(){
                         <a href="<?php echo $link?>" class="product-title">
                             <?php echo $product->name?>
                         </a>
-                        <?php 
-          
-                        ?>
+                        <!-- variation attributes  -->
+                        <div class="variation-attributes">
+                            <?php 
+                            if($colourAttribute){ 
+                                ?>
+                                <div class="item">
+                                    Color: <span><?php echo $colourAttribute; ?> </span>       
+                                </div>
+                                <?php 
+                            }
+                            ?>
+                            <?php 
+                            if($sizeAttribute){ 
+                                ?>
+                                <div class="item">
+                                    Size: <span><?php echo $sizeAttribute; ?> </span>       
+                                </div>
+                                <?php 
+                            }
+                            ?>
+                        </div>
                         <div class="availability-container">
                             
                             <div class="availability">
@@ -90,7 +113,20 @@ add_action('woocommerce_before_cart', function(){
                         </div>
                     </td>
                     <td class="quantity-column" >
-                        <h3><?php echo $quantity;?> </h3>
+                        <div class="quantity-container"> 
+                            <input class="minus" type="button" value="–" control-id="ControlID-1">
+                            <input 
+                            type="number" 
+                            name="quantity" 
+                            id="cart-quantity" 
+                            value="<?php echo $quantity;?>"
+                            max="25"
+                            min="1"
+                            data-cart_item_key="<?php echo $cart_item_key;?>"
+                            />
+                            <input class="plus" type="button" value="+" control-id="ControlID-3">
+                        </div>
+                 
                     </td>
                     <td class="price-column" >
                         <div class="price-container">

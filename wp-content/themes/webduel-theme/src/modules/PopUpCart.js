@@ -80,6 +80,8 @@ class PopUpCart {
     }
 
     ajaxAddToCart(e) {
+
+        console.log(wc_add_to_cart_params)
         e.preventDefault();
         let thisbutton = $(this),
             $form = thisbutton.closest('form.cart'),
