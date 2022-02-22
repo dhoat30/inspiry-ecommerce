@@ -50,7 +50,11 @@ import WooGallery from './modules/Woocommerce/WooGallery'
 import SingleProductAccordion from "./modules/Woocommerce/singleProductAccordion";
 import ProductArchive from "./modules/Woocommerce/ProductArchive";
 import SingleProduct from "./modules/Woocommerce/SingleProduct";
-import Cart from './modules/Woocommerce/Cart'
+import Cart from './modules/Woocommerce/Cart/Cart'
+import Coupon from './modules/Woocommerce/Cart/Coupon'
+// modals 
+import ErrorModal from "./modules/ErrorModal/ErrorModal";
+
 // add to cart and remove from cart class 
 const popUpCart = new PopUpCart();
 
@@ -69,6 +73,9 @@ const productArchive = new ProductArchive()
 
 // cart 
 const cart = new Cart()
+const coupon = new Coupon()
+// modals 
+const errorModal = new ErrorModal()
 window.onload = function () {
 
   // enquiry modal 

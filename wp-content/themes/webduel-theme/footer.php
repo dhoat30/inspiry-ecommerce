@@ -116,9 +116,19 @@
 </div>
 
 
-
+<!-- overlay  -->
 <div class="overlay">
   <i class="fa-duotone fa-loader fa-spin"></i>
+</div>
+
+<!-- error pop up  -->
+<div class="error-modal">
+  
+  <div class="container">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <div class="content"></div>
+    <button>Dismiss</button>
+  </div>
 </div>
 <?php wp_footer();?>
 

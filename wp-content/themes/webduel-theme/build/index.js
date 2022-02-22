@@ -34,7 +34,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_Woocommerce_singleProductAccordion__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./modules/Woocommerce/singleProductAccordion */ "./src/modules/Woocommerce/singleProductAccordion.js");
 /* harmony import */ var _modules_Woocommerce_ProductArchive__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./modules/Woocommerce/ProductArchive */ "./src/modules/Woocommerce/ProductArchive.js");
 /* harmony import */ var _modules_Woocommerce_SingleProduct__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./modules/Woocommerce/SingleProduct */ "./src/modules/Woocommerce/SingleProduct.js");
-/* harmony import */ var _modules_Woocommerce_Cart__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./modules/Woocommerce/Cart */ "./src/modules/Woocommerce/Cart.js");
+/* harmony import */ var _modules_Woocommerce_Cart_Cart__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./modules/Woocommerce/Cart/Cart */ "./src/modules/Woocommerce/Cart/Cart.js");
+/* harmony import */ var _modules_Woocommerce_Cart_Coupon__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./modules/Woocommerce/Cart/Coupon */ "./src/modules/Woocommerce/Cart/Coupon.js");
+/* harmony import */ var _modules_ErrorModal_ErrorModal__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./modules/ErrorModal/ErrorModal */ "./src/modules/ErrorModal/ErrorModal.js");
 let $ = jQuery;
  // form 
 
@@ -74,6 +76,9 @@ let $ = jQuery;
 
 
 
+
+ // modals 
+
  // add to cart and remove from cart class 
 
 const popUpCart = new _modules_PopUpCart__WEBPACK_IMPORTED_MODULE_10__["default"](); // woo Gallery 
@@ -88,7 +93,10 @@ const everyOwlCarousel = new _modules_OwlCarousel_EveryOwlCarousel__WEBPACK_IMPO
 
 const productArchive = new _modules_Woocommerce_ProductArchive__WEBPACK_IMPORTED_MODULE_23__["default"](); // cart 
 
-const cart = new _modules_Woocommerce_Cart__WEBPACK_IMPORTED_MODULE_25__["default"]();
+const cart = new _modules_Woocommerce_Cart_Cart__WEBPACK_IMPORTED_MODULE_25__["default"]();
+const coupon = new _modules_Woocommerce_Cart_Coupon__WEBPACK_IMPORTED_MODULE_26__["default"](); // modals 
+
+const errorModal = new _modules_ErrorModal_ErrorModal__WEBPACK_IMPORTED_MODULE_27__["default"]();
 
 window.onload = function () {
   // enquiry modal 
@@ -1239,6 +1247,37 @@ class EnquiryModal {
 
 /***/ }),
 
+/***/ "./src/modules/ErrorModal/ErrorModal.js":
+/*!**********************************************!*\
+  !*** ./src/modules/ErrorModal/ErrorModal.js ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const $ = jQuery;
+
+class ErrorModal {
+  constructor() {
+    this.dismissBtn = $('.error-modal button');
+    this.events();
+  }
+
+  events() {
+    this.dismissBtn.on('click', this.hideModal);
+    $('.error-modal').on('click', this.hideModal);
+  }
+
+  hideModal() {
+    $('.error-modal').hide();
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (ErrorModal);
+
+/***/ }),
+
 /***/ "./src/modules/FacetFilter/FacetFilter.js":
 /*!************************************************!*\
   !*** ./src/modules/FacetFilter/FacetFilter.js ***!
@@ -1805,7 +1844,7 @@ class PopUpCart {
   }
 
   ajaxAddToCart(e) {
-    console.log(wc_add_to_cart_params);
+    console.log(wc_add_to_cart_params.ajax_url);
     e.preventDefault();
     let thisbutton = $(this),
         $form = thisbutton.closest('form.cart'),
@@ -1823,7 +1862,7 @@ class PopUpCart {
     $(document.body).trigger('adding_to_cart', [thisbutton, data]);
     $.ajax({
       type: 'post',
-      url: wc_add_to_cart_params.ajax_url,
+      url: '/wp-admin/admin-ajax.php',
       data: data,
       beforeSend: function (response) {
         thisbutton.removeClass('added').addClass('loading');
@@ -2558,35 +2597,34 @@ class CheckoutInputValidation {
 
 /***/ }),
 
-/***/ "./src/modules/Woocommerce/Cart.js":
-/*!*****************************************!*\
-  !*** ./src/modules/Woocommerce/Cart.js ***!
-  \*****************************************/
+/***/ "./src/modules/Woocommerce/Cart/Cart.js":
+/*!**********************************************!*\
+  !*** ./src/modules/Woocommerce/Cart/Cart.js ***!
+  \**********************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var _RemoveCartItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./RemoveCartItem */ "./src/modules/Woocommerce/Cart/RemoveCartItem.js");
+/* harmony import */ var _UpdateCart__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UpdateCart */ "./src/modules/Woocommerce/Cart/UpdateCart.js");
+
 
 const $ = jQuery;
 
 class Cart {
   constructor() {
-    (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(this, "updateCart", (qty, cart_item_key) => {
-      console.log('update cart');
-      console.log(`this is qty ${qty}`);
-      console.log(`this is key ${cart_item_key}`);
-    });
-
     this.plusBtn = $('.woocommerce-cart .quantity-container .plus');
     this.minusBtn = $('.woocommerce-cart .quantity-container .minus');
     this.qtyInputField = $('.woocommerce-cart .quantity-container #cart-quantity');
+    this.removeIcon = $('.woocommerce-cart .remove-column i');
     this.events();
   }
 
   events() {
     this.plusBtn.on('click', this.incrementValue);
     this.minusBtn.on('click', this.decrementValue);
+    this.qtyInputField.on('change', this.onQtyChange);
+    this.removeIcon.on('click', this.removeCartItem);
   }
 
   incrementValue(e) {
@@ -2601,9 +2639,8 @@ class Cart {
       qty.val(max);
     } else {
       qty.val(val + step);
+      const updateCart = new _UpdateCart__WEBPACK_IMPORTED_MODULE_1__["default"](qty.val(), cart_item_key);
     }
-
-    this.updateCart(qty.val(), cart_item_key);
   }
 
   decrementValue() {
@@ -2611,20 +2648,280 @@ class Cart {
     let val = parseFloat(qty.val());
     var max = parseFloat(qty.attr('max'));
     var min = parseFloat(qty.attr('min'));
+    var cart_item_key = qty.attr('data-cart_item_key');
     var step = 1;
 
     if (min && min >= val) {
       qty.val(min);
     } else if (val > 1) {
       qty.val(val - step);
+      setTimeout(() => {
+        const updateCart = new _UpdateCart__WEBPACK_IMPORTED_MODULE_1__["default"](qty.val(), cart_item_key);
+      }, 1000);
     }
+  }
 
-    this.updateCart(qty.val(), cart_item_key);
+  onQtyChange() {
+    let qty = $(this);
+    var cart_item_key = qty.attr('data-cart_item_key');
+    const updateCart = new _UpdateCart__WEBPACK_IMPORTED_MODULE_1__["default"](qty.val(), cart_item_key);
+  }
+
+  removeCartItem() {
+    let qty = $(this).closest('.remove-column').siblings('.quantity-column').find('#cart-quantity');
+    var cart_item_key = qty.attr('data-cart_item_key');
+    const removeCartItem = new _RemoveCartItem__WEBPACK_IMPORTED_MODULE_0__["default"](0, cart_item_key);
+    console.log(removeCartItem);
   }
 
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Cart);
+
+/***/ }),
+
+/***/ "./src/modules/Woocommerce/Cart/Coupon.js":
+/*!************************************************!*\
+  !*** ./src/modules/Woocommerce/Cart/Coupon.js ***!
+  \************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const $ = jQuery;
+
+class Coupon {
+  constructor() {
+    this.events();
+  }
+
+  events() {
+    $('.total-summary .coupon-code-input-container button').on('click', this.applyCoupon);
+    $(document).on('click', '.total-summary .coupon-row button', this.removeCoupon);
+  }
+
+  applyCoupon() {
+    const couponCode = $('.total-summary .coupon-code-input-container #coupon').val();
+    $.ajax({
+      beforeSend: xhr => {
+        $('.overlay').show();
+        xhr.setRequestHeader('X-WP-NONCE', inspiryData.nonce);
+      },
+      url: '/wp-admin/admin-ajax.php',
+      type: 'POST',
+      data: {
+        couponCode: couponCode,
+        action: 'woocommerce_ajax_add_coupon'
+      },
+      complete: () => {
+        console.log('completed ajax request ');
+      },
+      success: response => {
+        if (response.code === 200) {
+          console.log(response);
+          $('.overlay').hide(); // refresh cart data 
+
+          $('.total-summary .subtotal-row .amount span').text(response.subtotal);
+          $('.total-summary .shipping-row .amount span').text(response.shipping);
+          $('.total-summary .tax-row .amount span').text(response.tax);
+          $('.total-summary .total-row .amount').html(response.total);
+          $(` <ul class="flex-box coupon-row">
+                    <li class="title">Coupon: give10</li>
+                    <li class="amount">-$<span>10 <button>[Remove]</button></span></li>
+                    </ul>`).insertAfter('.subtotal-row'); // hide coupon input field 
+
+          $('.coupon-code-input-container').hide();
+        } else {
+          console.log(response);
+          $('.overlay').hide();
+          $('.error-modal .content').text('An error has occurred while applying coupon. Please try again.');
+          $('.error-modal').show();
+        }
+      },
+      error: response => {
+        $('.overlay').hide();
+        console.log('this is an error');
+        console.log(response);
+        $('.error-modal').show();
+        $('.error-modal .content').text('An error has occurred while applying coupon. Please try again.');
+      }
+    });
+  }
+
+  removeCoupon() {
+    const couponCode = $('.total-summary .coupon-code-input-container #coupon').val();
+    $.ajax({
+      beforeSend: xhr => {
+        $('.overlay').show();
+        xhr.setRequestHeader('X-WP-NONCE', inspiryData.nonce);
+      },
+      url: '/wp-admin/admin-ajax.php',
+      type: 'POST',
+      data: {
+        action: 'woocommerce_ajax_add_coupon',
+        couponCode: 'remove'
+      },
+      complete: () => {
+        console.log('completed ajax request ');
+      },
+      success: response => {
+        if (response.code === 202) {
+          console.log(response);
+          $('.overlay').hide();
+          location.reload();
+        } else {
+          $('.error-modal .content').text('An error has occurred while removing coupon. Please try again.');
+          $('.error-modal').show();
+        }
+      },
+      error: response => {
+        $('.overlay').hide();
+        console.log('this is an error');
+        console.log(response);
+        $('.error-modal').show();
+        $('.error-modal .content').text('An error has occurred while removing coupon. Please try again.');
+      }
+    });
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Coupon);
+
+/***/ }),
+
+/***/ "./src/modules/Woocommerce/Cart/RemoveCartItem.js":
+/*!********************************************************!*\
+  !*** ./src/modules/Woocommerce/Cart/RemoveCartItem.js ***!
+  \********************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const $ = jQuery;
+
+class RemoveCartItem {
+  constructor(qty, cartItemKey) {
+    this.qty = qty;
+    this.cartItemKey = cartItemKey;
+    this.removeItem();
+  }
+
+  removeItem() {
+    $.ajax({
+      beforeSend: xhr => {
+        $('.overlay').show();
+        xhr.setRequestHeader('X-WP-NONCE', inspiryData.nonce);
+      },
+      url: '/wp-admin/admin-ajax.php',
+      type: 'POST',
+      data: {
+        qty: this.qty,
+        cartItemKey: this.cartItemKey,
+        action: 'woocommerce_ajax_update_cart'
+      },
+      complete: () => {
+        console.log('completed ajax request ');
+      },
+      success: response => {
+        if (response.code === 200) {
+          console.log(response);
+          $('.overlay').hide();
+          $(`#${this.cartItemKey}`).hide();
+          $('.total-summary .subtotal-row .amount span').text(response.subtotal);
+          $('.total-summary .shipping-row .amount span').text(response.shipping);
+          $('.total-summary .tax-row .amount span').text(response.tax);
+          $('.total-summary .total-row .amount').html(response.total);
+        } else {
+          $('.overlay').hide();
+          $('.error-modal .content').text('An error has occurred while removing item. Please try again.');
+          $('.error-modal').show();
+        }
+      },
+      error: response => {
+        $('.overlay').hide();
+        $('.error-modal .content').text('An error has occurred while removing item. Please try again.');
+        $('.error-modal').show();
+        console.log('this is an error');
+        console.log(response);
+      }
+    });
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (RemoveCartItem);
+
+/***/ }),
+
+/***/ "./src/modules/Woocommerce/Cart/UpdateCart.js":
+/*!****************************************************!*\
+  !*** ./src/modules/Woocommerce/Cart/UpdateCart.js ***!
+  \****************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const $ = jQuery;
+
+class UpdateCart {
+  constructor(qty, cartItemKey) {
+    this.qty = qty;
+    this.cartItemKey = cartItemKey;
+    this.events();
+  }
+
+  events() {
+    $.ajax({
+      beforeSend: xhr => {
+        $('.overlay').show();
+        xhr.setRequestHeader('X-WP-NONCE', inspiryData.nonce);
+      },
+      url: '/wp-admin/admin-ajax.php',
+      type: 'POST',
+      data: {
+        qty: this.qty,
+        cartItemKey: this.cartItemKey,
+        action: 'woocommerce_ajax_update_cart'
+      },
+      complete: () => {
+        console.log('completed ajax request ');
+      },
+      success: response => {
+        if (response.code === 200) {
+          console.log(response);
+          $('.overlay').hide(); // refresh cart data 
+
+          $('.total-summary .subtotal-row .amount span').text(response.subtotal);
+          $('.total-summary .shipping-row .amount span').text(response.shipping);
+          $('.total-summary .tax-row .amount span').text(response.tax);
+          $('.total-summary .total-row .amount').html(response.total); // if (response.regularPrice === response.productPrice) {
+          //     console.log(response.productPrice)
+          //     $('.price-column .sale-price').text(response.productPrice)
+          // }
+          // else {
+          //     $('.price-column .regular-price span').text(response.regularPrice)
+          //     $('.price-column .sale-price span').text(response.productPrice)
+          //     console.log(response.regularPrice)
+          //     console.log(response.productPrice)
+          // }
+        } else {
+          $('.overlay').hide();
+          $('.error-modal .content').text('An error has occurred while updating cart. Please try again.');
+          $('.error-modal').show();
+        }
+      },
+      error: response => {
+        $('.overlay').hide();
+        console.log('this is an error');
+        console.log(response);
+      }
+    });
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (UpdateCart);
 
 /***/ }),
 
@@ -6326,34 +6623,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 module.exports = window["jQuery"];
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js":
-/*!*******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/esm/defineProperty.js ***!
-  \*******************************************************************/
-/***/ (function(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": function() { return /* binding */ _defineProperty; }
-/* harmony export */ });
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
 
 /***/ })
 

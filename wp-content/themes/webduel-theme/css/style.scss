@@ -3,6 +3,9 @@
 @import "../node_modules/@glidejs/glide/dist/css/glide.core.min.css";
 
 @import "modules/consultation";
+
+// general styling
+@import "modules/error-modal";
 // header
 @import "modules/header/popup-cart";
 @import "modules/header/header";
@@ -76,6 +79,7 @@
   --boxShadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px !important;
   --cardBorderRadius: 16px;
   --red: #e60023;
+  --errorRed: #f65656;
   --white: rgb(255, 255, 255);
 
   /* new styling  */

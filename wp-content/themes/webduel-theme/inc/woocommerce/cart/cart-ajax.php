@@ -1,26 +1,92 @@
-<?php 
+<?php
+// add to cart  Ajax -------------------------------------------------------------
+add_action('wp_ajax_woocommerce_ajax_update_cart', 'woocommerce_ajax_update_cart');
+add_action('wp_ajax_nopriv_woocommerce_ajax_update_cart', 'woocommerce_ajax_update_cart');
+        
+function woocommerce_ajax_update_cart() {
 
-// add banner on cart page 
-add_action('webduel_hero_section', function(){ 
-    if(is_cart() ){ 
-        $imageLarge = get_the_post_thumbnail_url(get_the_id(), 'large' );
-       echo '<img src="'.$imageLarge.'"/>'; 
-  
-    }
-      
-}, 10);
+            $cartItemKey = sanitize_text_field($_POST['cartItemKey']);
+            $qty = sanitize_text_field($_POST['qty']);
+            global $woocommerce;
 
-// add page title
-add_action('woocommerce_before_cart', function(){ 
-    ?>
-  
-    <?php 
-}, 20); 
+            $woocommerce->cart->set_quantity( $cartItemKey, $qty, false );
+            $woocommerce->cart->calculate_totals();
+            $productPrice = ''; 
+            $regularPrice = ''; 
+            foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+                if($cart_item_key === $cartItemKey){ 
+                    $product = $cart_item['data'];
+                    $regularPrice = $product->regular_price; 
+                    $productPrice = $product->price; 
+                }
+            } 
+            $dataArray = array(
+                'code'=>  200, 
+                'subtotal'=> WC()->cart->subtotal, 
+                'total'=> WC()->cart->get_total(), 
+                'tax' => WC()->cart->get_taxes_total(), 
+                'shipping'=> WC()->cart->get_shipping_total() + WC()->cart->get_shipping_taxes()[1], 
+                'productPrice'=> $productPrice, 
+                'regularPrice' => $regularPrice
+            );
+            echo wp_send_json($dataArray);
 
-add_action('woocommerce_before_cart', function(){ 
-    ?>
-        <div class="cart-flex-container">
-            <div class="product-summary">
+           wp_die();
+}
+
+// add coupon  Ajax -------------------------------------------------------------
+add_action('wp_ajax_woocommerce_ajax_add_coupon', 'woocommerce_ajax_add_coupon');
+add_action('wp_ajax_nopriv_woocommerce_ajax_add_coupon', 'woocommerce_ajax_add_coupon');
+        
+function woocommerce_ajax_add_coupon() {
+
+            $couponCode = $_POST['couponCode'];
+            global $woocommerce;
+            
+            if($couponCode === 'remove'){ 
+                WC()->cart->remove_coupons();
+                    $dataArray = array(
+                        'code'=>  202, 
+                        'couponCode'=> $couponCode, 
+                        'subtotal'=> WC()->cart->subtotal, 
+                        'total'=> WC()->cart->get_total(), 
+                        'tax' => WC()->cart->get_taxes_total(), 
+                        'shipping'=> WC()->cart->get_shipping_total() + WC()->cart->get_shipping_taxes()[1]
+                    );
+                     echo wp_send_json($dataArray);
+            }
+            else{ 
+                WC()->cart->remove_coupons();
+                $ret = WC()->cart->add_discount( $couponCode ); 
+                if($ret){ 
+                    $dataArray = array(
+                        'code'=>  200, 
+                        'couponCode'=> $couponCode, 
+                        'subtotal'=> WC()->cart->subtotal, 
+                    'total'=> WC()->cart->get_total(), 
+                    'tax' => WC()->cart->get_taxes_total(), 
+                    'shipping'=> WC()->cart->get_shipping_total() + WC()->cart->get_shipping_taxes()[1]
+                    );
+                     echo wp_send_json($dataArray);
+                }
+            }
+           
+           
+       
+           wp_die();
+}
+
+// refresh unit price 
+
+add_filter( 'woocommerce_add_to_cart_fragments', 'woocommerce_cart_unit_refresh' );
+
+function woocommerce_cart_unit_refresh( $fragments ) {
+  global $woocommerce;
+
+  ob_start();
+
+  ?>
+      <div class="product-summary">
                 <h1>My Cart</h1>
                 <table class="cart-items-table" >
                     <thead>
@@ -37,7 +103,7 @@ add_action('woocommerce_before_cart', function(){
 
                         foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
                             $product = $cart_item['data'];
-                            print_r($cart_item);
+                            
                             $delivery = wc_get_product_terms( $cart_item['product_id'], 'pa_delivery' )[0]->name;
                             $availability = ""; 
                             $product_id = ''; 
@@ -59,7 +125,7 @@ add_action('woocommerce_before_cart', function(){
                             $regularPrice = $product->regular_price; 
                             $subtotal = WC()->cart->get_product_subtotal( $product, $cart_item['quantity'] );
                             $link = $product->get_permalink( $cart_item );
-                                    echo $regularPrice;
+                    
                             ?>
                             <tr id="<?php echo $cart_item_key?>">
                                 <td class="image-column">
@@ -160,62 +226,7 @@ add_action('woocommerce_before_cart', function(){
                     </tbody>
                 </table>
             </div>
-    <?php 
-}, 30); 
-
-
-add_action('woocommerce_before_cart', function(){ 
-    $cart = WC()->cart;
-
-    ?> 
-        <div class="total-summary" id="total-summary">
-            <h2>Order Summary</h2>
-            <div>
-                <ul class="flex-box subtotal-row">
-                    <li class="title">Subtotal: </li>
-                    <li class="amount">$<span><?php echo WC()->cart->subtotal;?> </span></li>
-                </ul>
-                <?php if(WC()->cart->get_coupon_discount_amount( WC()->cart->get_applied_coupons()[0], false )){
-                   ?>
-                    <ul class="flex-box coupon-row">
-                        <li class="title">Coupon: <?php print_r( WC()->cart->get_applied_coupons()[0]);?> </li>
-                        <li class="amount">-$<span><?php echo WC()->cart->get_coupon_discount_amount( WC()->cart->get_applied_coupons()[0], false );?> <button>[Remove]</button></span></li>
-                    </ul>
-                   <?php 
-                   }?>
-               
-                <ul class="flex-box shipping-row">
-                    <li class="title">Shipping: </li>
-                    <li class="amount">$<span><?php $shippingTotal = WC()->cart->get_shipping_total() + WC()->cart->get_shipping_taxes()[1]; 
-                        echo $shippingTotal;?> 
-                        </span>
-                    </li>
-                </ul>
-                <ul class="flex-box tax-row">
-                    <li class="title">Est. Taxes: </li>
-                    <li class="amount">$<span><?php echo WC()->cart->get_taxes_total();?></span> </li>
-                </ul>
-                <ul class="flex-box total-row">
-                    <li class="title">Total: </li>
-                    <li class="amount"><?php echo WC()->cart->get_total();?> </li>
-                </ul>
-            </div>
-
-            <!-- show apply coupon if the coupon is not added yet -->
-            <?php if(!WC()->cart->get_coupon_discount_amount( WC()->cart->get_applied_coupons()[0], false )){
-                   ?>
-            <div class="coupon-code-input-container" )>
-                <input type="text" name="coupon" id="coupon" />
-                <button class="primary-button">Apply</button>
-            </div>
-            <?php 
-                   }?>
-            <!-- checkout button -->
-            <a href="<?php echo wc_get_checkout_url();?>" class="primary-button">CHECKOUT NOW</a>
-        </div>
-    <!-- closing the div of above hook -->
-    </div>
-    <?php 
-}, 30); 
-
-// remove woocommerce default layout
+ <?php
+  $fragments['.product-summary'] = ob_get_clean();
+  return $fragments;
+}

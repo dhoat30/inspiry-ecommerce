@@ -81,7 +81,7 @@ class PopUpCart {
 
     ajaxAddToCart(e) {
 
-        console.log(wc_add_to_cart_params)
+        console.log(wc_add_to_cart_params.ajax_url)
         e.preventDefault();
         let thisbutton = $(this),
             $form = thisbutton.closest('form.cart'),
@@ -101,7 +101,7 @@ class PopUpCart {
         $(document.body).trigger('adding_to_cart', [thisbutton, data]);
         $.ajax({
             type: 'post',
-            url: wc_add_to_cart_params.ajax_url,
+            url: '/wp-admin/admin-ajax.php',
             data: data,
             beforeSend: function (response) {
                 thisbutton.removeClass('added').addClass('loading');

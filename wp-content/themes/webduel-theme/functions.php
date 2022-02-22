@@ -54,6 +54,7 @@ require get_theme_file_path('/inc/woocommerce/product-archive/product-archive.ph
 require get_theme_file_path('/inc/woocommerce/product-archive/archive-product.php');
 
 require get_theme_file_path('/inc/woocommerce/cart/cart.php');
+require get_theme_file_path('/inc/woocommerce/cart/cart-ajax.php');
 
 // shortcodes
 require get_theme_file_path('/inc/short-codes/social-share.php');
