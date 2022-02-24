@@ -39,8 +39,7 @@ require get_theme_file_path('/inc/nav-registeration.php');
 require get_theme_file_path('/inc/rest-acf.php');
 require get_theme_file_path('/inc/users.php');
 // windcave 
-require get_theme_file_path('/inc/windcave-payment.php');
-require get_theme_file_path('/inc/windcave-session.php');
+
 
 // woocommerce 
 require get_theme_file_path('/inc/woocommerce/image-size.php');
@@ -55,6 +54,9 @@ require get_theme_file_path('/inc/woocommerce/product-archive/archive-product.ph
 
 require get_theme_file_path('/inc/woocommerce/cart/cart.php');
 require get_theme_file_path('/inc/woocommerce/cart/cart-ajax.php');
+
+require get_theme_file_path('/inc/woocommerce/checkout/checkout.php');
+
 
 // shortcodes
 require get_theme_file_path('/inc/short-codes/social-share.php');

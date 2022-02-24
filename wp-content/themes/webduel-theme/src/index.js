@@ -31,8 +31,6 @@ import CartModal from './modules/CartModal/CartModal'
 // auth
 import Login from './modules/Auth/Login'
 
-// windcave checkout validation 
-import CheckoutInputValidation from './modules/Windcave/CheckoutInputValidation'
 
 // search 
 import Search from './modules/Search'
@@ -52,8 +50,10 @@ import ProductArchive from "./modules/Woocommerce/ProductArchive";
 import SingleProduct from "./modules/Woocommerce/SingleProduct";
 import Cart from './modules/Woocommerce/Cart/Cart'
 import Coupon from './modules/Woocommerce/Cart/Coupon'
+import Windcave from "./modules/Woocommerce/Checkout/Windcave";
 // modals 
 import ErrorModal from "./modules/ErrorModal/ErrorModal";
+import Checkout from "./modules/Woocommerce/Checkout/Checkout";
 
 // add to cart and remove from cart class 
 const popUpCart = new PopUpCart();
@@ -76,6 +76,9 @@ const cart = new Cart()
 const coupon = new Coupon()
 // modals 
 const errorModal = new ErrorModal()
+
+// checkout 
+const checkout = new Checkout()
 window.onload = function () {
 
   // enquiry modal 
@@ -111,7 +114,7 @@ window.onload = function () {
   const customerServiceMenu = new CustomerServiceMenu()
   const contactForm = new ContactForm()
   const feedbackForm = new FeedbackForm()
-
+  const windcave = new Windcave()
   //price 
   let pricevalue = document.getElementsByClassName('bc-show-current-price');
   // console.log($('.bc-show-current-price').text);
@@ -223,167 +226,6 @@ var myScrollFunc = function () {
 };
 
 window.addEventListener("scroll", myScrollFunc);
-
-// windcave-------------------------------------------------------------------
-let onChangeValue
-let windcavePaymentSelected = $("input[type='radio'][name='payment_method']:checked").val();
-
-$(document).on('change', '.wc_payment_methods .input-radio', () => {
-  onChangeValue = $("input[type='radio'][name='payment_method']:checked").val()
-  windcavePaymentSelected = $("input[type='radio'][name='payment_method']:checked").val();
-  console.log(onChangeValue)
-})
-
-// email validation 
-
-
-// hide iframe 
-
-const showWindcaveiframe = () => {
-  $('.payment-gateway-container').show();
-  $('.overlay').show();
-}
-
-const hideOverlay = () => {
-  $(document).on('click', '#payment-iframe-container .cancel-payment', () => {
-    $('.payment-gateway-container').hide();
-    $('.overlay').hide();
-  })
-}
-hideOverlay();
-
-// show windcave iframe conditionaly
-$(document).on('click', '#place_order', (e) => {
-  if (onChangeValue === 'inspiry_payment' || windcavePaymentSelected === 'inspiry_payment') {
-    e.preventDefault();
-
-    // validation class 
-    const checkoutInputValidation = new CheckoutInputValidation()
-    // check if the terms and conditions is checked 
-    let termsConditionsCheckbox = $('.validate-required .woocommerce-form__input-checkbox')
-    // check if the validation is true
-    if (checkoutInputValidation.validate() && termsConditionsCheckbox.is(':checked')) {
-
-      showWindcaveiframe();
-    }
-    else if (!termsConditionsCheckbox.is(':checked')) {
-      $('#payment').append(`<div class="error">*Please check the terms & conditions</div>`)
-    }
-
-  }
-  else {
-    $('#place_order').unbind('click');
-  }
-})
-
-// validate iframe 
-$(document).on('click', '.windcave-submit-button', (e) => {
-  e.preventDefault();
-  // remove error element 
-  $('.error').remove()
-  // add loader icon 
-  $('.button-container').append('<div class="loader-icon loader--visible"></div>')
-  // add overlay 
-  $('.white-overlay').show()
-
-  console.log('windcave submit button');
-
-  WindcavePayments.Seamless.validate({
-    onProcessed: function (isValid) {
-      console.log(isValid)
-      console.log('Card is valid')
-      if (isValid) {
-        WindcavePayments.Seamless.submit({
-          showSpinner: true,
-          onProcessed: function () {
-            // validate transaction by sending a query session reques to the backend
-            let valueOfTransaction = validateTransaction();
-            valueOfTransaction.then(res => {
-
-              // successful transaction 
-              if (res === "true") {
-                // remove loader icon 
-                $('.loader-icon').remove()
-                // hide overlay 
-                $('.white-overlay').hide()
-                // hide button
-                $('.windcave-submit-button').hide()
-
-                // append response text in iframe container 
-                $(".woocommerce-checkout").trigger("submit");
-
-                $('#payment-iframe-container .button-container').append(`<p class="success center-align">Successful</p>`)
-                WindcavePayments.Seamless.cleanup()
-
-              }
-
-              // failed transaction 
-              else {
-                // remove loader icon 
-                $('.loader-icon').remove()
-                // hide overlay 
-                $('.white-overlay').hide()
-                // append response text in iframe container 
-                $('#payment-iframe-container .button-container').append(`<p class="error center-align">${res}</p>`)
-                //  add this timeout if it doesn't work 
-                // setTimeout(() => {
-                //   location.reload();
-                // }, 2000)
-              }
-            })
-          },
-          onError: function (error) { console.log('submission error') }
-        });
-      }
-    },
-    onError: function (error) {
-      console.log('this is an error')
-      console.log(error)
-    }
-  });
-
-})
-
-
-
-// send data to backend for query session 
-async function validateTransaction() {
-  let sessionID = $('.windcave-session-id').attr('data-sessionid')
-  const body = {
-    sessionID: sessionID
-  }
-
-  // dynamic url 
-  let url = window.location.hostname;
-  let filePath;
-
-  if (url === 'testfly3.local') {
-    filePath = `https://testfly3.local/wp-json/inspiry/v1/windcave-session-status`
-  }
-
-  else {
-    filePath = `https://inspiry.co.nz/wp-json/inspiry/v1/windcave-session-status`
-  }
-
-  try {
-    const response = await fetch(filePath, {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-        "Accept": "application/json",
-      }
-    })
-    const data = await response.json()
-    console.log("response in a funtion")
-    console.log(data)
-    return data
-  }
-  catch (err) {
-    console.log(err)
-  }
-
-}
 
 // hide facet if no value 
 (function ($) {

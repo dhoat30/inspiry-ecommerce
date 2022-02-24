@@ -37,7 +37,7 @@ add_action('woocommerce_before_cart', function(){
 
                         foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
                             $product = $cart_item['data'];
-                            print_r($cart_item);
+                      
                             $delivery = wc_get_product_terms( $cart_item['product_id'], 'pa_delivery' )[0]->name;
                             $availability = ""; 
                             $product_id = ''; 
@@ -59,7 +59,7 @@ add_action('woocommerce_before_cart', function(){
                             $regularPrice = $product->regular_price; 
                             $subtotal = WC()->cart->get_product_subtotal( $product, $cart_item['quantity'] );
                             $link = $product->get_permalink( $cart_item );
-                                    echo $regularPrice;
+                                   
                             ?>
                             <tr id="<?php echo $cart_item_key?>">
                                 <td class="image-column">
@@ -134,21 +134,9 @@ add_action('woocommerce_before_cart', function(){
                             
                                 </td>
                                 <td class="price-column" >
-                                    <div class="price-container">
-                                        <?php 
-                                        if($product->price !== $regularPrice ){ 
-                                        ?>
-                                            <h4 class="regular-price striked" >$<span><?php echo $regularPrice;?></span></h4>
-                                            <h5 class="sale-price">$<span><?php echo $product->price; ?></span></h5>
-                                        <?php 
-                                        }
-                                        else{ 
-                                            ?>
-                                            <h4 class="regular-price" >$<span><?php echo $product->price;?></span></h4>
-                                            <?php 
-                                        }
-                                        ?>
-                                    </div>
+                                    <?php
+                                    echo apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $product ), $cart_item, $cart_item_key ); // PHPCS: XSS ok.
+                                    ?>
                                 </td>
                                 <td class="remove-column" > 
                                     <i class="fa-light fa-xmark"></i>
@@ -192,7 +180,7 @@ add_action('woocommerce_before_cart', function(){
                     </li>
                 </ul>
                 <ul class="flex-box tax-row">
-                    <li class="title">Est. Taxes: </li>
+                    <li class="title">Est. GST: </li>
                     <li class="amount">$<span><?php echo WC()->cart->get_taxes_total();?></span> </li>
                 </ul>
                 <ul class="flex-box total-row">
@@ -218,4 +206,14 @@ add_action('woocommerce_before_cart', function(){
     <?php 
 }, 30); 
 
-// remove woocommerce default layout
+// add regular price 
+add_filter( 'woocommerce_cart_item_price', 'bbloomer_change_cart_table_price_display', 30, 3 );
+  
+function bbloomer_change_cart_table_price_display( $price, $values, $cart_item_key ) {
+   $slashed_price = $values['data']->get_price_html();
+   $is_on_sale = $values['data']->is_on_sale();
+   if ( $is_on_sale ) {
+      $price = $slashed_price;
+   }
+   return $price;
+}

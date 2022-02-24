@@ -29,7 +29,10 @@ class Cart {
         }
         else {
             qty.val(val + step);
-            const updateCart = new UpdateCart(qty.val(), cart_item_key)
+            let timer = setTimeout(() => {
+                const updateCart = new UpdateCart(qty.val(), cart_item_key)
+            }, 1000)
+
         }
     }
     decrementValue() {
@@ -45,9 +48,10 @@ class Cart {
         }
         else if (val > 1) {
             qty.val(val - step);
-            setTimeout(() => {
+            let timer = setTimeout(() => {
                 const updateCart = new UpdateCart(qty.val(), cart_item_key)
             }, 1000)
+
         }
     }
 

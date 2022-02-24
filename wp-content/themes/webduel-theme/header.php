@@ -14,8 +14,7 @@
      <link rel="profile" href="https://gmpg.org/xfn/11"/>
     <?php wp_head(); ?>
    
-    <!-- windcave --> 
-    <script src="https://dev.windcave.com/js/windcavepayments-seamless-v1.js"></script>
+
         <!-- splide -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@latest/dist/css/splide.min.css">
      <!-- font awesome  -->
@@ -45,33 +44,8 @@
         src="https://www.facebook.com/tr?id=828264374302518&ev=PageView&noscript=1"
         /></noscript>
 <!-- End Facebook Pixel Code -->
-    <?php 
-    // get user email address 
-    $pinterestUserEmail; 
-    if(is_user_logged_in()){ 
-        $current_user = wp_get_current_user(); 
-        $pinterestUserEmail = $current_user->user_email; 
-        $hashedPinterestEmail = wp_hash($pinterestUserEmail); 
-    }
-   
-    ?>
-<!-- pinterest Tag -->
-        <!-- Pinterest Tag -->
-        <script>
-        !function(e){if(!window.pintrk){window.pintrk = function () {
-        window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var
-        n=window.pintrk;n.queue=[],n.version="3.0";var
-        t=document.createElement("script");t.async=!0,t.src=e;var
-        r=document.getElementsByTagName("script")[0];
-        r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");
-        pintrk('load', '2612506427665', {em: '<?php echo $pinterestUserEmail; ?>'});
-        pintrk('page');
-        </script>
-        <noscript>
-        <img height="1" width="1" style="display:none;" alt=""
-        src='https://ct.pinterest.com/v3/?event=init&tid=2612506427665&pd[em]=<<?php echo $hashedPinterestEmail?>>&noscript=1'/>
-        </noscript>
-        <!-- end Pinterest Tag -->
+
+
         
 </head>
 <?php 
@@ -87,7 +61,7 @@
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PS7XFHN"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-  
+ 
     <section class="header" >
         <div class="top-banner">
             <div class="track-order">

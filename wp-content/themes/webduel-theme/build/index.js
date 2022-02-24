@@ -24,19 +24,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_EnquiryModal_EnquiryModal__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modules/EnquiryModal/EnquiryModal */ "./src/modules/EnquiryModal/EnquiryModal.js");
 /* harmony import */ var _modules_CartModal_CartModal__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./modules/CartModal/CartModal */ "./src/modules/CartModal/CartModal.js");
 /* harmony import */ var _modules_Auth_Login__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modules/Auth/Login */ "./src/modules/Auth/Login.js");
-/* harmony import */ var _modules_Windcave_CheckoutInputValidation__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./modules/Windcave/CheckoutInputValidation */ "./src/modules/Windcave/CheckoutInputValidation.js");
-/* harmony import */ var _modules_Search__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./modules/Search */ "./src/modules/Search.js");
-/* harmony import */ var _modules_FacetFilter_FacetFilter__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./modules/FacetFilter/FacetFilter */ "./src/modules/FacetFilter/FacetFilter.js");
-/* harmony import */ var _modules_CustomerService_CustomerServiceMenu__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./modules/CustomerService/CustomerServiceMenu */ "./src/modules/CustomerService/CustomerServiceMenu.js");
-/* harmony import */ var _modules_CustomerService_ContactForm__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./modules/CustomerService/ContactForm */ "./src/modules/CustomerService/ContactForm.js");
-/* harmony import */ var _modules_CustomerService_FeedbackForm__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./modules/CustomerService/FeedbackForm */ "./src/modules/CustomerService/FeedbackForm.js");
-/* harmony import */ var _modules_Woocommerce_WooGallery__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./modules/Woocommerce/WooGallery */ "./src/modules/Woocommerce/WooGallery.js");
-/* harmony import */ var _modules_Woocommerce_singleProductAccordion__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./modules/Woocommerce/singleProductAccordion */ "./src/modules/Woocommerce/singleProductAccordion.js");
-/* harmony import */ var _modules_Woocommerce_ProductArchive__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./modules/Woocommerce/ProductArchive */ "./src/modules/Woocommerce/ProductArchive.js");
-/* harmony import */ var _modules_Woocommerce_SingleProduct__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./modules/Woocommerce/SingleProduct */ "./src/modules/Woocommerce/SingleProduct.js");
-/* harmony import */ var _modules_Woocommerce_Cart_Cart__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./modules/Woocommerce/Cart/Cart */ "./src/modules/Woocommerce/Cart/Cart.js");
-/* harmony import */ var _modules_Woocommerce_Cart_Coupon__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./modules/Woocommerce/Cart/Coupon */ "./src/modules/Woocommerce/Cart/Coupon.js");
+/* harmony import */ var _modules_Search__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./modules/Search */ "./src/modules/Search.js");
+/* harmony import */ var _modules_FacetFilter_FacetFilter__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./modules/FacetFilter/FacetFilter */ "./src/modules/FacetFilter/FacetFilter.js");
+/* harmony import */ var _modules_CustomerService_CustomerServiceMenu__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./modules/CustomerService/CustomerServiceMenu */ "./src/modules/CustomerService/CustomerServiceMenu.js");
+/* harmony import */ var _modules_CustomerService_ContactForm__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./modules/CustomerService/ContactForm */ "./src/modules/CustomerService/ContactForm.js");
+/* harmony import */ var _modules_CustomerService_FeedbackForm__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./modules/CustomerService/FeedbackForm */ "./src/modules/CustomerService/FeedbackForm.js");
+/* harmony import */ var _modules_Woocommerce_WooGallery__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./modules/Woocommerce/WooGallery */ "./src/modules/Woocommerce/WooGallery.js");
+/* harmony import */ var _modules_Woocommerce_singleProductAccordion__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./modules/Woocommerce/singleProductAccordion */ "./src/modules/Woocommerce/singleProductAccordion.js");
+/* harmony import */ var _modules_Woocommerce_ProductArchive__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./modules/Woocommerce/ProductArchive */ "./src/modules/Woocommerce/ProductArchive.js");
+/* harmony import */ var _modules_Woocommerce_SingleProduct__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./modules/Woocommerce/SingleProduct */ "./src/modules/Woocommerce/SingleProduct.js");
+/* harmony import */ var _modules_Woocommerce_Cart_Cart__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./modules/Woocommerce/Cart/Cart */ "./src/modules/Woocommerce/Cart/Cart.js");
+/* harmony import */ var _modules_Woocommerce_Cart_Coupon__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./modules/Woocommerce/Cart/Coupon */ "./src/modules/Woocommerce/Cart/Coupon.js");
+/* harmony import */ var _modules_Woocommerce_Checkout_Windcave__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./modules/Woocommerce/Checkout/Windcave */ "./src/modules/Woocommerce/Checkout/Windcave.js");
 /* harmony import */ var _modules_ErrorModal_ErrorModal__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./modules/ErrorModal/ErrorModal */ "./src/modules/ErrorModal/ErrorModal.js");
+/* harmony import */ var _modules_Woocommerce_Checkout_Checkout__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./modules/Woocommerce/Checkout/Checkout */ "./src/modules/Woocommerce/Checkout/Checkout.js");
 let $ = jQuery;
  // form 
 
@@ -60,8 +61,6 @@ let $ = jQuery;
 
  // auth
 
- // windcave checkout validation 
-
  // search 
 
  // facet filter
@@ -77,26 +76,30 @@ let $ = jQuery;
 
 
 
+
  // modals 
+
 
  // add to cart and remove from cart class 
 
 const popUpCart = new _modules_PopUpCart__WEBPACK_IMPORTED_MODULE_10__["default"](); // woo Gallery 
 
-const wooGallery = new _modules_Woocommerce_WooGallery__WEBPACK_IMPORTED_MODULE_21__["default"](); // single product page accordion 
+const wooGallery = new _modules_Woocommerce_WooGallery__WEBPACK_IMPORTED_MODULE_20__["default"](); // single product page accordion 
 
-const singleProductAccordion = new _modules_Woocommerce_singleProductAccordion__WEBPACK_IMPORTED_MODULE_22__["default"](); // single product 
+const singleProductAccordion = new _modules_Woocommerce_singleProductAccordion__WEBPACK_IMPORTED_MODULE_21__["default"](); // single product 
 
-const singleProduct = new _modules_Woocommerce_SingleProduct__WEBPACK_IMPORTED_MODULE_24__["default"](); // every owl carousel
+const singleProduct = new _modules_Woocommerce_SingleProduct__WEBPACK_IMPORTED_MODULE_23__["default"](); // every owl carousel
 
 const everyOwlCarousel = new _modules_OwlCarousel_EveryOwlCarousel__WEBPACK_IMPORTED_MODULE_2__["default"](); // product archive
 
-const productArchive = new _modules_Woocommerce_ProductArchive__WEBPACK_IMPORTED_MODULE_23__["default"](); // cart 
+const productArchive = new _modules_Woocommerce_ProductArchive__WEBPACK_IMPORTED_MODULE_22__["default"](); // cart 
 
-const cart = new _modules_Woocommerce_Cart_Cart__WEBPACK_IMPORTED_MODULE_25__["default"]();
-const coupon = new _modules_Woocommerce_Cart_Coupon__WEBPACK_IMPORTED_MODULE_26__["default"](); // modals 
+const cart = new _modules_Woocommerce_Cart_Cart__WEBPACK_IMPORTED_MODULE_24__["default"]();
+const coupon = new _modules_Woocommerce_Cart_Coupon__WEBPACK_IMPORTED_MODULE_25__["default"](); // modals 
 
-const errorModal = new _modules_ErrorModal_ErrorModal__WEBPACK_IMPORTED_MODULE_27__["default"]();
+const errorModal = new _modules_ErrorModal_ErrorModal__WEBPACK_IMPORTED_MODULE_27__["default"](); // checkout 
+
+const checkout = new _modules_Woocommerce_Checkout_Checkout__WEBPACK_IMPORTED_MODULE_28__["default"]();
 
 window.onload = function () {
   // enquiry modal 
@@ -116,13 +119,14 @@ window.onload = function () {
 
   const login = new _modules_Auth_Login__WEBPACK_IMPORTED_MODULE_14__["default"](); // search 
 
-  const search = new _modules_Search__WEBPACK_IMPORTED_MODULE_16__["default"](); // facet filter 
+  const search = new _modules_Search__WEBPACK_IMPORTED_MODULE_15__["default"](); // facet filter 
 
-  const facetFilter = new _modules_FacetFilter_FacetFilter__WEBPACK_IMPORTED_MODULE_17__["default"](); // customer service 
+  const facetFilter = new _modules_FacetFilter_FacetFilter__WEBPACK_IMPORTED_MODULE_16__["default"](); // customer service 
 
-  const customerServiceMenu = new _modules_CustomerService_CustomerServiceMenu__WEBPACK_IMPORTED_MODULE_18__["default"]();
-  const contactForm = new _modules_CustomerService_ContactForm__WEBPACK_IMPORTED_MODULE_19__["default"]();
-  const feedbackForm = new _modules_CustomerService_FeedbackForm__WEBPACK_IMPORTED_MODULE_20__["default"](); //price 
+  const customerServiceMenu = new _modules_CustomerService_CustomerServiceMenu__WEBPACK_IMPORTED_MODULE_17__["default"]();
+  const contactForm = new _modules_CustomerService_ContactForm__WEBPACK_IMPORTED_MODULE_18__["default"]();
+  const feedbackForm = new _modules_CustomerService_FeedbackForm__WEBPACK_IMPORTED_MODULE_19__["default"]();
+  const windcave = new _modules_Woocommerce_Checkout_Windcave__WEBPACK_IMPORTED_MODULE_26__["default"](); //price 
 
   let pricevalue = document.getElementsByClassName('bc-show-current-price'); // console.log($('.bc-show-current-price').text);
   //slogan 
@@ -216,142 +220,7 @@ var myScrollFunc = function () {
   }
 };
 
-window.addEventListener("scroll", myScrollFunc); // windcave-------------------------------------------------------------------
-
-let onChangeValue;
-let windcavePaymentSelected = $("input[type='radio'][name='payment_method']:checked").val();
-$(document).on('change', '.wc_payment_methods .input-radio', () => {
-  onChangeValue = $("input[type='radio'][name='payment_method']:checked").val();
-  windcavePaymentSelected = $("input[type='radio'][name='payment_method']:checked").val();
-  console.log(onChangeValue);
-}); // email validation 
-// hide iframe 
-
-const showWindcaveiframe = () => {
-  $('.payment-gateway-container').show();
-  $('.overlay').show();
-};
-
-const hideOverlay = () => {
-  $(document).on('click', '#payment-iframe-container .cancel-payment', () => {
-    $('.payment-gateway-container').hide();
-    $('.overlay').hide();
-  });
-};
-
-hideOverlay(); // show windcave iframe conditionaly
-
-$(document).on('click', '#place_order', e => {
-  if (onChangeValue === 'inspiry_payment' || windcavePaymentSelected === 'inspiry_payment') {
-    e.preventDefault(); // validation class 
-
-    const checkoutInputValidation = new _modules_Windcave_CheckoutInputValidation__WEBPACK_IMPORTED_MODULE_15__["default"](); // check if the terms and conditions is checked 
-
-    let termsConditionsCheckbox = $('.validate-required .woocommerce-form__input-checkbox'); // check if the validation is true
-
-    if (checkoutInputValidation.validate() && termsConditionsCheckbox.is(':checked')) {
-      showWindcaveiframe();
-    } else if (!termsConditionsCheckbox.is(':checked')) {
-      $('#payment').append(`<div class="error">*Please check the terms & conditions</div>`);
-    }
-  } else {
-    $('#place_order').unbind('click');
-  }
-}); // validate iframe 
-
-$(document).on('click', '.windcave-submit-button', e => {
-  e.preventDefault(); // remove error element 
-
-  $('.error').remove(); // add loader icon 
-
-  $('.button-container').append('<div class="loader-icon loader--visible"></div>'); // add overlay 
-
-  $('.white-overlay').show();
-  console.log('windcave submit button');
-  WindcavePayments.Seamless.validate({
-    onProcessed: function (isValid) {
-      console.log(isValid);
-      console.log('Card is valid');
-
-      if (isValid) {
-        WindcavePayments.Seamless.submit({
-          showSpinner: true,
-          onProcessed: function () {
-            // validate transaction by sending a query session reques to the backend
-            let valueOfTransaction = validateTransaction();
-            valueOfTransaction.then(res => {
-              // successful transaction 
-              if (res === "true") {
-                // remove loader icon 
-                $('.loader-icon').remove(); // hide overlay 
-
-                $('.white-overlay').hide(); // hide button
-
-                $('.windcave-submit-button').hide(); // append response text in iframe container 
-
-                $(".woocommerce-checkout").trigger("submit");
-                $('#payment-iframe-container .button-container').append(`<p class="success center-align">Successful</p>`);
-                WindcavePayments.Seamless.cleanup();
-              } // failed transaction 
-              else {
-                // remove loader icon 
-                $('.loader-icon').remove(); // hide overlay 
-
-                $('.white-overlay').hide(); // append response text in iframe container 
-
-                $('#payment-iframe-container .button-container').append(`<p class="error center-align">${res}</p>`); //  add this timeout if it doesn't work 
-                // setTimeout(() => {
-                //   location.reload();
-                // }, 2000)
-              }
-            });
-          },
-          onError: function (error) {
-            console.log('submission error');
-          }
-        });
-      }
-    },
-    onError: function (error) {
-      console.log('this is an error');
-      console.log(error);
-    }
-  });
-}); // send data to backend for query session 
-
-async function validateTransaction() {
-  let sessionID = $('.windcave-session-id').attr('data-sessionid');
-  const body = {
-    sessionID: sessionID
-  }; // dynamic url 
-
-  let url = window.location.hostname;
-  let filePath;
-
-  if (url === 'testfly3.local') {
-    filePath = `https://testfly3.local/wp-json/inspiry/v1/windcave-session-status`;
-  } else {
-    filePath = `https://inspiry.co.nz/wp-json/inspiry/v1/windcave-session-status`;
-  }
-
-  try {
-    const response = await fetch(filePath, {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json',
-        "Accept": "application/json"
-      }
-    });
-    const data = await response.json();
-    console.log("response in a funtion");
-    console.log(data);
-    return data;
-  } catch (err) {
-    console.log(err);
-  }
-} // hide facet if no value 
-
+window.addEventListener("scroll", myScrollFunc); // hide facet if no value 
 
 (function ($) {
   document.addEventListener('facetwp-loaded', function () {
@@ -2481,122 +2350,6 @@ class Warranty {
 
 /***/ }),
 
-/***/ "./src/modules/Windcave/CheckoutInputValidation.js":
-/*!*********************************************************!*\
-  !*** ./src/modules/Windcave/CheckoutInputValidation.js ***!
-  \*********************************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-const $ = jQuery;
-
-class CheckoutInputValidation {
-  constructor() {
-    this.firstName = $('#billing_first_name').val();
-    this.lastName = $("#billing_last_name").val();
-    this.emailValue = $('#billing_email').val();
-    this.streetAddress = $('#billing_address_1').val();
-    this.city = $('#billing_city').val();
-    this.postCode = $('#billing_postcode').val();
-    this.billingPhone = $('#billing_phone').val();
-    $('.error').remove();
-  } // validate name
-
-
-  validateName() {
-    if (this.firstName.length > 1 && this.lastName.length > 1) {
-      return true;
-    } else {
-      // if the valid email address in not entered           
-      // add error under the email address input field 
-      $('#payment').append(`<div class="error">*Please enter your first and last name</div>`); // scroll to the email address field 
-
-      return false;
-    }
-  } // validate street address 
-
-
-  validateStreetAddress() {
-    if (this.streetAddress.length > 3) {
-      return true;
-    } else {
-      // if the valid email address in not entered           
-      // add error under the email address input field 
-      $('#payment').append(`<div class="error">*Please enter your street address</div>`); // scroll to the email address field 
-
-      return false;
-    }
-  }
-
-  validateCity() {
-    if (this.city.length > 2) {
-      return true;
-    } else {
-      // if the valid email address in not entered           
-      // add error under the email address input field 
-      $('#payment').append(`<div class="error">*Please enter your Town/City</div>`); // scroll to the email address field 
-
-      return false;
-    }
-  } // validate post code
-
-
-  validatePostCode() {
-    if (this.postCode.length > 3) {
-      return true;
-    } else {
-      // if the valid email address in not entered           
-      // add error under the email address input field 
-      $('#payment').append(`<div class="error">*Please enter your Postcode</div>`); // scroll to the email address field 
-
-      return false;
-    }
-  } // validate post code
-
-
-  validatePhoneNumber() {
-    if (this.billingPhone.length > 5) {
-      return true;
-    } else {
-      // if the valid email address in not entered           
-      // add error under the email address input field 
-      $('#payment').append(`<div class="error">*Please enter your Phone Number</div>`); // scroll to the email address field 
-
-      return false;
-    }
-  } // validate email 
-
-
-  validateEmail($email) {
-    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,6})?$/;
-    let emailValidation = emailReg.test($email); // check if the email is valid and length is greater than 3
-
-    if (emailValidation && this.emailValue.length > 3) {
-      return true;
-    } else {
-      // if the valid email address in not entered           
-      // add error under the email address input field 
-      $('#payment').append(`<div class="error">*Please enter a valid email address</div>`); // scroll to the email address field 
-
-      return false;
-    }
-  }
-
-  validate() {
-    // validate email 
-    if (this.validateName() && this.validateStreetAddress() && this.validateCity() && this.validatePostCode() && this.validatePhoneNumber() && this.validateEmail(this.emailValue)) {
-      // remove the appended element first 
-      return true;
-    }
-  }
-
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (CheckoutInputValidation);
-
-/***/ }),
-
 /***/ "./src/modules/Woocommerce/Cart/Cart.js":
 /*!**********************************************!*\
   !*** ./src/modules/Woocommerce/Cart/Cart.js ***!
@@ -2639,7 +2392,9 @@ class Cart {
       qty.val(max);
     } else {
       qty.val(val + step);
-      const updateCart = new _UpdateCart__WEBPACK_IMPORTED_MODULE_1__["default"](qty.val(), cart_item_key);
+      let timer = setTimeout(() => {
+        const updateCart = new _UpdateCart__WEBPACK_IMPORTED_MODULE_1__["default"](qty.val(), cart_item_key);
+      }, 1000);
     }
   }
 
@@ -2655,7 +2410,7 @@ class Cart {
       qty.val(min);
     } else if (val > 1) {
       qty.val(val - step);
-      setTimeout(() => {
+      let timer = setTimeout(() => {
         const updateCart = new _UpdateCart__WEBPACK_IMPORTED_MODULE_1__["default"](qty.val(), cart_item_key);
       }, 1000);
     }
@@ -2895,16 +2650,11 @@ class UpdateCart {
           $('.total-summary .subtotal-row .amount span').text(response.subtotal);
           $('.total-summary .shipping-row .amount span').text(response.shipping);
           $('.total-summary .tax-row .amount span').text(response.tax);
-          $('.total-summary .total-row .amount').html(response.total); // if (response.regularPrice === response.productPrice) {
-          //     console.log(response.productPrice)
-          //     $('.price-column .sale-price').text(response.productPrice)
-          // }
-          // else {
-          //     $('.price-column .regular-price span').text(response.regularPrice)
-          //     $('.price-column .sale-price span').text(response.productPrice)
-          //     console.log(response.regularPrice)
-          //     console.log(response.productPrice)
-          // }
+          $('.total-summary .total-row .amount').html(response.total); // check if the sale price exist
+
+          if (response.salePrice && response.salePrice !== response.productPrice) {
+            location.reload();
+          }
         } else {
           $('.overlay').hide();
           $('.error-modal .content').text('An error has occurred while updating cart. Please try again.');
@@ -2922,6 +2672,84 @@ class UpdateCart {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (UpdateCart);
+
+/***/ }),
+
+/***/ "./src/modules/Woocommerce/Checkout/Checkout.js":
+/*!******************************************************!*\
+  !*** ./src/modules/Woocommerce/Checkout/Checkout.js ***!
+  \******************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const $ = jQuery;
+
+class Checkout {
+  constructor() {
+    this.events();
+  }
+
+  events() {
+    $('#pay-button').on('click', this.showPaymentOptions);
+  }
+
+  showPaymentOptions(e) {
+    e.preventDefault();
+    $('#customer_details').hide();
+    $('.total-summary').hide();
+    $('#payment').show();
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Checkout);
+
+/***/ }),
+
+/***/ "./src/modules/Woocommerce/Checkout/Windcave.js":
+/*!******************************************************!*\
+  !*** ./src/modules/Woocommerce/Checkout/Windcave.js ***!
+  \******************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const $ = jQuery;
+
+class Windcave {
+  constructor() {
+    this.events();
+  }
+
+  events() {
+    $('.windcave-btn').on('click', this.validateWindcave);
+  }
+
+  validateWindcave(e) {
+    WindcavePayments.Seamless.validate({
+      onProcessed: function (isValid) {
+        if (isValid) {
+          WindcavePayments.Seamless.submit({
+            onProcessed: function (response) {
+              console.log(response);
+              $(".woocommerce-checkout").trigger("submit");
+            },
+            onError: function (error) {
+              console.log(error);
+            }
+          });
+        }
+      },
+      onError: function (error) {
+        console.log(error);
+      }
+    });
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Windcave);
 
 /***/ }),
 

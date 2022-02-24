@@ -33,17 +33,12 @@ class UpdateCart {
                     $('.total-summary .shipping-row .amount span').text(response.shipping)
                     $('.total-summary .tax-row .amount span').text(response.tax)
                     $('.total-summary .total-row .amount').html(response.total)
-                    // if (response.regularPrice === response.productPrice) {
-                    //     console.log(response.productPrice)
-                    //     $('.price-column .sale-price').text(response.productPrice)
-                    // }
-                    // else {
-                    //     $('.price-column .regular-price span').text(response.regularPrice)
-                    //     $('.price-column .sale-price span').text(response.productPrice)
+                    // check if the sale price exist
 
-                    //     console.log(response.regularPrice)
-                    //     console.log(response.productPrice)
-                    // }
+                    if (response.salePrice && response.salePrice !== response.productPrice) {
+                        location.reload();
+                    }
+
                 }
                 else {
                     $('.overlay').hide()
