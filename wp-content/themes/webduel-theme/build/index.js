@@ -4760,7 +4760,9 @@ class Checkout {
     $(document).on('click', '.payment-gateway-container .cancel-payment', () => {
       $('.payment-gateway-container').hide();
       $('.overlay').hide();
-    });
+    }); // try again button click
+
+    $(document).on('click', '.error-modal button', this.showWindcaveIFrameOnErrorButtonClick);
   }
 
   showPaymentOptions(e) {
@@ -4828,6 +4830,13 @@ class Checkout {
         $('#place_order').unbind('click');
       }
     });
+  }
+
+  showWindcaveIFrameOnErrorButtonClick() {
+    const windcave = new _Windcave__WEBPACK_IMPORTED_MODULE_0__["default"]();
+    $('.payment-gateway-container').show();
+    $('.overlay').show();
+    $('.error-modal').hide();
   }
 
 }
@@ -4954,13 +4963,20 @@ class Windcave {
         complete: () => {
           $('.payment-gateway-container .foreground-loader').hide();
           console.log('request completed');
-          $('.payment-gateway-container .foreground-loader').hide();
         },
         success: response => {
           if (response.transactions[0].authorised) {
             console.log('transaction successful');
+            $(".woocommerce-checkout").trigger("submit");
+            $('#payment-iframe-container .button-container').append(`<p class="success center-align">Successful</p>`);
+            WindcavePayments.Seamless.cleanup();
           } else {
             console.log(response);
+            $('.error-modal').show();
+            $('.error-modal .content').text(response.transactions[0].responseText);
+            $('.error-modal button').text("Try Again");
+            $('.payment-gateway-container').hide();
+            $('.overlay').hide();
           }
         },
         error: response => {

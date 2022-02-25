@@ -26,6 +26,9 @@ class Checkout {
             $('.overlay').hide();
         })
 
+        // try again button click
+        $(document).on('click', '.error-modal button', this.showWindcaveIFrameOnErrorButtonClick)
+
     }
     showPaymentOptions(e) {
         e.preventDefault()
@@ -95,6 +98,13 @@ class Checkout {
                 $('#place_order').unbind('click');
             }
         })
+    }
+
+    showWindcaveIFrameOnErrorButtonClick() {
+        const windcave = new Windcave()
+        $('.payment-gateway-container').show();
+        $('.overlay').show();
+        $('.error-modal').hide()
     }
 }
 export default Checkout

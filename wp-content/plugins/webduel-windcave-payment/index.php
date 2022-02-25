@@ -141,7 +141,7 @@ function wc_offline_gateway_init() {
 					'title'       => __( 'Description', 'wc-gateway-windcave' ),
 					'type'        => 'textarea',
 					'description' => __( 'Payment method description that the customer will see on your checkout.', 'wc-gateway-windcave' ),
-					'default'     => __( 'Pay with your Credit or Debit Card via Windcave.', 'wc-gateway-windcave' ),
+					'default'     => __( '', 'wc-gateway-windcave' ),
 					'desc_tip'    => true,
 				),
 				
@@ -179,52 +179,15 @@ function wc_offline_gateway_init() {
                 return;
             }
         
-            // if our payment gateway is disabled, we do not have to enqueue JS too
-            // if ( 'no' === $this->enabled ) {
-            //     return;
-            // }
-        
-            // no reason to enqueue JavaScript if API keys are not set
-            // if ( empty( $this->private_key ) || empty( $this->publishable_key ) ) {
-            //     return;
-            // }
-        
-            // do not work with card detailes without SSL unless your website is in a test mode
-            // if ( ! $this->testmode && ! is_ssl() ) {
-            //     return;
-            // }
-
-            // setting up environment variables 
-
-            
-            // // let's suppose it is our payment processor JavaScript that allows to obtain a token
-            // wp_enqueue_script( 'misha_js', 'https://dev.windcave.com/js/windcavepayments-seamless-v1.js' );
-        
-            // // and this is our custom JS in your plugin directory that works with token.js
-            // wp_register_script( 'woocommerce_misha', plugins_url( 'misha.js', __FILE__ ), array( 'jquery', 'misha_js' ) );
-        
-            // // in most payment processors you have to use PUBLIC KEY to obtain a token
-            // wp_localize_script( 'woocommerce_misha', 'misha_params', array(
-            //     'seamlessValue' => $seamlessValue
-            // ) );
-        
-            // wp_enqueue_script( 'woocommerce_misha' );
+         
         }
 
 
-        public function payment_fields() {
-            ?> <div id="testing" data="<?php echo $this->sessionID;?>"></div>
-         <h1>hello</h1>
-         <?php 
-        
-            }
         /**
         * Output for the order received page.
         */
         public function thankyou_page() {
-        if ( $this->instructions ) {
-        echo wpautop( wptexturize( $this->instructions ) );
-        }
+      
         }
       
 		/**
@@ -240,12 +203,8 @@ function wc_offline_gateway_init() {
             // we need it to get any order detailes
             $order = wc_get_order( $order_id );
 
-            $response = true; 
-			if(!is_wp_error( $response )){ 
-               
-                if(4===5){ 
                 // Mark as on-hold (we're awaiting the payment)
-                $order->update_status( 'processing', __( 'Awaiting offline payment', 'wc-gateway-offline' ) );
+                $order->update_status( 'processing', __( 'Payment Received', 'wc-gateway-windcave' ) );
               
                 
                 // Remove cart
@@ -257,12 +216,6 @@ function wc_offline_gateway_init() {
                     'redirect' => $this->get_return_url( $order )
                 );
 
-                } else {
-                wc_add_notice(  'Please try againssss.', 'error' );
-                return;
-                }
-               
-            }
 		}
 	
   } // end \WD_Windcave_Gateway class

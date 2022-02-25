@@ -80,7 +80,7 @@ function webduel_order_review(){
                 
             </div>
         </div>
-        <a href="<?php echo get_site_url()?>/checkout?payment-gateway=true" class="primary-button" id="pay-button"><i class="fa-regular fa-lock-keyhole"></i>Pay Securely Now</a>
+        <button class="primary-button" id="pay-button"><i class="fa-regular fa-lock-keyhole"></i>Pay Securely Now</button>
 
     <?php 
 } 
