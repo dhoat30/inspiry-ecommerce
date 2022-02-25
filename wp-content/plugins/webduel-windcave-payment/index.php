@@ -1,26 +1,25 @@
 <?php 
 /**
- * Plugin Name: WooCommerce Offline Gateway
- * Plugin URI: https://www.skyverge.com/?p=3343
- * Description: Clones the "Cheque" gateway to create another manual / offline payment method; can be used for testing as well.
- * Author: SkyVerge
- * Author URI: http://www.skyverge.com/
+ * Plugin Name: Webduel Windcave Payment Gateway
+ * Plugin URI: https://webduel.co.nz
+ * Description: Windcave payment gateway plugin developed by webduel 
+ * Author: Gurpreet Singh Dhoat
+ * Author URI: http://www.webduel.co.nz/
  * Version: 1.0.2
- * Text Domain: wc-gateway-offline
- * Domain Path: /i18n/languages/
+ * Text Domain: webduel-windcave-payment-gateway
  *
- * Copyright: (c) 2015-2016 SkyVerge, Inc. (info@skyverge.com) and WooCommerce
+ * Copyright: (c) 2022 Webduel Limited 
  *
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  *
  * @package   WC-Gateway-Offline
- * @author    SkyVerge
+ * @author    Gurpreet
  * @category  Admin
- * @copyright Copyright (c) 2015-2016, SkyVerge, Inc. and WooCommerce
+ * @copyright (c) 2022 Webduel Limited 
  * @license   http://www.gnu.org/licenses/gpl-3.0.html GNU General Public License v3.0
  *
- * This offline gateway forks the WooCommerce core "Cheque" payment gateway to create another offline payment method.
+ * 
  */
  
 defined( 'ABSPATH' ) or exit;
@@ -40,7 +39,7 @@ if ( ! in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins',
  * @return array $gateways all WC gateways + offline gateway
  */
 function wc_offline_add_to_gateways( $gateways ) {
-	$gateways[] = 'WC_Gateway_Offline';
+	$gateways[] = 'WD_Windcave_Gateway';
 	return $gateways;
 }
 add_filter( 'woocommerce_payment_gateways', 'wc_offline_add_to_gateways' );
@@ -70,7 +69,7 @@ add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'wc_offline_ga
  * Provides an Offline Payment Gateway; mainly for testing purposes.
  * We load it later to ensure WC is loaded first since we're extending it.
  *
- * @class 		WC_Gateway_Offline
+ * @class 		WD_Windcave_Gateway
  * @extends		WC_Payment_Gateway
  * @version		1.0.0
  * @package		WooCommerce/Classes/Payment
@@ -80,18 +79,18 @@ add_action( 'plugins_loaded', 'wc_offline_gateway_init', 11 );
 
 function wc_offline_gateway_init() {
 
-	class WC_Gateway_Offline extends WC_Payment_Gateway {
+	class WD_Windcave_Gateway extends WC_Payment_Gateway {
 
 		/**
 		 * Constructor for the gateway.
 		 */
 		public function __construct() {
 	  
-			$this->id                 = 'offline_gateway';
+			$this->id                 = 'webduel_windcave_gateway';
 			$this->icon               = apply_filters('woocommerce_offline_icon', '');
 			$this->has_fields         = true;
-			$this->method_title       = __( 'Offline', 'wc-gateway-offline' );
-			$this->method_description = __( 'Allows offline payments. Very handy if you use your cheque gateway for another payment method, and can help with testing. Orders are marked as "on-hold" when received.', 'wc-gateway-offline' );
+			$this->method_title       = __( 'Windcave', 'wc-gateway-windcave' );
+			$this->method_description = __( 'Allows Windcave payments.', 'wc-gateway-windcave' );
             $this->sessionID = ''; 
 			// Load the settings.
 			$this->init_form_fields();
@@ -124,32 +123,32 @@ function wc_offline_gateway_init() {
 			$this->form_fields = apply_filters( 'wc_offline_form_fields', array(
 		  
 				'enabled' => array(
-					'title'   => __( 'Enable/Disable', 'wc-gateway-offline' ),
+					'title'   => __( 'Enable/Disable', 'wc-gateway-windcave' ),
 					'type'    => 'checkbox',
-					'label'   => __( 'Enable Offline Payment', 'wc-gateway-offline' ),
+					'label'   => __( 'Enable Windcave Payment', 'wc-gateway-windcave' ),
 					'default' => 'yes'
 				),
 				
 				'title' => array(
-					'title'       => __( 'Title', 'wc-gateway-offline' ),
+					'title'       => __( 'Title', 'wc-gateway-windcave' ),
 					'type'        => 'text',
-					'description' => __( 'This controls the title for the payment method the customer sees during checkout.', 'wc-gateway-offline' ),
-					'default'     => __( 'Offline Payment', 'wc-gateway-offline' ),
+					'description' => __( 'This controls the title for the payment method the customer sees during checkout.', 'wc-gateway-windcave' ),
+					'default'     => __( 'Windcave', 'wc-gateway-windcave' ),
 					'desc_tip'    => true,
 				),
 				
 				'description' => array(
-					'title'       => __( 'Description', 'wc-gateway-offline' ),
+					'title'       => __( 'Description', 'wc-gateway-windcave' ),
 					'type'        => 'textarea',
-					'description' => __( 'Payment method description that the customer will see on your checkout.', 'wc-gateway-offline' ),
-					'default'     => __( 'Please remit payment to Store Name upon pickup or delivery.', 'wc-gateway-offline' ),
+					'description' => __( 'Payment method description that the customer will see on your checkout.', 'wc-gateway-windcave' ),
+					'default'     => __( 'Pay with your Credit or Debit Card via Windcave.', 'wc-gateway-windcave' ),
 					'desc_tip'    => true,
 				),
 				
 				'instructions' => array(
-					'title'       => __( 'Instructions', 'wc-gateway-offline' ),
+					'title'       => __( 'Instructions', 'wc-gateway-windcave' ),
 					'type'        => 'textarea',
-					'description' => __( 'Instructions that will be added to the thank you page and emails.', 'wc-gateway-offline' ),
+					'description' => __( 'Instructions that will be added to the thank you page and emails.', 'wc-gateway-windcave' ),
 					'default'     => '',
 					'desc_tip'    => true,
 				),
@@ -197,51 +196,6 @@ function wc_offline_gateway_init() {
 
             // setting up environment variables 
 
-          $sessionUrl = "https://uat.windcave.com/api/v1/sessions"; 
-          $authKey = "Basic SW5zcGlyeV9SZXN0OmI0NGFiMjZmOWFkNzIwNDQ4OTc0MGQ1YWM3NmE5YzE2ZDgzNDJmODUwYTRlYjQ1NTc1NmRiNDgyYjFiYWVjMjk="; 
-      
-       
-                // get order details
-                $totalAmount = WC()->cart->total; 
-
-                // https request to windcave to create a session 
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $sessionUrl);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-                curl_setopt($ch, CURLOPT_HEADER, FALSE);
-
-                curl_setopt($ch, CURLOPT_POST, TRUE);
-
-                curl_setopt($ch, CURLOPT_POSTFIELDS, "{
-                \"type\": \"purchase\",
-                \"methods\": [
-                    \"card\"
-                ],
-                \"amount\": \"$totalAmount\",
-                \"currency\": \"NZD\",
-                \"callbackUrls\": {
-                    \"approved\": \"http://inspiry.local/success\",
-                    \"declined\": \"http://inspiry.local/failure\"
-                }
-                }");
-
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                "Content-Type: application/json",
-                "Authorization:".$authKey."" 
-                ));
-
-                $response = curl_exec($ch);
-                $obj = json_decode($response);
-                $seamlessValue = ''; 
-                // for each loop to get seamless_hpp url 
-                foreach ($obj->links as $obj) {
-                    if($obj->rel=== "seamless_hpp"){
-                        $seamlessValue = $obj->href;
-                    }
-                    if($obj->rel=== "self"){
-                    $this->sessionID = basename($obj->href);
-                    }
-                }
             
             // // let's suppose it is our payment processor JavaScript that allows to obtain a token
             // wp_enqueue_script( 'misha_js', 'https://dev.windcave.com/js/windcavepayments-seamless-v1.js' );
@@ -280,35 +234,16 @@ function wc_offline_gateway_init() {
 		 * @return array
 		 */
 		public function process_payment( $order_id ) {
+
+            global $woocommerce;
+        
+            // we need it to get any order detailes
             $order = wc_get_order( $order_id );
-          
-            $sessionID =$this->sessionID; 
-            $sessionIdentifier = $this->sessionID; 
-            $curl = curl_init();
 
-            curl_setopt_array($curl, array(
-              CURLOPT_URL => 'https://uat.windcave.com/api/v1/sessions/'.$sessionIdentifier,
-              CURLOPT_RETURNTRANSFER => true,
-              CURLOPT_ENCODING => '',
-              CURLOPT_MAXREDIRS => 10,
-              CURLOPT_TIMEOUT => 0,
-              CURLOPT_FOLLOWLOCATION => true,
-              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-              CURLOPT_CUSTOMREQUEST => 'GET',
-              CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json',
-                'Authorization: Basic SW5zcGlyeV9SZXN0OmI0NGFiMjZmOWFkNzIwNDQ4OTc0MGQ1YWM3NmE5YzE2ZDgzNDJmODUwYTRlYjQ1NTc1NmRiNDgyYjFiYWVjMjk='
-              ),
-            ));
-            
-            $response = curl_exec($curl);
-            
-            curl_close($curl);
-
-            $sessionObj = json_decode($response);
+            $response = true; 
 			if(!is_wp_error( $response )){ 
                
-                if($sessionObj->transactions[0]->authorised ){ 
+                if(4===5){ 
                 // Mark as on-hold (we're awaiting the payment)
                 $order->update_status( 'processing', __( 'Awaiting offline payment', 'wc-gateway-offline' ) );
               
@@ -330,5 +265,5 @@ function wc_offline_gateway_init() {
             }
 		}
 	
-  } // end \WC_Gateway_Offline class
+  } // end \WD_Windcave_Gateway class
 }

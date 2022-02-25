@@ -80,7 +80,7 @@ function webduel_order_review(){
                 
             </div>
         </div>
-        <button class="primary-button" id="pay-button"><i class="fa-regular fa-lock-keyhole"></i>Pay Securely Now</button>
+        <a href="<?php echo get_site_url()?>/checkout?payment-gateway=true" class="primary-button" id="pay-button"><i class="fa-regular fa-lock-keyhole"></i>Pay Securely Now</a>
 
     <?php 
 } 
@@ -108,13 +108,22 @@ return $fields;
 }
 
 // add windcave iframe 
-// add_action('woocommerce_after_checkout_form', function(){ 
+add_action('woocommerce_after_checkout_form', function(){ 
     ?>
-    <!-- <div>
-        <div id="test">
 
+    <div class="payment-gateway-container"  data-carttotal="<?php echo WC()->cart->total;?>">
+        <div class="foreground-loader">
+            <i class="fa-duotone fa-loader fa-spin"></i>
+         </div>
+        <img src="https://inspiry.co.nz/wp-content/uploads/2021/08/windcave-logo.png" width="95%">
+        <div id="payment-iframe-container"> 
+           
         </div>
-        <button class="primary-button windcave-btn">Submit</button>
-    </div> -->
-    <?php 
-// }, 20); 
+        <div class="button-container" >
+            <button class="windcave-submit-button" >Submit</button> 
+            <div class="cancel-payment" >Cancel Payment</div> 
+        </div> 
+    </div> 
+
+  <?php 
+}, 20); 

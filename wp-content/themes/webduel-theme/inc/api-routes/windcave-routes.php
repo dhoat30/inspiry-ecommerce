@@ -4,6 +4,11 @@
 add_action("rest_api_init", "windcave_routes");
 
 function windcave_routes() {
+  	// 	create windcave session
+    register_rest_route("inspiry/v1/", "windcave-session", array(
+      "methods" => "POST",
+      "callback" => "createWindcaveSession"
+    ));
   
 		// 	get trade post using category slug
 		  register_rest_route("inspiry/v1/", "windcave-session-status", array(
@@ -12,20 +17,68 @@ function windcave_routes() {
 			));
 		
 }
+function createWindcaveSession($data){ 
+    $cartTotal = sanitize_text_field($_POST['cartTotal']); 
+    $firstName = sanitize_text_field($_POST['firstName']); 
+    $lastName = sanitize_text_field($_POST['lastName']); 
+    $emailAddress = sanitize_email($_POST['emailAddress']); 
+    $phone = preg_replace('/[^0-9]/', '', $_POST['phone']);
+
+    $sessionUrl = "https://uat.windcave.com/api/v1/sessions"; 
+    $authKey = "Basic SW5zcGlyeV9SZXN0OmI0NGFiMjZmOWFkNzIwNDQ4OTc0MGQ1YWM3NmE5YzE2ZDgzNDJmODUwYTRlYjQ1NTc1NmRiNDgyYjFiYWVjMjk="; 
+      
+    // https request to windcave to create a session 
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL, $sessionUrl);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+      curl_setopt($ch, CURLOPT_HEADER, FALSE);
+
+      curl_setopt($ch, CURLOPT_POST, TRUE);
+
+      curl_setopt($ch, CURLOPT_POSTFIELDS, "{
+      \"type\": \"purchase\",
+      \"methods\": [
+          \"card\"
+      ],
+      \"amount\": \"$cartTotal\",
+      \"currency\": \"NZD\",
+      \"callbackUrls\": {
+          \"approved\": \"http://inspiry.local/success\",
+          \"declined\": \"http://inspiry.local/failure\"
+      },
+      \"customer\": {
+        \"firstName\": \"$firstName\",
+        \"lastName\": \"$lastName\",
+        \"email\": \"$emailAddress\",
+        \"phoneNumber\": \"$phone\"
+      }
+      }");
+
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+      "Content-Type: application/json",
+      "Authorization:".$authKey."" 
+      ));
+
+      $response = curl_exec($ch);
+      $obj = json_decode($response);
+      return $obj; 
+}
 function windcaveSessionStatus($data){
     $sessionID = $data["sessionID"];
   
       // setting up environment variables 
        $sessionUrl = "test"; 
        $authKey = "test";
-         if(get_site_url() === "https://testfly3.local" || get_site_url()==="https://test.webduel.co.nz/"){ 
-            $sessionUrl = "https://uat.windcave.com/api/v1/sessions/"; 
-            $authKey = "Basic SW5zcGlyeV9SZXN0OmI0NGFiMjZmOWFkNzIwNDQ4OTc0MGQ1YWM3NmE5YzE2ZDgzNDJmODUwYTRlYjQ1NTc1NmRiNDgyYjFiYWVjMjk="; 
-         }
-         else{ 
-            $sessionUrl = "https://sec.windcave.com/api/v1/sessions/"; 
-            $authKey = "Basic SW5zcGlyeUxQOmRkYzdhZDg2ZDQ0NDA3NDk3OTNkZWM1OWU5YTk1MmI4ODU3ODlkM2Q0OGE2MzliODMwZWI0OTJhNjAyYmNhNjM=";
-         }
+        //  if(get_site_url() === "https://inspiry.local/" || get_site_url()==="https://test.webduel.co.nz/"){ 
+        //     $sessionUrl = "https://uat.windcave.com/api/v1/sessions/"; 
+        //     $authKey = "Basic SW5zcGlyeV9SZXN0OmI0NGFiMjZmOWFkNzIwNDQ4OTc0MGQ1YWM3NmE5YzE2ZDgzNDJmODUwYTRlYjQ1NTc1NmRiNDgyYjFiYWVjMjk="; 
+        //  }
+        //  else{ 
+        //     $sessionUrl = "https://sec.windcave.com/api/v1/sessions/"; 
+        //     $authKey = "Basic SW5zcGlyeUxQOmRkYzdhZDg2ZDQ0NDA3NDk3OTNkZWM1OWU5YTk1MmI4ODU3ODlkM2Q0OGE2MzliODMwZWI0OTJhNjAyYmNhNjM=";
+        //  }
+        $sessionUrl = "https://uat.windcave.com/api/v1/sessions/"; 
+        $authKey = "Basic SW5zcGlyeV9SZXN0OmI0NGFiMjZmOWFkNzIwNDQ4OTc0MGQ1YWM3NmE5YzE2ZDgzNDJmODUwYTRlYjQ1NTc1NmRiNDgyYjFiYWVjMjk="; 
 
    $curl = curl_init();
    
@@ -48,14 +101,14 @@ function windcaveSessionStatus($data){
   
    curl_close($curl);
    $sessionObj = json_decode($response);
+   return $sessionObj;
    
-   
-       $newValue = $sessionObj->transactions[0]->authorised; 
-       if($newValue){
-           return "true";
-       }
-       else{ 
-            return $sessionObj->transactions[0]->responseText; 
-       }
+      //  $newValue = $sessionObj->transactions[0]->authorised; 
+      //  if($newValue){
+      //      return "true";
+      //  }
+      //  else{ 
+      //       return $sessionObj->transactions[0]->responseText; 
+      //  }
 }
 ?>

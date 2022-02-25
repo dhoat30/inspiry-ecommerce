@@ -120,7 +120,10 @@
 <div class="overlay">
   <i class="fa-duotone fa-loader fa-spin"></i>
 </div>
-
+<!-- foreground overlay  -->
+<div class="foreground-loader">
+  <i class="fa-duotone fa-loader fa-spin"></i>
+</div>
 <!-- error pop up  -->
 <div class="error-modal">
   

@@ -50,7 +50,7 @@ import ProductArchive from "./modules/Woocommerce/ProductArchive";
 import SingleProduct from "./modules/Woocommerce/SingleProduct";
 import Cart from './modules/Woocommerce/Cart/Cart'
 import Coupon from './modules/Woocommerce/Cart/Coupon'
-import Windcave from "./modules/Woocommerce/Checkout/Windcave";
+// import Windcave from "./modules/Woocommerce/Checkout/Windcave";
 // modals 
 import ErrorModal from "./modules/ErrorModal/ErrorModal";
 import Checkout from "./modules/Woocommerce/Checkout/Checkout";
@@ -77,10 +77,10 @@ const coupon = new Coupon()
 // modals 
 const errorModal = new ErrorModal()
 
-// checkout 
-const checkout = new Checkout()
-window.onload = function () {
 
+window.onload = function () {
+  // checkout 
+  const checkout = new Checkout()
   // enquiry modal 
   const enquiryModal = new EnquiryModal();
   // cart modal 
@@ -114,7 +114,7 @@ window.onload = function () {
   const customerServiceMenu = new CustomerServiceMenu()
   const contactForm = new ContactForm()
   const feedbackForm = new FeedbackForm()
-  const windcave = new Windcave()
+  // const windcave = new Windcave()
   //price 
   let pricevalue = document.getElementsByClassName('bc-show-current-price');
   // console.log($('.bc-show-current-price').text);

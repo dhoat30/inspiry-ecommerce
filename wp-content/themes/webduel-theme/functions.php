@@ -66,8 +66,11 @@ require get_theme_file_path('/inc/short-codes/archive-page-shortcode.php');
 
  //enqueue scripts
  function inspiry_scripts(){ 
-
-  
+    $actualLink = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    // we need JavaScript to process a token only on cart/checkout pages, right?
+    if ( is_checkout()  ) {
+      wp_enqueue_script( 'misha_js', 'https://dev.windcave.com/js/windcavepayments-seamless-v1.js' );
+    }
    wp_enqueue_script('main', get_theme_file_uri('/build/index.js'), array('jquery'), '1.0', true);
    wp_enqueue_style('university_main_styles', get_theme_file_uri('/build/style-index.css'));
    wp_enqueue_style('university_extra_styles', get_theme_file_uri('/build/index.css'));

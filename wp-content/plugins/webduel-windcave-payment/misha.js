@@ -3,7 +3,7 @@ jQuery(function ($) {
     console.log(misha_params.seamlessValue)
     WindcavePayments.Seamless.prepareIframe({
         url: misha_params.seamlessValue,
-        containerId: "test",
+        containerId: "payment-iframe-container",
         loadTimeout: 30,
         width: 400,
         height: 500,
@@ -12,7 +12,7 @@ jQuery(function ($) {
         },
         onError: function (error) {
             console.log(error)
-            console.log('this is and error event after loading ')
+            console.log('this is an error event after loading ')
         }
     });
     console.log('loading seamless ')

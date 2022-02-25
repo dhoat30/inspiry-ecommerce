@@ -10,17 +10,10 @@ function auth_route() {
         "callback" => "createUser"
     ));
 
-    register_rest_route("inspiry/v1/", "windcave", array(
-        "methods" => "POST",
-        "callback" => "windcave"
-    ));
+
 	
 }
-function windcave($data){ 
-    $sessionID = $_POST['sessionID']; 
 
-    return $sessionID; 
-}
 // send email to trade professional 
 function createUser($data) {
     $new_user_name = stripcslashes($_POST['username']);
