@@ -85,13 +85,12 @@ function wc_offline_gateway_init() {
 		 * Constructor for the gateway.
 		 */
 		public function __construct() {
-	  
 			$this->id                 = 'webduel_windcave_gateway';
-			$this->icon               = apply_filters('woocommerce_offline_icon', '');
+			$this->icon               = apply_filters( 'woocommerce_webduel_icon', plugins_url('/assets/icon.png', __FILE__ ) );
 			$this->has_fields         = true;
 			$this->method_title       = __( 'Windcave', 'wc-gateway-windcave' );
 			$this->method_description = __( 'Allows Windcave payments.', 'wc-gateway-windcave' );
-            $this->sessionID = ''; 
+        
 			// Load the settings.
 			$this->init_form_fields();
 			$this->init_settings();

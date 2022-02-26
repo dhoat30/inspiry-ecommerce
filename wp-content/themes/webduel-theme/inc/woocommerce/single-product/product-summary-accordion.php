@@ -6,7 +6,7 @@ add_action('woocommerce_single_product_summary', function() {
     <div class="accordion-container">'; 
         productDescription(); 
         productDetails();
-        productShippingReturn();
+        // productShippingReturn();
     echo '
    
     </div>'; 

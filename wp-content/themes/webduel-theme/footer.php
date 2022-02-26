@@ -116,6 +116,9 @@
 </div>
 
 
+<!-- overlay without loader  -->
+<div class="dark-overlay">
+</div>
 <!-- overlay  -->
 <div class="overlay">
   <i class="fa-duotone fa-loader fa-spin"></i>

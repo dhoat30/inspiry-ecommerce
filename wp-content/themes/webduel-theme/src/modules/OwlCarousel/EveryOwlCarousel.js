@@ -15,7 +15,7 @@ class EveryOwlCarousel {
         this.productGallery();
 
         // // banner carousel 
-        // this.banner();
+        this.banner();
 
         // recently viewed carousel 
         this.recentlyViewedCarousel()

@@ -79,6 +79,12 @@
 /* banner styling */
 .banner-container {
   padding: 10px 5px;
+  .banner-link {
+    color: var(--white);
+    font-weight: var(--light);
+    font-size: var(--paragraphSize);
+    text-align: center;
+  }
 }
 .banner-container a {
   text-decoration: none;
@@ -259,7 +265,6 @@
   .top-banner .shopping-cart {
     position: static;
     top: none;
-    z-index: 1003;
   }
 }
 
@@ -272,6 +277,7 @@
   left: 50px;
   position: absolute;
   display: none;
+  z-index: 1001;
 }
 .main-navbar-container .wishlist i {
   color: var(--darkGrey);
@@ -282,6 +288,7 @@
   left: 10px;
   position: absolute;
   display: none;
+  z-index: 1001;
 }
 .main-navbar-container .shopping-cart i {
   color: var(--darkGrey);
@@ -293,6 +300,7 @@
     top: 16px;
     left: 35px;
     position: absolute;
+    z-index: 10;
   }
 
   .main-navbar-container .wishlist i {

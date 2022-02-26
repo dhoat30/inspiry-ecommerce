@@ -8,7 +8,7 @@ class Coupon {
         $('.total-summary .coupon-code-input-container button').on('click', this.applyCoupon)
         $(document).on('click', '.total-summary .coupon-row button', this.removeCoupon)
     }
-    applyCoupon() {
+    applyCoupon(e) {
         const couponCode = $('.total-summary .coupon-code-input-container #coupon').val()
 
         $.ajax({
@@ -25,6 +25,7 @@ class Coupon {
             },
             complete: () => {
                 console.log('completed ajax request ')
+                $('.overlay').hide()
             },
             success: (response) => {
                 if (response.code === 200) {
@@ -45,8 +46,9 @@ class Coupon {
                 else {
                     console.log(response)
                     $('.overlay').hide()
-                    $('.error-modal .content').text('An error has occurred while applying coupon. Please try again.')
+                    $('.error-modal .content').text('Coupon does not exist.')
                     $('.error-modal').show()
+                    e.stopPropagation();
                 }
             },
             error: (response) => {

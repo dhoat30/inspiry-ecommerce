@@ -3190,6 +3190,7 @@ class ErrorModal {
 
   hideModal() {
     $('.error-modal').hide();
+    $('.overlay').hide();
   }
 
 }
@@ -3479,8 +3480,8 @@ class EveryOwlCarousel {
     // product gallery on single product page
 
     this.productGallery(); // // banner carousel 
-    // this.banner();
-    // recently viewed carousel 
+
+    this.banner(); // recently viewed carousel 
 
     this.recentlyViewedCarousel();
   } // banner carousel 
@@ -3702,7 +3703,9 @@ class PopUpCart {
       let formData = $('form.cart').data('product_variations');
     });
     $('.header .shopping-cart .cart-items-header').on('click', this.openCart);
-    $(document).on('click', '.cart-box .cont-shopping a', this.closeCart); // $('.cart-popup-container .fa-times').on('click', this.closeCart)
+    $(document).on('click', '.cart-box .cont-shopping a', this.closeCart);
+    $(document).on('click', '.dark-overlay', this.closeCart);
+    $(document).on('click', '.cart-popup-container .title-section i', this.closeCart); // $('.cart-popup-container .fa-times').on('click', this.closeCart)
 
     $(document).on('click', '.single_add_to_cart_button', this.ajaxAddToCart); // remove item from cart ajax 
 
@@ -3756,11 +3759,13 @@ class PopUpCart {
     console.log('slide down cart');
     $('.cart-popup-container').slideToggle('slow');
     $('.header .shopping-cart a i').toggleClass('fa-chevron-up');
+    $('.dark-overlay').show();
   }
 
   closeCart() {
     $('.cart-popup-container').slideUp('slow');
     $('.header .shopping-cart a i').removeClass('fa-chevron-up');
+    $('.dark-overlay').hide();
   }
 
   ajaxAddToCart(e) {
@@ -3791,7 +3796,8 @@ class PopUpCart {
         thisbutton.addClass('added').removeClass('loading');
       },
       success: function (response) {
-        $('.cart-popup-container').slideDown(); // setTimeout(function () { $('.cart-popup-container').slideUp('slow'); }, 3000);
+        $('.cart-popup-container').slideDown();
+        $('.dark-overlay').show(); // setTimeout(function () { $('.cart-popup-container').slideUp('slow'); }, 3000);
 
         if (response.error & response.product_url) {
           window.location = response.product_url;
@@ -4506,7 +4512,7 @@ class Coupon {
     $(document).on('click', '.total-summary .coupon-row button', this.removeCoupon);
   }
 
-  applyCoupon() {
+  applyCoupon(e) {
     const couponCode = $('.total-summary .coupon-code-input-container #coupon').val();
     $.ajax({
       beforeSend: xhr => {
@@ -4521,6 +4527,7 @@ class Coupon {
       },
       complete: () => {
         console.log('completed ajax request ');
+        $('.overlay').hide();
       },
       success: response => {
         if (response.code === 200) {
@@ -4540,8 +4547,9 @@ class Coupon {
         } else {
           console.log(response);
           $('.overlay').hide();
-          $('.error-modal .content').text('An error has occurred while applying coupon. Please try again.');
+          $('.error-modal .content').text('Coupon does not exist.');
           $('.error-modal').show();
+          e.stopPropagation();
         }
       },
       error: response => {
@@ -4701,11 +4709,12 @@ class UpdateCart {
           $('.total-summary .subtotal-row .amount span').text(response.subtotal);
           $('.total-summary .shipping-row .amount span').text(response.shipping);
           $('.total-summary .tax-row .amount span').text(response.tax);
-          $('.total-summary .total-row .amount').html(response.total); // check if the sale price exist
-
-          if (response.salePrice && response.salePrice !== response.productPrice) {
-            location.reload();
-          }
+          $('.total-summary .total-row .amount').html(response.total);
+          $('.cart-items-table .item-subtotal-column .subtotal').html(response.productSubtotal);
+          location.reload(); // check if the sale price exist
+          // if (response.salePrice && response.salePrice !== response.productPrice) {
+          //     location.reload();
+          // }
         } else {
           $('.overlay').hide();
           $('.error-modal .content').text('An error has occurred while updating cart. Please try again.');

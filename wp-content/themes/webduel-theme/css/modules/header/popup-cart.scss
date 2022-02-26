@@ -1,16 +1,36 @@
 .cart-popup-container {
-  display: flex;
-  flex-direction: column;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   height: 100vh;
   position: fixed;
-  top: 50px;
+  top: 0;
   right: 0;
   overflow: scroll;
   padding: 20px 0;
-  z-index: 2000;
+  z-index: 1002 !important;
   background: white;
   display: none;
+  .title-section {
+    border-bottom: 1px solid var(--lightGrey);
+    padding-bottom: 10px;
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--columnSize);
+    i {
+      cursor: pointer;
+    }
+    .title {
+      font-size: var(--columnSize);
+      font-weight: var(--medium);
+    }
+  }
+  .flex-card {
+    height: 70vh;
+    overflow: scroll;
+  }
 }
 .cart-popup-container .fa-times {
   position: static !important;
@@ -50,6 +70,28 @@
 .pop-up-footer {
   width: 90% !important;
   margin: 0 auto;
+  border-top: 1px solid var(--lightGrey);
+  padding-top: 10px;
+  .secondary-button,
+  .primary-button {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}
+.dark-overlay {
+  display: block;
+  z-index: 0 !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .cart-popup-container .total-container {
   display: flex;

@@ -3,6 +3,18 @@
     font-size: var(--rowSize);
     font-weight: var(--regular);
   }
+  .mobile-cart-table {
+    display: none !important;
+  }
+
+  @media (max-width: 800px) {
+    .mobile-cart-table {
+      display: block !important;
+    }
+    .desktop-cart-table {
+      display: none !important;
+    }
+  }
   .woocommerce-message {
     display: none;
   }
@@ -10,6 +22,9 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    @media (max-width: 1100px) {
+      flex-direction: column;
+    }
     .product-summary {
       width: 100%;
       .cart-items-table {
@@ -33,6 +48,12 @@
         tbody {
           tr {
             border-bottom: 1px solid var(--lightGrey);
+            @media (max-width: 800px) {
+              display: flex;
+              flex-wrap: wrap;
+              width: 100% !important;
+              border: solid red;
+            }
             td {
               letter-spacing: 0.03rem;
               padding: 15px;
@@ -40,6 +61,7 @@
                 img {
                   width: 100px;
                   height: 100px;
+                  object-fit: cover;
                 }
               }
             }
@@ -165,8 +187,14 @@
               }
             }
             .remove-column {
-              font-size: 1.5rem;
+              font-size: var(--mediumSize);
               cursor: pointer;
+              i {
+                color: var(--darkGrey);
+                text-align: center;
+
+                display: block;
+              }
             }
           }
         }
@@ -183,7 +211,12 @@
   margin-top: 85px;
   padding: 15px;
   height: auto !important;
-
+  @media (max-width: 1100px) {
+    max-width: 600px;
+    margin-left: 0;
+    margin-top: 20px;
+    margin: 0 auto;
+  }
   h2 {
     font-size: var(--mediumSize);
     color: var(--grey);
@@ -251,5 +284,16 @@
     display: block;
     text-align: center;
     margin-top: 20px;
+  }
+}
+
+// hide default cart tables
+.woocommerce-cart-form {
+  display: none !important;
+}
+.cart-collaterals {
+  display: none !important;
+  .cart_totals {
+    display: none !important;
   }
 }

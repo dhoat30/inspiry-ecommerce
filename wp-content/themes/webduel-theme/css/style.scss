@@ -44,9 +44,9 @@
 @import "modules/woocommerce/checkout/checkout";
 
 // /* modal css  */
-// @import "modules/modal/modal";
+@import "modules/modal/modal";
 
-// @import "modules/inspiry-specials";
+@import "modules/inspiry-specials";
 
 /* customer service css  */
 @import "modules/customer-service/customer-service";
@@ -475,7 +475,18 @@ h3 {
 }
 
 /*overlay*/
-
+.dark-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100 !important;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+}
 .overlay {
   position: fixed;
   top: 0;
@@ -484,7 +495,7 @@ h3 {
   bottom: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 2000;
+  z-index: 200 !important;
   background: rgba(0, 0, 0, 0.5);
   display: none;
   .fa-loader {

@@ -58,6 +58,10 @@ function woocommerce_header_add_to_cart_fragment( $fragments ) {
 
   ?>
      <div class="cart-box">
+            <div class="title-section">
+                <div class="title">My Cart</div>
+                <i class="fa-light fa-xmark"></i>
+            </div>
             <div class="flex-card">
                 <?php
 
@@ -122,9 +126,8 @@ function woocommerce_header_add_to_cart_fragment( $fragments ) {
                         <?php 
                 }   
                         ?>
-                    
-
-                    <div class="pop-up-footer">
+            </div>
+            <div class="pop-up-footer">
                         <div class="total-container">
                             <div class="total poppins-font">
                                 Total: $<?php 
@@ -132,15 +135,14 @@ function woocommerce_header_add_to_cart_fragment( $fragments ) {
                                 echo number_format($totalAmount); ?>
                             </div>
                         </div>
-                        <div class="cont-shopping">
-                            <a class="rm-txt-dec button btn-dk-green-border btn-full-width center-align" href="#">Continue Shopping</a>
-                        </div>
+                        <!-- <div class="cont-shopping">
+                            <a class="secondary-button" href="#">Continue Shopping</a>
+                        </div> -->
                         <div class="checkout-btn">
-                            <a class="rm-txt-dec button btn-dk-green btn-full-width center-align checkout-btn-header" href="<?php echo get_site_url();?>/cart">Checkout</a>
+                            <a class="primary-button" href="<?php echo get_site_url();?>/cart">Cart</a>
                         </div>
-                    </div>
             </div>
-        </div>	
+        </div>		
  <?php
   $fragments['.cart-box'] = ob_get_clean();
   return $fragments;

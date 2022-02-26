@@ -44,7 +44,7 @@ function webduel_order_review(){
                         ?>
                         <ul class="flex-box product-row">
                             <li class="title"><?php echo $product->name; ?> X <?php echo $quantity; ?> </li>
-                            <li class="amount">$<span><?php echo $product->get_price() * $quantity ;?> </span></li>
+                            <li class="amount">$<span><?php echo round($product->get_price() * $quantity, 2) ;?> </span></li>
                         </ul>
                         <?php
                     }

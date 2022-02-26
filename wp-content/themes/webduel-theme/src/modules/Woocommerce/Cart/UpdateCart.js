@@ -33,11 +33,13 @@ class UpdateCart {
                     $('.total-summary .shipping-row .amount span').text(response.shipping)
                     $('.total-summary .tax-row .amount span').text(response.tax)
                     $('.total-summary .total-row .amount').html(response.total)
+                    $('.cart-items-table .item-subtotal-column .subtotal').html(response.productSubtotal)
+                    location.reload();
                     // check if the sale price exist
 
-                    if (response.salePrice && response.salePrice !== response.productPrice) {
-                        location.reload();
-                    }
+                    // if (response.salePrice && response.salePrice !== response.productPrice) {
+                    //     location.reload();
+                    // }
 
                 }
                 else {

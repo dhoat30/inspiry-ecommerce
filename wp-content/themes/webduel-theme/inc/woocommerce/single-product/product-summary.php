@@ -102,46 +102,46 @@ function singleProductQuery($categorySlug){
 
 // availability section _--------------------------------------------------------------
 
-add_action('woocommerce_single_product_summary', function (){ 
-    global $product;    
-    // Available on backorder
-    $countryOfOrigin = $product->get_attribute( 'pa_country-of-origin' );
-    $deliveryETA = $product->get_attribute( 'pa_delivery' );
-    if($countryOfOrigin){ 
-        $countryOfOrigin = 'Country Of Origin: '.$countryOfOrigin; 
-    }
-    echo '
-    <div class="availability">
-        <h3 class="title">'; 
-        if($product->get_availability()['class'] === 'in-stock'){ 
-           echo ' 
-            <i class="fa-solid fa-circle-check" style="color: var(--green); "></i>
-            <span  style="color: var(--green); ">
-            IN STOCK
-            </span>
-            '; 
+// add_action('woocommerce_single_product_summary', function (){ 
+//     global $product;    
+//     // Available on backorder
+//     $countryOfOrigin = $product->get_attribute( 'pa_country-of-origin' );
+//     $deliveryETA = $product->get_attribute( 'pa_availability' );
+//     if($countryOfOrigin){ 
+//         $countryOfOrigin = 'Country Of Origin: '.$countryOfOrigin; 
+//     }
+//     echo '
+//     <div class="availability">
+//         <h3 class="title">'; 
+//         if($product->get_availability()['class'] === 'in-stock'){ 
+//            echo ' 
+//             <i class="fa-solid fa-circle-check" style="color: var(--green); "></i>
+//             <span  style="color: var(--green); ">
+//             IN STOCK
+//             </span>
+//             '; 
 
-        }
-        else{ 
-            echo ' 
-            <i class="fa-solid fa-circle-check" style="color: var(--orange); "></i>
-            <span  style="color: var(--orange); ">
-            Pre Order
-            </span>
-            '; 
-        }
-        echo '
-        <h3>
-        <div class="content">
-            <h4 class="subtitle">
-                '.$countryOfOrigin.'
-            </h4>
-            <h5 class="delivery-info">
-                '.$deliveryETA.'
-            </h5>
-        </div>
-    </div>'; 
-}, 60) ; 
+//         }
+//         else{ 
+//             echo ' 
+//             <i class="fa-solid fa-circle-check" style="color: var(--orange); "></i>
+//             <span  style="color: var(--orange); ">
+//             Pre Order
+//             </span>
+//             '; 
+//         }
+//         echo '
+//         <h3>
+//         <div class="content">
+//             <h4 class="subtitle">
+//                 '.$countryOfOrigin.'
+//             </h4>
+//             <h5 class="delivery-info">
+//                 '.$deliveryETA.'
+//             </h5>
+//         </div>
+//     </div>'; 
+// }, 60) ; 
 
 // social share -----------------------------------------------------------
 add_action('woocommerce_single_product_summary', function(){

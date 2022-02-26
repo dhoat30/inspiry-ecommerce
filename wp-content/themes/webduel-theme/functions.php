@@ -56,6 +56,9 @@ require get_theme_file_path('/inc/woocommerce/cart/cart.php');
 require get_theme_file_path('/inc/woocommerce/cart/cart-ajax.php');
 
 require get_theme_file_path('/inc/woocommerce/checkout/checkout.php');
+// google analytics ecommerce data 
+require get_theme_file_path('/inc/woocommerce/product-archive/google-analytics-impressions.php');
+
 
 
 // shortcodes

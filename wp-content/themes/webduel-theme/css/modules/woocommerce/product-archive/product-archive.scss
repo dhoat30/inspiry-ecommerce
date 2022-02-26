@@ -99,11 +99,21 @@
               }
               .free-shipping {
                 font-size: var(--paragraphSize);
-                border-bottom: 1px solid var(--darkGrey);
-                display: inline-block;
+                position: relative;
+                color: var(--darkGrey);
+                margin: 5px 0;
+                display: block;
+                &::after {
+                  position: absolute;
+                  content: "";
+                  width: 90px;
+                  height: 1px;
+                  background-color: var(--darkGrey);
+                  left: 0;
+                  bottom: 0;
+                }
               }
               .loop-deal {
-                margin-top: 10px;
                 color: var(--grey);
                 font-size: var(--paragraphSize);
                 font-weight: var(--medium);

@@ -14,6 +14,8 @@ class PopUpCart {
 
         $('.header .shopping-cart .cart-items-header').on('click', this.openCart)
         $(document).on('click', '.cart-box .cont-shopping a', this.closeCart)
+        $(document).on('click', '.dark-overlay', this.closeCart)
+        $(document).on('click', '.cart-popup-container .title-section i', this.closeCart)
         // $('.cart-popup-container .fa-times').on('click', this.closeCart)
         $(document).on('click', '.single_add_to_cart_button', this.ajaxAddToCart)
         // remove item from cart ajax 
@@ -73,10 +75,13 @@ class PopUpCart {
         console.log('slide down cart')
         $('.cart-popup-container').slideToggle('slow');
         $('.header .shopping-cart a i').toggleClass('fa-chevron-up');
+        $('.dark-overlay').show()
+
     }
     closeCart() {
         $('.cart-popup-container').slideUp('slow')
         $('.header .shopping-cart a i').removeClass('fa-chevron-up');
+        $('.dark-overlay').hide()
     }
 
     ajaxAddToCart(e) {
@@ -112,6 +117,7 @@ class PopUpCart {
             },
             success: function (response) {
                 $('.cart-popup-container').slideDown();
+                $('.dark-overlay').show()
                 // setTimeout(function () { $('.cart-popup-container').slideUp('slow'); }, 3000);
 
                 if (response.error & response.product_url) {

@@ -23,9 +23,18 @@ function createWindcaveSession($data){
     $lastName = sanitize_text_field($_POST['lastName']); 
     $emailAddress = sanitize_email($_POST['emailAddress']); 
     $phone = preg_replace('/[^0-9]/', '', $_POST['phone']);
+    // setting up environment variables 
+    $sessionUrl = ""; 
+    $authKey = ""; 
+    if(get_site_url() === "https://inspiry.local"){ 
+      $sessionUrl = "https://uat.windcave.com/api/v1/sessions"; 
+      $authKey = "Basic SW5zcGlyeV9SZXN0OmI0NGFiMjZmOWFkNzIwNDQ4OTc0MGQ1YWM3NmE5YzE2ZDgzNDJmODUwYTRlYjQ1NTc1NmRiNDgyYjFiYWVjMjk="; 
+    }
+    else{ 
+      $sessionUrl = "https://sec.windcave.com/api/v1/sessions"; 
+      $authKey = "Basic SW5zcGlyeUxQOmRkYzdhZDg2ZDQ0NDA3NDk3OTNkZWM1OWU5YTk1MmI4ODU3ODlkM2Q0OGE2MzliODMwZWI0OTJhNjAyYmNhNjM=";
+    }
 
-    $sessionUrl = "https://uat.windcave.com/api/v1/sessions"; 
-    $authKey = "Basic SW5zcGlyeV9SZXN0OmI0NGFiMjZmOWFkNzIwNDQ4OTc0MGQ1YWM3NmE5YzE2ZDgzNDJmODUwYTRlYjQ1NTc1NmRiNDgyYjFiYWVjMjk="; 
       
     // https request to windcave to create a session 
       $ch = curl_init();
@@ -67,19 +76,18 @@ function windcaveSessionStatus($data){
     $sessionID = $data["sessionID"];
   
       // setting up environment variables 
-       $sessionUrl = "test"; 
-       $authKey = "test";
-        //  if(get_site_url() === "https://inspiry.local/" || get_site_url()==="https://test.webduel.co.nz/"){ 
-        //     $sessionUrl = "https://uat.windcave.com/api/v1/sessions/"; 
-        //     $authKey = "Basic SW5zcGlyeV9SZXN0OmI0NGFiMjZmOWFkNzIwNDQ4OTc0MGQ1YWM3NmE5YzE2ZDgzNDJmODUwYTRlYjQ1NTc1NmRiNDgyYjFiYWVjMjk="; 
-        //  }
-        //  else{ 
-        //     $sessionUrl = "https://sec.windcave.com/api/v1/sessions/"; 
-        //     $authKey = "Basic SW5zcGlyeUxQOmRkYzdhZDg2ZDQ0NDA3NDk3OTNkZWM1OWU5YTk1MmI4ODU3ODlkM2Q0OGE2MzliODMwZWI0OTJhNjAyYmNhNjM=";
-        //  }
+      $sessionUrl = ""; 
+      $authKey = ""; 
+      if(get_site_url() === "https://inspiry.local"){ 
         $sessionUrl = "https://uat.windcave.com/api/v1/sessions/"; 
         $authKey = "Basic SW5zcGlyeV9SZXN0OmI0NGFiMjZmOWFkNzIwNDQ4OTc0MGQ1YWM3NmE5YzE2ZDgzNDJmODUwYTRlYjQ1NTc1NmRiNDgyYjFiYWVjMjk="; 
-
+      }
+      else{ 
+        $sessionUrl = "https://sec.windcave.com/api/v1/sessions/"; 
+        $authKey = "Basic SW5zcGlyeUxQOmRkYzdhZDg2ZDQ0NDA3NDk3OTNkZWM1OWU5YTk1MmI4ODU3ODlkM2Q0OGE2MzliODMwZWI0OTJhNjAyYmNhNjM=";
+      }
+  
+      
    $curl = curl_init();
    
    curl_setopt_array($curl, array(
@@ -102,13 +110,6 @@ function windcaveSessionStatus($data){
    curl_close($curl);
    $sessionObj = json_decode($response);
    return $sessionObj;
-   
-      //  $newValue = $sessionObj->transactions[0]->authorised; 
-      //  if($newValue){
-      //      return "true";
-      //  }
-      //  else{ 
-      //       return $sessionObj->transactions[0]->responseText; 
-      //  }
+
 }
 ?>

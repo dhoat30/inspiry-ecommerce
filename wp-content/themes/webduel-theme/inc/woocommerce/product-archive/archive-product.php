@@ -62,5 +62,3 @@ function webduel_show_sale_percentage_loop() {
    }
    if ( $max_percentage > 0 ) echo "<div class='sale-perc'>(" . round($max_percentage) . "% OFF)</div>"; 
 }
-
-

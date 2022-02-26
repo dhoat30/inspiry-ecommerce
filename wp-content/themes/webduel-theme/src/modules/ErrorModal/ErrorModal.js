@@ -11,6 +11,7 @@ class ErrorModal {
     }
     hideModal() {
         $('.error-modal').hide()
+        $('.overlay').hide()
     }
 }
 

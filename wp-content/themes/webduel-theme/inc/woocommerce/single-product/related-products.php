@@ -31,21 +31,24 @@ add_action('woocommerce_after_single_product', function(){
         }
     }
     $buttonDataArray = get_field('related_categories', 'product_cat_'.$childCategoryID); 
-    echo'
-    <section class="related-categories-section  margin-row row-container">
-        <h3 class="title">Related Categories</h3>
-        <div class="flex">'; 
-        foreach($buttonDataArray as $button){ 
-           
+    if($buttonDataArray){ 
+        echo'
+        <section class="related-categories-section  margin-row row-container">
+            <h3 class="title">Related Categories</h3>
+            <div class="flex">'; 
+            foreach($buttonDataArray as $button){ 
+               
+                echo '
+                <a href="'.$button['category_link'].'">
+                '.$button['category_name'].'
+                </a>
+                ';
+            }
             echo '
-            <a href="'.$button['category_link'].'">
-            '.$button['category_name'].'
-            </a>
-            ';
-        }
-        echo '
-        </div>
-    </section>
-    '; 
+            </div>
+        </section>
+        '; 
+    }
+   
 }, 100);
 
