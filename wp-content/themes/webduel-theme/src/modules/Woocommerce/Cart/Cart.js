@@ -14,7 +14,7 @@ class Cart {
         this.plusBtn.on('click', this.incrementValue)
         this.minusBtn.on('click', this.decrementValue)
         this.qtyInputField.on('change', this.onQtyChange)
-        this.removeIcon.on('click', this.removeCartItem)
+        this.removeIcon.on('click', this.removeCartItemOnClick)
     }
 
     incrementValue(e) {
@@ -61,9 +61,8 @@ class Cart {
         const updateCart = new UpdateCart(qty.val(), cart_item_key)
     }
 
-    removeCartItem() {
-        let qty = $(this).closest('.remove-column').siblings('.quantity-column').find('#cart-quantity')
-        var cart_item_key = qty.attr('data-cart_item_key')
+    removeCartItemOnClick() {
+        var cart_item_key = $(this).attr('data-cart_item_key')
         const removeCartItem = new RemoveCartItem(0, cart_item_key)
         console.log(removeCartItem)
 

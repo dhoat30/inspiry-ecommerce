@@ -19,17 +19,33 @@
         border: 1px solid var(--lightGrey) !important;
         padding: 10px 10px 10px 10px;
       }
+      .owl-dots {
+        padding: 0;
+        margin: 0 auto;
+      }
+      .owl-nav {
+        span {
+          font-size: 2rem;
+          color: var(--white);
+          font-weight: 300;
+          position: relative;
+          top: -5px;
+        }
+      }
       .card {
         text-decoration: none !important;
-        img {
-          width: 100%;
-          height: 100%;
+        .image-container {
+          img {
+            width: 100%;
+            height: 100%;
+          }
         }
 
         h5 {
           font-size: var(--paragraphSize);
           font-weight: var(--regular);
           letter-spacing: 0.03rem;
+          margin-top: 5px;
         }
         h6 {
           font-size: var(--mediumSize) !important;
@@ -108,18 +124,40 @@
       }
       .owl-item {
         border: 1px solid var(--lightGrey) !important;
-        padding: 10px 10px 10px 10px;
+        padding: 10px 10px 0 10px;
+      }
+      .owl-nav {
+        span {
+          font-size: 2rem;
+          color: var(--white);
+          font-weight: 300;
+          position: relative;
+          top: -5px;
+        }
+      }
+      .owl-dots {
+        padding: 0;
+        margin: 0 auto;
       }
       .card {
         text-decoration: none !important;
-        margin: 0 20px 20px 0;
-        padding: 10px;
+        margin: 0 20px 0 0;
+        padding: 0;
+
         img {
           width: 100%;
-          height: 100%;
+          height: 350px;
+          object-fit: cover;
+          @media (min-width: 1400px) {
+            height: 400px;
+          }
+          @media (max-width: 400px) {
+            height: 250px;
+          }
         }
 
         h5 {
+          margin-top: 5px;
           font-size: var(--paragraphSize);
           font-weight: var(--regular);
           letter-spacing: 0.03rem;

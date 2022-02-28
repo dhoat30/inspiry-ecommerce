@@ -79,8 +79,9 @@ class Checkout {
         }
     }
     showWindcaveIframe(e) {
-        $(document).on('click', '#place_order', (e) => {
+        $(document).on('click.validator', '#place_order', (e) => {
             e.preventDefault();
+
             if (this.onPaymentSelectionChange === 'webduel_windcave_gateway' || this.windcavePaymentSelected === 'webduel_windcave_gateway') {
                 // check if the terms and conditions is checked 
                 let termsConditionsCheckbox = $('.validate-required .woocommerce-form__input-checkbox')
@@ -95,7 +96,8 @@ class Checkout {
                 }
             }
             else {
-                $('#place_order').unbind('click');
+                $(document).off('.validator');
+                console.log('hello')
             }
         })
     }
@@ -103,7 +105,7 @@ class Checkout {
     showWindcaveIFrameOnErrorButtonClick() {
         const windcave = new Windcave()
         $('.payment-gateway-container').show();
-        $('.overlay').show();
+
         $('.error-modal').hide()
     }
 }

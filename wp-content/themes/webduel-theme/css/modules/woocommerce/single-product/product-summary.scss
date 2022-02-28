@@ -52,9 +52,20 @@
   display: none;
 }
 .variations {
+  .label {
+    label {
+      font-size: var(--mediumSize);
+    }
+  }
+  .variable-item-span {
+    &::after {
+      box-shadow: none !important;
+    }
+  }
   .woo-selected-variation-item-name {
     font-size: var(--paragraphSize);
     color: var(--darkGrey);
+    font-weight: var(--regular);
   }
   tr:nth-child(1) {
     margin-bottom: 15px !important;

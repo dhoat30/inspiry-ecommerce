@@ -16,7 +16,7 @@ class CartModal {
         setTimeout(() => {
             $('.modal-section').show(200)
             if ($('.modal-section').data('overlay') === true) {
-                $('.overlay').show();
+
             }
 
         }, 3000)

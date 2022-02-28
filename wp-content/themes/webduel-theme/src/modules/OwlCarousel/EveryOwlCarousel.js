@@ -182,10 +182,12 @@ class EveryOwlCarousel {
             nav: true,
             responsive: {
                 0: {
+                    navText: ['<i class="fa-thin fa-arrow-left-long"></i>', '<i class="fa-thin fa-arrow-right-long"></i>'],
                     items: 1,
                     dots: false
                 },
                 600: {
+                    navText: ['<i class="fa-thin fa-arrow-left-long"></i>', '<i class="fa-thin fa-arrow-right-long"></i>'],
                     items: 2,
                     dots: false
                 },

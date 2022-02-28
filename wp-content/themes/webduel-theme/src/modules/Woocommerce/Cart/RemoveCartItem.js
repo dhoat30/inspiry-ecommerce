@@ -9,8 +9,8 @@ class RemoveCartItem {
     removeItem() {
         $.ajax({
             beforeSend: (xhr) => {
-                $('.overlay').show()
 
+                $('.overlay').show()
                 xhr.setRequestHeader('X-WP-NONCE', inspiryData.nonce)
             },
             url: '/wp-admin/admin-ajax.php',
@@ -25,13 +25,14 @@ class RemoveCartItem {
             },
             success: (response) => {
                 if (response.code === 200) {
-                    console.log(response);
+                    console.log(response)
                     $('.overlay').hide()
-                    $(`#${this.cartItemKey}`).hide()
+                    $(`.${this.cartItemKey}`).hide()
                     $('.total-summary .subtotal-row .amount span').text(response.subtotal)
                     $('.total-summary .shipping-row .amount span').text(response.shipping)
                     $('.total-summary .tax-row .amount span').text(response.tax)
                     $('.total-summary .total-row .amount').html(response.total)
+                    location.reload()
                 }
                 else {
                     $('.overlay').hide()
@@ -41,10 +42,11 @@ class RemoveCartItem {
                 }
             },
             error: (response) => {
-                $('.overlay').hide()
+
                 $('.error-modal .content').text('An error has occurred while removing item. Please try again.')
                 $('.error-modal').show()
                 console.log('this is an error');
+                $('.overlay').hide()
                 console.log(response)
 
             }

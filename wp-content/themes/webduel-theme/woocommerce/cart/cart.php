@@ -174,3 +174,97 @@ do_action( 'woocommerce_before_cart' ); ?>
 </div>
 
 <?php do_action( 'woocommerce_after_cart' ); ?>
+<script type="text/javascript">
+
+			 var placeOrderBtn = document.getElementsByClassName("checkout-btn")[0];
+
+			 placeOrderBtn.addEventListener("click", function(event) {
+
+			 	dataLayer.push({
+					    'event': 'checkout',
+					    'ecommerce': {
+					      'checkout': {
+					      	'actionField': {'step': 1},
+					        'products': [
+					        <?php 
+									foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+
+										$product = wc_get_product( $cart_item['data']->get_id()); 
+										$term_list = get_the_terms( $product->get_id(), 'product_cat' );
+					    				$term = $term_list[0];
+					    				$variation_id = "No Variation";
+					    				$qty = $cart_item['quantity'];
+
+					    				if( $product->is_type('variable') ) {
+
+					    							foreach($product->get_available_variations() as $variation_values ){
+					    								foreach($variation_values['attributes'] as $key => $attribute_value ){
+					    									$attribute_name = str_replace( 'attribute_', '', $key );
+					    									$default_value = $product->get_variation_default_attribute($attribute_name);
+					    									if( $default_value == $attribute_value ){
+					    										$is_default_variation = true;
+					    									} else {
+					    										$is_default_variation = false;
+					                 				  		 	break; // Stop this loop to start next main lopp
+										               		}
+										           		 }
+										            	if( $is_default_variation ){
+										            		$variation_id = $variation_values['variation_id'];
+										                break; // Stop the main loop
+										            	}
+										        }
+									} //end of variable product type condition
+
+							?>
+
+					        {
+					          'name': '<?php echo $product -> get_name()?>',                  
+					          'id': '<?php echo $product -> get_id()?>',
+					          'price': '<?php echo $product -> get_price()?>',
+					          'brand': 'My Custom Brand',
+					          'category': '<?php echo $term -> name ?>',
+					          'variant': '<?php echo $variation_id ?>',
+					          'quantity': '<?php echo $qty ?>'  
+					         },
+							<?php						
+								}
+							 ?>
+					         ]
+					       }
+			   		  	}
+			 		 });
+			 });
+   </script>
+
+
+<!-- facebook pixel intiated checkout  -->
+<script type="text/javascript">
+
+		let initiateCheckoutObj = { 
+			content_category: '<?php echo $term -> name; ?>', 
+			num_items: '<?php echo WC()->cart->get_cart_contents_count();?>',
+			value: '<?php echo WC()->cart->total;?>' , 
+			content_type: "Product", 
+			currency: "NZD", 
+			content: [
+						<?php 
+								foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+									$product = wc_get_product( $cart_item['data']->get_id()); 
+									$qty = $cart_item['quantity'];
+										?>,
+										{
+										id: '<?php echo $product -> get_id()?>',
+										item_price: '<?php echo $product -> get_price()?>',
+										quantity: '<?php echo $qty ?>'  
+										}
+										<?php
+								}
+						?>
+					]
+	}
+	
+		placeOrderBtn.addEventListener('click', (e)=> { 
+			fbq('track', 'InitiateCheckout', initiateCheckoutObj);
+
+		})
+</script>

@@ -44,7 +44,33 @@
         src="https://www.facebook.com/tr?id=828264374302518&ev=PageView&noscript=1"
         /></noscript>
 <!-- End Facebook Pixel Code -->
-
+<?php 
+    // get user email address 
+    $pinterestUserEmail; 
+    if(is_user_logged_in()){ 
+        $current_user = wp_get_current_user(); 
+        $pinterestUserEmail = $current_user->user_email; 
+        $hashedPinterestEmail = wp_hash($pinterestUserEmail); 
+    }
+   
+    ?>
+<!-- pinterest Tag -->
+        <!-- Pinterest Tag -->
+        <script>
+        !function(e){if(!window.pintrk){window.pintrk = function () {
+        window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var
+        n=window.pintrk;n.queue=[],n.version="3.0";var
+        t=document.createElement("script");t.async=!0,t.src=e;var
+        r=document.getElementsByTagName("script")[0];
+        r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");
+        pintrk('load', '2612506427665', {em: '<?php echo $pinterestUserEmail; ?>'});
+        pintrk('page');
+        </script>
+        <noscript>
+        <img height="1" width="1" style="display:none;" alt=""
+        src='https://ct.pinterest.com/v3/?event=init&tid=2612506427665&pd[em]=<<?php echo $hashedPinterestEmail?>>&noscript=1'/>
+        </noscript>
+        <!-- end Pinterest Tag -->
 
         
 </head>
@@ -321,54 +347,3 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	</div>
 
 
-
-    <!-- gtag manager data -->
-<script type="text/javascript">
-    jQuery('.checkout-btn-header').on("click", function(event) {
-        dataLayer.push({
-            'event': 'checkout',
-            'ecommerce': {
-                'checkout': {
-                    'actionField': {'step': 1},
-                    'products': [
-                        <?php
-                        foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
-                            $product = $cart_item['data'];
-                            $product_id = $cart_item['product_id'];
-                            $quantity = $cart_item['quantity'];
-                            $price = WC()->cart->get_product_price( $product );
-                            $subtotal = WC()->cart->get_product_subtotal( $product, $cart_item['quantity'] );
-                            $link = $product->get_permalink( $cart_item );
-                            // Anything related to $product, check $product tutorial
-                            $meta = wc_get_formatted_cart_item_data( $cart_item );
-       
-                            ?>
-                            {
-                                'name': '<?php echo $product -> get_name()?>',                  
-                                'id': '<?php echo $product -> get_id()?>',
-                                'price': '<?php echo $product -> get_price()?>',
-                                'brand': '<?php echo  $product->get_attribute('pa_brands')?>	',
-                                            'category': '<?php $terms = get_the_terms( $product_id, 'product_cat' );
-                                            foreach ($terms as $term) {
-                                                $product_cat_id = $term->term_id;
-                                                
-                                                echo get_the_category_by_ID($product_cat_id).",";
-                                            
-                                                break;
-                                            } ?>',
-                                'variant': 'none',
-                                'quantity': '<?php echo $quantity; ?>'  
-                            },
-
-
-                            <?php
-                        }    
-                           
-                            ?>
-                    ]
-                }
-            }
-        })
-    });
-       
-</script>	

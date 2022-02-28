@@ -58,8 +58,8 @@ require get_theme_file_path('/inc/woocommerce/cart/cart-ajax.php');
 require get_theme_file_path('/inc/woocommerce/checkout/checkout.php');
 // google analytics ecommerce data 
 require get_theme_file_path('/inc/woocommerce/product-archive/google-analytics-impressions.php');
-
-
+require get_theme_file_path('/inc/woocommerce/single-product/google-analytics-detail.php');
+require get_theme_file_path('/inc/woocommerce/cart/google-analytics-cart.php');
 
 // shortcodes
 require get_theme_file_path('/inc/short-codes/social-share.php');

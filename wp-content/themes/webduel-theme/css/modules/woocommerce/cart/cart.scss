@@ -10,6 +10,37 @@
   @media (max-width: 800px) {
     .mobile-cart-table {
       display: block !important;
+      tbody {
+        tr {
+          @media (max-width: 800px) {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100% !important;
+            align-items: center;
+            .image-column {
+              display: flex;
+            }
+            .quantity-column {
+              display: flex;
+              align-items: center;
+
+              margin: 0 !important;
+              padding: 0 15px 15px 15px !important;
+              width: 100%;
+              .remove-column {
+                margin-left: 10px;
+              }
+            }
+            .img-container {
+              margin-right: 5px;
+              img {
+                width: 50px !important;
+                height: 50px !important;
+              }
+            }
+          }
+        }
+      }
     }
     .desktop-cart-table {
       display: none !important;
@@ -48,12 +79,7 @@
         tbody {
           tr {
             border-bottom: 1px solid var(--lightGrey);
-            @media (max-width: 800px) {
-              display: flex;
-              flex-wrap: wrap;
-              width: 100% !important;
-              border: solid red;
-            }
+
             td {
               letter-spacing: 0.03rem;
               padding: 15px;

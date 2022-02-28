@@ -2089,7 +2089,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_Woocommerce_Cart_Coupon__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./modules/Woocommerce/Cart/Coupon */ "./src/modules/Woocommerce/Cart/Coupon.js");
 /* harmony import */ var _modules_ErrorModal_ErrorModal__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./modules/ErrorModal/ErrorModal */ "./src/modules/ErrorModal/ErrorModal.js");
 /* harmony import */ var _modules_Woocommerce_Checkout_Checkout__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./modules/Woocommerce/Checkout/Checkout */ "./src/modules/Woocommerce/Checkout/Checkout.js");
-let $ = jQuery;
  // form 
 
  // owl carousel 
@@ -2131,7 +2130,8 @@ let $ = jQuery;
 // modals 
 
 
- // add to cart and remove from cart class 
+
+let $ = jQuery; // add to cart and remove from cart class 
 
 const popUpCart = new _modules_PopUpCart__WEBPACK_IMPORTED_MODULE_10__["default"](); // woo Gallery 
 
@@ -2459,9 +2459,7 @@ class CartModal {
     setTimeout(() => {
       $('.modal-section').show(200);
 
-      if ($('.modal-section').data('overlay') === true) {
-        $('.overlay').show();
-      }
+      if ($('.modal-section').data('overlay') === true) {}
     }, 3000);
   }
 
@@ -3190,7 +3188,6 @@ class ErrorModal {
 
   hideModal() {
     $('.error-modal').hide();
-    $('.overlay').hide();
   }
 
 }
@@ -3627,10 +3624,12 @@ class EveryOwlCarousel {
       nav: true,
       responsive: {
         0: {
+          navText: ['<i class="fa-thin fa-arrow-left-long"></i>', '<i class="fa-thin fa-arrow-right-long"></i>'],
           items: 1,
           dots: false
         },
         600: {
+          navText: ['<i class="fa-thin fa-arrow-left-long"></i>', '<i class="fa-thin fa-arrow-right-long"></i>'],
           items: 2,
           dots: false
         },
@@ -4434,7 +4433,7 @@ class Cart {
     this.plusBtn.on('click', this.incrementValue);
     this.minusBtn.on('click', this.decrementValue);
     this.qtyInputField.on('change', this.onQtyChange);
-    this.removeIcon.on('click', this.removeCartItem);
+    this.removeIcon.on('click', this.removeCartItemOnClick);
   }
 
   incrementValue(e) {
@@ -4479,9 +4478,8 @@ class Cart {
     const updateCart = new _UpdateCart__WEBPACK_IMPORTED_MODULE_1__["default"](qty.val(), cart_item_key);
   }
 
-  removeCartItem() {
-    let qty = $(this).closest('.remove-column').siblings('.quantity-column').find('#cart-quantity');
-    var cart_item_key = qty.attr('data-cart_item_key');
+  removeCartItemOnClick() {
+    var cart_item_key = $(this).attr('data-cart_item_key');
     const removeCartItem = new _RemoveCartItem__WEBPACK_IMPORTED_MODULE_0__["default"](0, cart_item_key);
     console.log(removeCartItem);
   }
@@ -4641,11 +4639,12 @@ class RemoveCartItem {
         if (response.code === 200) {
           console.log(response);
           $('.overlay').hide();
-          $(`#${this.cartItemKey}`).hide();
+          $(`.${this.cartItemKey}`).hide();
           $('.total-summary .subtotal-row .amount span').text(response.subtotal);
           $('.total-summary .shipping-row .amount span').text(response.shipping);
           $('.total-summary .tax-row .amount span').text(response.tax);
           $('.total-summary .total-row .amount').html(response.total);
+          location.reload();
         } else {
           $('.overlay').hide();
           $('.error-modal .content').text('An error has occurred while removing item. Please try again.');
@@ -4653,10 +4652,10 @@ class RemoveCartItem {
         }
       },
       error: response => {
-        $('.overlay').hide();
         $('.error-modal .content').text('An error has occurred while removing item. Please try again.');
         $('.error-modal').show();
         console.log('this is an error');
+        $('.overlay').hide();
         console.log(response);
       }
     });
@@ -4821,7 +4820,7 @@ class Checkout {
   }
 
   showWindcaveIframe(e) {
-    $(document).on('click', '#place_order', e => {
+    $(document).on('click.validator', '#place_order', e => {
       e.preventDefault();
 
       if (this.onPaymentSelectionChange === 'webduel_windcave_gateway' || this.windcavePaymentSelected === 'webduel_windcave_gateway') {
@@ -4836,7 +4835,8 @@ class Checkout {
           $('#payment').append(`<div class="error">*Please check the terms & conditions</div>`);
         }
       } else {
-        $('#place_order').unbind('click');
+        $(document).off('.validator');
+        console.log('hello');
       }
     });
   }
@@ -4844,7 +4844,6 @@ class Checkout {
   showWindcaveIFrameOnErrorButtonClick() {
     const windcave = new _Windcave__WEBPACK_IMPORTED_MODULE_0__["default"]();
     $('.payment-gateway-container').show();
-    $('.overlay').show();
     $('.error-modal').hide();
   }
 

@@ -1,5 +1,3 @@
-let $ = jQuery;
-
 import "../css/style.scss"
 
 // form 
@@ -54,7 +52,7 @@ import Coupon from './modules/Woocommerce/Cart/Coupon'
 // modals 
 import ErrorModal from "./modules/ErrorModal/ErrorModal";
 import Checkout from "./modules/Woocommerce/Checkout/Checkout";
-
+let $ = jQuery;
 // add to cart and remove from cart class 
 const popUpCart = new PopUpCart();
 
@@ -241,4 +239,6 @@ window.addEventListener("scroll", myScrollFunc);
     });
   });
 })(jQuery);
+
+
 

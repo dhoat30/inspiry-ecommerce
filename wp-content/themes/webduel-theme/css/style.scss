@@ -53,8 +53,8 @@
 @import "modules/customer-service/form";
 
 // /* account css */
-// @import "modules/account/login";
-// @import "modules/account/create-account";
+@import "modules/account/login";
+@import "modules/account/create-account";
 
 // /*geo directroy styling*/
 // /*
@@ -495,7 +495,7 @@ h3 {
   bottom: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 200 !important;
+  z-index: 200;
   background: rgba(0, 0, 0, 0.5);
   display: none;
   .fa-loader {

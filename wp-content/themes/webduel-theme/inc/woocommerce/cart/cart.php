@@ -50,7 +50,6 @@ add_action('woocommerce_before_cart', function(){
                                         $availability = $variation->get_availability();
                                         $colourAttribute = $product->get_attributes()['pa_colour'];
                                         $sizeAttribute = $product->get_attributes()['pa_sizes'];
-                                        
                                     }
                                     else{ 
                                         $product_id = $cart_item['product_id'];
@@ -61,7 +60,7 @@ add_action('woocommerce_before_cart', function(){
                             $subtotal = WC()->cart->get_product_subtotal( $product, $cart_item['quantity'] );
                             $link = $product->get_permalink( $cart_item );
                             ?>
-                            <tr id="<?php echo $cart_item_key?>">
+                            <tr class="<?php echo $cart_item_key?>">
                                 <td class="image-column">
                                     <a href="<?php echo $link?>">
                                         <div class="img-container">
@@ -127,6 +126,7 @@ add_action('woocommerce_before_cart', function(){
                                         value="<?php echo $quantity;?>"
                                         max="25"
                                         min="1"
+                                        data-product_id="<?php echo $product_id?>"
                                         data-cart_item_key="<?php echo $cart_item_key;?>"
                                         />
                                         <input class="plus" type="button" value="+" control-id="ControlID-3">
@@ -139,7 +139,9 @@ add_action('woocommerce_before_cart', function(){
                                     ?>
                                 </td>
                                 <td class="remove-column" > 
-                                    <i class="fa-solid fa-trash"></i>
+                                    <i class="fa-solid fa-trash"  
+                                    data-product_id="<?php echo $product_id?>"
+                                    data-cart_item_key="<?php echo $cart_item_key;?>"></i>
                                 </td>
                                 <td class="item-subtotal-column" > 
                                     <div class="subtotal"><?php echo $subtotal; ?></div>
@@ -191,62 +193,68 @@ add_action('woocommerce_before_cart', function(){
                             $subtotal = WC()->cart->get_product_subtotal( $product, $cart_item['quantity'] );
                             $link = $product->get_permalink( $cart_item );
                             ?>
-                            <tr id="<?php echo $cart_item_key?>">
+                            <tr class="<?php echo $cart_item_key?>">
                                 <td class="image-column">
                                     <a href="<?php echo $link?>">
                                         <div class="img-container">
                                             <img src="<?php echo get_the_post_thumbnail_url($product_id, array( 500, 500));?>" alt="<?php echo $product->name?>"/>
                                         </div>
                                     </a>
+                                    <div class="product-info-column">
+                                        <a href="<?php echo $link?>" class="product-title">
+                                            <?php echo $product->name?>
+                                        </a>
+                                        <!-- variation attributes  -->
+                                        <div class="variation-attributes">
+                                            <?php 
+                                            if($colourAttribute){ 
+                                                ?>
+                                                <div class="item">
+                                                    Color: <span><?php echo $colourAttribute; ?> </span>       
+                                                </div>
+                                                <?php 
+                                            }
+                                            ?>
+                                            <?php 
+                                            if($sizeAttribute){ 
+                                                ?>
+                                                <div class="item">
+                                                    Size: <span><?php echo $sizeAttribute; ?> </span>       
+                                                </div>
+                                                <?php 
+                                            }
+                                            ?>
+                                            <div class="price-column">
+                                                <?php
+                                                echo apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $product ), $cart_item, $cart_item_key ); // PHPCS: XSS ok.
+                                                ?>
+                                            </div>
+                                        </div>
+                                        <div class="availability-container">
+                                            
+                                            <div class="availability">
+                                                <i class="fa-solid fa-cube"></i>
+                                                Availability: 
+                                                <span>
+                                                    <?php 
+                                                    if( $availability['class']=== 'in-stock'){ 
+                                                        echo "In stock"; 
+                                                    }
+                                                    else{ 
+                                                    echo "Pre order";
+                                                    }
+                                                        
+                                                    ?>
+                                                </span>
+                                            </div>
+                                            <div class="arrives">
+                                                Arrives: <span> <?php echo $delivery;?></span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 
                                 </td>
-                                <td class="product-info-column">
-                                    <a href="<?php echo $link?>" class="product-title">
-                                        <?php echo $product->name?>
-                                    </a>
-                                    <!-- variation attributes  -->
-                                    <div class="variation-attributes">
-                                        <?php 
-                                        if($colourAttribute){ 
-                                            ?>
-                                            <div class="item">
-                                                Color: <span><?php echo $colourAttribute; ?> </span>       
-                                            </div>
-                                            <?php 
-                                        }
-                                        ?>
-                                        <?php 
-                                        if($sizeAttribute){ 
-                                            ?>
-                                            <div class="item">
-                                                Size: <span><?php echo $sizeAttribute; ?> </span>       
-                                            </div>
-                                            <?php 
-                                        }
-                                        ?>
-                                    </div>
-                                    <div class="availability-container">
-                                        
-                                        <div class="availability">
-                                            <i class="fa-solid fa-cube"></i>
-                                            Availability: 
-                                            <span>
-                                                <?php 
-                                                if( $availability['class']=== 'in-stock'){ 
-                                                    echo "In stock"; 
-                                                }
-                                                else{ 
-                                                echo "Pre order";
-                                                }
-                                                    
-                                                ?>
-                                            </span>
-                                        </div>
-                                        <div class="arrives">
-                                            Arrives: <span> <?php echo $delivery;?></span>
-                                        </div>
-                                    </div>
-                                </td>
+                               
                                 <td class="quantity-column" >
                                     <div class="quantity-container"> 
                                         <input class="minus" type="button" value="–" control-id="ControlID-1">
@@ -261,19 +269,16 @@ add_action('woocommerce_before_cart', function(){
                                         />
                                         <input class="plus" type="button" value="+" control-id="ControlID-3">
                                     </div>
+                                    <div class="remove-column" > 
+                                        <i class="fa-solid fa-trash"  
+                                        data-product_id="<?php echo $product_id?>"
+                                        data-cart_item_key="<?php echo $cart_item_key;?>"></i>
+                                    </div>
                             
                                 </td>
-                                <td class="price-column" >
-                                    <?php
-                                    echo apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $product ), $cart_item, $cart_item_key ); // PHPCS: XSS ok.
-                                    ?>
-                                </td>
-                                <td class="remove-column" > 
-                                    <i class="fa-solid fa-trash"></i>
-                                </td>
-                                <td class="item-subtotal-column" > 
-                                    <div class="subtotal"><?php echo $subtotal; ?></div>
-                                </td>
+                                
+                              
+                                
                             </tr>
                             <?php 
                         }
@@ -331,7 +336,7 @@ add_action('woocommerce_before_cart', function(){
             <?php 
                    }?>
             <!-- checkout button -->
-            <a href="<?php echo wc_get_checkout_url();?>" class="primary-button">CHECKOUT NOW</a>
+            <a href="<?php echo wc_get_checkout_url();?>" class="primary-button checkout-btn">CHECKOUT NOW</a>
         </div>
     <!-- closing the div of above hook -->
     </div>
