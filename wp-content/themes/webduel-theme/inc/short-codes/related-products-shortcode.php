@@ -60,14 +60,17 @@ function relatedProductLoopShortCode(){
             $postsExists = new WP_Query( $parentCategoriesQuery );
         }
         if($postsExists->have_posts()){ 
+            $relatedOwlCarouselClass = $postsExists->post_count>3 ? 'owl-carousel' : null; 
+
             ?>
             <section class="trending-section row-container">
                 <h3 class="title">You may also like</h3>
-                <div class="related-product-section owl-carousel">
+                <div class="related-product-section <?php echo $relatedOwlCarouselClass; ?>">
                     <?php 
                     while($postsExists->have_posts()){ 
                         $postsExists->the_post(); 
                         $product = wc_get_product( get_the_ID() );
+                        
                         ?>
                         <a class="card" href="<?php echo get_the_permalink()?>">
                             <div class="image-container">

@@ -47,6 +47,7 @@ require get_theme_file_path('/inc/woocommerce/single-product/image-gallery.php')
 require get_theme_file_path('/inc/woocommerce/single-product/product-summary.php');
 require get_theme_file_path('/inc/woocommerce/single-product/related-products.php');
 require get_theme_file_path('/inc/woocommerce/single-product/ajax-operations.php');
+// require get_theme_file_path('/inc/woocommerce/single-product/sample-button.php');
 
 require get_theme_file_path('/inc/woocommerce/single-product/product-summary-accordion.php');
 require get_theme_file_path('/inc/woocommerce/product-archive/product-archive.php');
@@ -56,6 +57,9 @@ require get_theme_file_path('/inc/woocommerce/cart/cart.php');
 require get_theme_file_path('/inc/woocommerce/cart/cart-ajax.php');
 
 require get_theme_file_path('/inc/woocommerce/checkout/checkout.php');
+
+require get_theme_file_path('/inc/woocommerce/misc/misc.php');
+
 // google analytics ecommerce data 
 require get_theme_file_path('/inc/woocommerce/product-archive/google-analytics-impressions.php');
 require get_theme_file_path('/inc/woocommerce/single-product/google-analytics-detail.php');

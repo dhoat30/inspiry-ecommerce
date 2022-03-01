@@ -11,37 +11,53 @@
     font-weight: var(--regular);
     color: var(--black);
     margin-bottom: 0;
+    @media (max-width: 400px) {
+      font-size: var(--columnSize);
+      line-height: 1.5rem;
+    }
   }
 
   //   regular price
-  .price {
-    grid-column: 1/2;
-  }
+
   .price .amount bdi {
     font-weight: var(--medium);
   }
   .price-flex {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 130px 1fr 1fr 98px;
+
     align-items: center;
     justify-content: space-between;
-  }
+    .price {
+      grid-column: 1/2;
+    }
+    // sale percentage
 
-  // free delivery
-  .free-shipping {
-    font-size: var(--paragraphSize);
-    font-weight: var(--regular);
-    font-family: "Open Sans", sans-serif;
-    grid-column: 3/3;
-    display: block;
-    i {
-      font-size: var(--mediumSize);
-      position: relative;
-      top: 1px;
+    // free delivery
+    .free-shipping {
+      font-size: var(--paragraphSize);
+      font-weight: var(--regular);
+      font-family: "Open Sans", sans-serif;
+      grid-column: 4/4;
+      @media (max-width: 350px) {
+        grid-column: 1/4;
+      }
+      display: block;
+      i {
+        font-size: var(--mediumSize);
+        position: relative;
+        top: 1px;
+      }
+    }
+  }
+  .sale-perc {
+    color: var(--red);
+    @media (max-width: 500px) {
+      margin-top: 10px;
     }
   }
   .laybuy-inline-widget {
-    grid-column: 1/3;
+    grid-column: 1/5;
     font-size: var(--paragraphSize);
     margin: 5px 0;
   }
@@ -67,10 +83,7 @@
     color: var(--darkGrey);
     font-weight: var(--regular);
   }
-  tr:nth-child(1) {
-    margin-bottom: 15px !important;
-    display: block;
-  }
+
   .woo-variation-items-wrapper {
     margin-top: 0px;
   }
@@ -111,6 +124,7 @@
     margin: 0 0 0 0;
     background-color: var(--beige);
     padding: 20px 10px;
+    margin-top: 20px;
     .title {
       font-size: var(--columnSize);
       font-weight: var(--medium);
@@ -135,6 +149,20 @@
     border-radius: 0 !important;
     &:hover {
       background-color: rgba(0, 0, 0, 1) !important;
+    }
+  }
+  .product-page-btn-container {
+    .sizing-calculator-button {
+      display: block;
+      width: 100%;
+      margin: 10px 0 0 0;
+      transition: var(--transition);
+      i {
+        transition: var(--transition);
+      }
+      &:hover i {
+        color: var(--white);
+      }
     }
   }
   .summary {

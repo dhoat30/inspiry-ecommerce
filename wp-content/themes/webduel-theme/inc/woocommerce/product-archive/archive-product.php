@@ -30,6 +30,19 @@ add_action( 'woocommerce_after_shop_loop_item', 'remove_add_to_cart_buttons', 1 
 // woocommerce variations 
 
 add_action('woocommerce_shop_loop_item_title', 'wvs_pro_archive_variation_template', 5); 
+// wrap product archive title with anchor 
+add_action('woocommerce_shop_loop_item_title', 'wrap_title_with_anchor', 6); 
+function wrap_title_with_anchor(){ 
+   global $product; 
+   ?>
+   <a href="<?php echo get_permalink( $product->get_id() );?>" alt="<?php echo $product->get_name(); ?>">
+   <?php 
+}
+add_action('woocommerce_shop_loop_item_title', function() { 
+   ?> 
+   </a>
+   <?php 
+}, 20); 
 
 // add product attributes on product loop product page
 add_action("woocommerce_after_shop_loop_item_title", "add_product_attributes", 1); 

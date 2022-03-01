@@ -96,49 +96,55 @@
                 letter-spacing: 0.03rem;
                 padding: 5px 0 0 0;
                 margin-bottom: -3px !important;
-              }
-              .free-shipping {
-                font-size: var(--paragraphSize);
-                position: relative;
-                color: var(--darkGrey);
-                margin: 5px 0;
-                display: block;
-                &::after {
-                  position: absolute;
-                  content: "";
-                  width: 90px;
-                  height: 1px;
-                  background-color: var(--darkGrey);
-                  left: 0;
-                  bottom: 0;
+                &:hover {
+                  text-decoration: underline;
                 }
-              }
-              .loop-deal {
-                color: var(--grey);
-                font-size: var(--paragraphSize);
-                font-weight: var(--medium);
-              }
-              .price {
-                font-size: var(--mediumSize) !important;
-                font-weight: var(--semiBold);
-                display: inline-block;
-                float: left;
-              }
-              .sale-perc {
-                display: inline-block;
-                font-size: var(--paragraphSize) !important;
-                font-weight: var(--semiBold);
-                padding-left: 5px;
-                color: var(--red);
               }
             }
             img {
               margin-bottom: 0;
               border: 1px solid var(--lightGrey);
             }
+            .free-shipping {
+              font-size: var(--paragraphSize);
+              position: relative;
+              color: var(--darkGrey);
+              margin: 5px 0;
+              display: block;
+              &::after {
+                position: absolute;
+                content: "";
+                width: 90px;
+                height: 1px;
+                background-color: var(--darkGrey);
+                left: 0;
+                bottom: 0;
+              }
+            }
+            .loop-deal {
+              color: var(--grey);
+              font-size: var(--paragraphSize);
+              font-weight: var(--medium);
+            }
+            .price {
+              font-size: var(--mediumSize) !important;
+              font-weight: var(--bold);
+              display: inline-block;
+              float: left;
+            }
+            .sale-perc {
+              display: inline-block;
+              font-size: var(--paragraphSize) !important;
+              font-weight: var(--semiBold);
+              padding-left: 5px;
+              color: var(--red);
+            }
             .woo-variation-items-wrapper {
               margin: 5px 0;
               .variable-items-wrapper {
+                .woocommerce-LoopProduct-link {
+                  display: flex;
+                }
                 li {
                   margin: 0 10px 0 0 !important;
                 }

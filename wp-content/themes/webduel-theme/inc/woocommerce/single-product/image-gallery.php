@@ -9,7 +9,6 @@ return false;
 // remove default product images
 // remove_action('woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 20); 
 
-
 // change breadcrumb location
 remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20, 0);
 add_action('woocommerce_before_single_product_summary', function(){ 

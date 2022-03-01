@@ -29,19 +29,49 @@ function productDescription(){
 }
 function productDetails(){
     global $product; 
-  
     $attributesArr = array(
-        'Brand Name'=> $product->get_attribute( 'pa_brand-name' ), 
-        'Collection'=> $product->get_attribute( 'pa_collection' ),
-        'Colour'=> $product->get_attribute('pa_colour'), 
-        'Design Name'=> $product->get_attribute( 'pa_design-name' ), 
-        'Design Style'=> $product->get_attribute( 'pa_design-style' ), 
-        'Pattern' => $product->get_attribute( 'pa_pattern' ), 
-        'Composition'=> $product->get_attribute('pa_composition'), 
-        'Construction'=> $product->get_attribute('pa_construction'), 
-        'Dimensions'=> $product->get_attribute('pa_dimensions'), 
-        'Dimensions'=> $product->get_attribute('pa_dimensions'), 
+        array(
+            'name'=> 'Brand Name', 
+            'value'=> $product->get_attribute( 'pa_brand-name' )
+        ),
+        array(
+            'name'=> 'Collection', 
+            'value'=>  $product->get_attribute( 'pa_collection' )
+        ),
+        array(
+            'name'=> 'Colour', 
+            'value'=>  $product->get_attribute( 'pa_colour' )
+        ), 
+        array(
+            'name'=> 'Design Name', 
+            'value'=>  $product->get_attribute( 'pa_design-name' )
+        ),
+        array(
+            'name'=> 'Design Style', 
+            'value'=>  $product->get_attribute( 'pa_design-style' )
+        )
+
     );
+    
+    foreach($product->get_attributes() as $key => $value){ 
+        if( $key !== 'pa_brand-name' 
+        && $key !== 'pa_collection' 
+        && $key !== 'pa_colour'
+        && $key !== 'pa_design-name'
+        && $key !== 'pa_design-style'
+        && $key !== 'pa_availability'
+        && $key !== 'pa_origin'
+        && $value['visible']
+        )
+        { 
+            array_push($attributesArr, array(
+                'name'=> wc_attribute_label( $key ), 
+                'value'=> $product->get_attribute( $value['name'])
+            )); 
+        }
+       
+    }
+   
 
     echo '
     <div class="item">
@@ -53,11 +83,11 @@ function productDetails(){
             <table class="woocommerce-product-attributes shop_attributes">
                 <tbody>'; 
                 foreach ($attributesArr as $key => $value) {
-                    if($value){ 
+                    if($value['value']){ 
                         echo '
                         <tr>
-                            <th class="woocommerce-product-attributes-item__label">'.$key.'</th>
-                            <td class="woocommerce-product-attributes-item__value">'.$value.'<td>
+                            <th class="woocommerce-product-attributes-item__label">'.$value['name'].'</th>
+                            <td class="woocommerce-product-attributes-item__value">'.$value['value'].'<td>
                         </tr>'; 
                     }
                    
@@ -82,3 +112,4 @@ function productShippingReturn(){
         </div> 
     </div>'; 
 }
+

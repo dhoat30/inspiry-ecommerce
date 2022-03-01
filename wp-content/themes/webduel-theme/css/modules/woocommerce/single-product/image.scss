@@ -36,11 +36,14 @@
       }
     }
     .variations {
-      margin: 20px 0 0 0;
+      margin: 20px 0 0 0 !important;
       label {
         color: var(--grey);
         letter-spacing: 0;
         margin: 0 !important;
+      }
+      .reset_variations {
+        display: none;
       }
     }
   }
