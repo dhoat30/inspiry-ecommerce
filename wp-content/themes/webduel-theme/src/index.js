@@ -16,10 +16,6 @@ import ToolTip from './modules/ToolTip';
 //pop up cart
 import PopUpCart from './modules/PopUpCart';
 
-
-// get product date
-import Product from './modules/Product';
-
 // Enquire Modal 
 import EnquiryModal from './modules/EnquiryModal/EnquiryModal'
 
@@ -85,8 +81,6 @@ window.onload = function () {
   const cartModal = new CartModal();
   // form data processing 
   const form = new Form();
-  //get product data and show in the quick view
-  const product = new Product();
 
   const shopFav = new ShopFav();
   const topnav = new TopNav();

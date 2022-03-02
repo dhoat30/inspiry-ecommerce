@@ -136,6 +136,8 @@
     <button>Dismiss</button>
   </div>
 </div>
+<!-- design board modal  -->
+<?php echo do_shortcode('[design_board_modal_code]');?>
 <?php wp_footer();?>
 
 </body>

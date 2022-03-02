@@ -45,7 +45,7 @@ add_action('woocommerce_single_product_summary', function(){
 
 
 // add deal information on single product page --------------------------------------
-add_action('woocommerce_single_variation', 'webduelModal', 10); 
+add_action('woocommerce_single_product_summary', 'webduelModal', 15); 
 
 function webduelModal(){ 
    if(is_product()){ 
@@ -306,3 +306,19 @@ function calculator_body(){
 </div>';
 }
 
+// single product page wishlist container and add brand name before title 
+add_action("woocommerce_single_product_summary", "single_product_page_title_start", 1); 
+
+function single_product_page_title_start(){ 
+ 
+    global $product; 
+    // find the brand name of the product
+    $brand = array_shift( wc_get_product_terms( $product->id, 'pa_brands', array( 'fields' => 'names' ) ) );
+
+    echo  '<div class="single-product-before-title-container">';
+        echo '<div class="brand-name">'; 
+        echo $brand; 
+        echo '</div>';
+        echo '<div class="design-board-container">'. do_shortcode('[design_board_button_code]').'</div>';
+    echo '</div>';
+}

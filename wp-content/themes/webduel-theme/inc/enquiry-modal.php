@@ -40,7 +40,7 @@ function add_enquiry_button(){
                                 <input class="checkbox" type="checkbox" id="newsletter" name="newsletter" value="No" >
                                 <label for="newsletter" class="paragraph-font-size thin"> Receive the latest news, events and special offers from Inspiry.</label>
                             </div>
-                            <button class="rm-txt-dec button btn-dk-green">Send</button>
+                            <button class="primary-button">Send</button>
                             
                         </form>
                     </div>

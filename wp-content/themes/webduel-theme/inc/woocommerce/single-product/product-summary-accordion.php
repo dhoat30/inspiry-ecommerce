@@ -59,7 +59,7 @@ function productDetails(){
         && $key !== 'pa_colour'
         && $key !== 'pa_design-name'
         && $key !== 'pa_design-style'
-        && $key !== 'pa_availability'
+        // && $key !== 'pa_availability'
         && $key !== 'pa_origin'
         && $value['visible']
         )

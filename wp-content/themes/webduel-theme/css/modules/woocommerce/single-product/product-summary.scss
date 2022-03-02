@@ -61,6 +61,16 @@
     font-size: var(--paragraphSize);
     margin: 5px 0;
   }
+  .single-product-before-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    .brand-name {
+      font-size: var(--paragraphSize);
+      text-transform: uppercase;
+      color: var(--grey);
+    }
+  }
 }
 
 // variable swatches

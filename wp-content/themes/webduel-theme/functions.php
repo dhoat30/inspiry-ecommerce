@@ -47,6 +47,7 @@ require get_theme_file_path('/inc/woocommerce/single-product/image-gallery.php')
 require get_theme_file_path('/inc/woocommerce/single-product/product-summary.php');
 require get_theme_file_path('/inc/woocommerce/single-product/related-products.php');
 require get_theme_file_path('/inc/woocommerce/single-product/ajax-operations.php');
+require get_theme_file_path('/inc/woocommerce/single-product/single-product-shortcode.php');
 // require get_theme_file_path('/inc/woocommerce/single-product/sample-button.php');
 
 require get_theme_file_path('/inc/woocommerce/single-product/product-summary-accordion.php');
@@ -70,6 +71,8 @@ require get_theme_file_path('/inc/short-codes/social-share.php');
 require get_theme_file_path('/inc/short-codes/related-products-shortcode.php');
 require get_theme_file_path('/inc/short-codes/archive-page-shortcode.php');
 
+// design board 
+require get_theme_file_path('/inc/design-board-modal/design-board-modal.php');
 
  //enqueue scripts
  function inspiry_scripts(){ 

@@ -16,7 +16,7 @@ function add_category_banner_webduel(){
                 <source media="(min-width:1366px)" srcset="'.$imageLarge[0].'">
                 <source media="(min-width:600px)" srcset="'.$imageLarge[0].'">
                 <img class="product-cat-banner"  loading="lazy" src="'.$imageMedium[0].'"
-                alt="<?php echo get_the_title();?>" width="100%" >
+                alt="'.get_the_title().'" width="100%" >
             </picture>
         </div>
             '; 
@@ -38,7 +38,7 @@ function add_category_banner_webduel(){
             <source media="(min-width:1366px)" srcset="'.$tagImage[0].'">
             <source media="(min-width:600px)" srcset="'.$tagImage[0].'">
             <img class="product-cat-banner"  loading="lazy" src="'.$tagImageMobile[0].'"
-            alt="<?php echo get_the_title();?>" width="100%" >
+            alt="'.get_the_title().'" width="100%" >
             </picture>'; 
         }
 }

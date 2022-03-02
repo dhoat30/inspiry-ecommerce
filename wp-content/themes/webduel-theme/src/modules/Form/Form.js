@@ -14,19 +14,18 @@ class Form {
 
     enquiryFormProcessor(e) {
         let dataObj = this.getFormData(e, '#enquiry-form');
-        this.sendMailchimpReq(dataObj, 'wp-json/inspiry/v1/enquiry-mailchimp')
+        // this.sendMailchimpReq(dataObj, 'wp-json/inspiry/v1/enquiry-mailchimp')
         this.sendRequest(dataObj, 'wp-json/inspiry/v1/enquiry-email', '#enquiry-form')
     }
     // send data to mailchimp 
     sendMailchimpReq(dataObj, fileName, formID) {
-
         const jsonData = JSON.stringify(dataObj);
         let xhr = new XMLHttpRequest();
         let url = window.location.hostname;
         let filePath;
 
-        if (url === 'localhost') {
-            filePath = `/inspirynew/${fileName}`
+        if (url === 'inspiry.local') {
+            filePath = `http://inspiry.local/${fileName}`
         }
         else {
             filePath = `https://inspiry.co.nz/${fileName}`
@@ -47,7 +46,16 @@ class Form {
     // send request function
     sendRequest(dataObj, fileName, formID) {
         // change button to loading icon
-        $('#enquiry-form .button').html('<div class="loader-icon loader--visible"></div>')
+        $('#enquiry-form button').html('<div class="loader-icon loader--visible"></div>')
+        let filePath;
+        let url = window.location.hostname;
+
+        if (url === 'inspiry.local') {
+            filePath = `http://inspiry.local/${fileName}`
+        }
+        else {
+            filePath = `https://inspiry.co.nz/${fileName}`
+        }
 
         const jsonData = JSON.stringify(dataObj);
         let xhr = new XMLHttpRequest();
@@ -61,11 +69,11 @@ class Form {
             // remove loader icon
             // $('.loader-icon').remove()
             // show button
-            $('#enquiry-form .button').html("Sent")
+            $('#enquiry-form button').html("Sent")
 
             $(`${formID} p`).html('');
             if (xhr.status == 200) {
-
+                console.log(xhr)
                 $($(formID).prop('elements')).each(function (i) {
                     if (this.value !== 'Submit') {
                         this.value = "";

@@ -30,6 +30,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     column-gap: 40px;
+    justify-content: center;
+
     .woocommerce-NoticeGroup {
       width: 100%;
       grid-column: 1/4;
@@ -39,7 +41,7 @@
       flex-direction: column;
       grid-column: 1/3;
       @media (max-width: 800px) {
-        grid-column: 1/4;
+        grid-column: 1/5;
       }
       .col-1 {
         width: 100%;
@@ -59,7 +61,7 @@
     .summary-payment {
       grid-column: 3/4;
       @media (max-width: 800px) {
-        grid-column: 1/4;
+        grid-column: 1/5;
       }
       .total-summary {
         margin: 0 0 20px 0 !important;
@@ -91,6 +93,7 @@
       #pay-button {
         display: block;
         width: 100%;
+        margin-bottom: 10px;
         i {
           color: white;
           margin-right: 5px;

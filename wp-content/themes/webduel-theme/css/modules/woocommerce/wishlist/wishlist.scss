@@ -151,9 +151,10 @@
 .wishlist-container .copy-trigger {
   border: 1px solid var(--darkGrey);
   font-family: var(--playfairDisplay);
-  padding: 7px 30px 9px 30px;
+  padding: 9px 30px 9px 30px;
   display: inline-block;
   margin-left: -5px;
+
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -169,31 +170,54 @@
   }
 }
 
-/* wishlist buttons  */
-
+/* wishlist share buttons  */
+.share-button a i {
+  color: white;
+}
 /*wishlist and design board*/
 .wishlist-designer-board-container {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  .design-board-save-btn-container {
+    background-color: var(--beige);
+    position: relative;
+    width: 35px;
+    height: 35px;
+    border-radius: 50% !important;
+    padding: 8px 5px 3px 8px !important;
+    i {
+      margin-right: 0;
+      font-size: 1.2rem;
+      position: absolute;
+      color: var(--red);
+      left: 50%;
+      top: 52%;
+      transform: translate(-50%, -50%) !important;
+      line-height: 0;
+    }
+  }
+  .yith-wcwl-add-button {
+    .add_to_wishlist {
+      background: var(--beige) !important;
+      position: relative;
+      width: 35px;
+      height: 35px;
+      border-radius: 50% !important;
+      padding: 8px 5px 3px 8px !important;
+      i {
+        margin-right: 0;
+        font-size: 1.2rem;
+        position: absolute;
+        color: var(--red);
+        left: 50%;
+        top: 52%;
+        transform: translate(-50%, -50%) !important;
+      }
+    }
+  }
 }
 .yith-wcwl-add-to-wishlist {
   margin-top: 0 !important;
   margin-left: 5px;
-}
-.yith-wcwl-add-to-wishlist .single_add_to_wishlist i {
-  margin-right: 0;
-  font-size: 17px;
-  position: absolute;
-  color: var(--red);
-  right: 5.5px;
-}
-.yith-wcwl-add-to-wishlist .single_add_to_wishlist {
-  width: 30px;
-  height: 30px;
-  position: relative;
-}
-.yith-wcwl-add-to-wishlist .single_add_to_wishlist {
-  border-radius: 50% !important;
-  padding: 8px 5px 3px 8px !important;
 }
