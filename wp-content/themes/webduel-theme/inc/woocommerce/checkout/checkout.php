@@ -77,10 +77,9 @@ function webduel_order_review(){
                         <li class="title">Total: </li>
                         <li class="amount"><?php echo WC()->cart->get_total();?> </li>
                     </ul>
-                
             </div>
         </div>
-        <button class="primary-button" id="pay-button"><i class="fa-regular fa-lock-keyhole"></i>Pay Securely Now</button>
+        <button class="primary-button" id="pay-button" disabled><i class="fa-regular fa-lock-keyhole"></i>Pay Securely Now</button>
 
     <?php 
 } 

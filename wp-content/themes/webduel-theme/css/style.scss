@@ -19,6 +19,8 @@
 @import "modules/about-us";
 @import "modules/loader";
 
+// design boards
+@import "modules/design-boards/design-boards";
 // /*pages */
 
 @import "modules/page";
@@ -515,6 +517,13 @@ h3 {
   z-index: 10;
   background-color: rgba(255, 255, 255, 0.8);
   display: none;
+  i {
+    position: fixed;
+    font-size: 1.3rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 .foreground-loader {
   position: absolute;
@@ -722,4 +731,11 @@ h3 {
 /* or element */
 .or-element {
   width: 100%;
+}
+// button disabled
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
 }

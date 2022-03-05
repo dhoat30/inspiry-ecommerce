@@ -3,6 +3,7 @@ import Windcave from "./Windcave";
 const $ = jQuery
 class Checkout {
     constructor() {
+        $(":submit").removeAttr("disabled");
         this.onPaymentSelectionChange
         this.windcavePaymentSelected = $("input[type='radio'][name='payment_method']:checked").val();
         this.events()
@@ -28,6 +29,7 @@ class Checkout {
 
         // try again button click
         $(document).on('click', '.error-modal button', this.showWindcaveIFrameOnErrorButtonClick)
+
 
     }
     showPaymentOptions(e) {
@@ -86,18 +88,18 @@ class Checkout {
                 // check if the terms and conditions is checked 
                 let termsConditionsCheckbox = $('.validate-required .woocommerce-form__input-checkbox')
                 // check if the validation is true
-                if (termsConditionsCheckbox.is(':checked')) {
-                    $('.payment-gateway-container').show();
-                    $('.overlay').show();
-                    const windcave = new Windcave()
-                }
-                else if (!termsConditionsCheckbox.is(':checked')) {
-                    $('#payment').append(`<div class="error">*Please check the terms & conditions</div>`)
-                }
+                $('.payment-gateway-container').show();
+                $('.overlay').show();
+                const windcave = new Windcave()
+                // if (termsConditionsCheckbox.is(':checked')) {
+
+                // }
+                // else if (!termsConditionsCheckbox.is(':checked')) {
+                //     $('#payment').append(`<div class="error">*Please check the terms & conditions</div>`)
+                // }
             }
             else {
                 $(document).off('.validator');
-                console.log('hello')
             }
         })
     }

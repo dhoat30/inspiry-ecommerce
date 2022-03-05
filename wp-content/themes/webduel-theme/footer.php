@@ -137,7 +137,8 @@
   </div>
 </div>
 <!-- design board modal  -->
-<?php echo do_shortcode('[design_board_modal_code]');?>
+<?php 
+do_action( 'design_board_modal_hook' ); ?>
 <?php wp_footer();?>
 
 </body>

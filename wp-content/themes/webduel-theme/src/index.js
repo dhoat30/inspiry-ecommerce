@@ -49,6 +49,13 @@ import Coupon from './modules/Woocommerce/Cart/Coupon'
 import ErrorModal from "./modules/ErrorModal/ErrorModal";
 import Checkout from "./modules/Woocommerce/Checkout/Checkout";
 let $ = jQuery;
+$(document).on('click', '.ppc-button', () => {
+  console.log('this is paypal')
+})
+$(document).on('click', '.paypal-button', () => {
+  console.log('this is paypal ')
+})
+
 // add to cart and remove from cart class 
 const popUpCart = new PopUpCart();
 
@@ -70,9 +77,11 @@ const cart = new Cart()
 const coupon = new Coupon()
 // modals 
 const errorModal = new ErrorModal()
-
+// design board save button 
+const designBoardSaveBtn = new DesignBoardSaveBtn();
 
 window.onload = function () {
+
   // checkout 
   const checkout = new Checkout()
   // enquiry modal 
@@ -85,7 +94,6 @@ window.onload = function () {
   const shopFav = new ShopFav();
   const topnav = new TopNav();
   const overlay = new Overlay();
-  const designBoardSaveBtn = new DesignBoardSaveBtn();
 
 
 

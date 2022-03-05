@@ -94,27 +94,28 @@ add_action('woocommerce_before_cart', function(){
                                         }
                                         ?>
                                     </div>
-                                    <div class="availability-container">
+                                    <!-- uncomment once all the product are uploaded -->
+                                    <!-- <div class="availability-container">
                                         
                                         <div class="availability">
                                             <i class="fa-solid fa-cube"></i>
                                             Availability: 
                                             <span>
                                                 <?php 
-                                                if( $availability['class']=== 'in-stock'){ 
-                                                    echo "In stock"; 
-                                                }
-                                                else{ 
-                                                echo "Pre order";
-                                                }
+                                                // if( $availability['class']=== 'in-stock'){ 
+                                                //     echo "In stock"; 
+                                                // }
+                                                // else{ 
+                                                // echo "Pre order";
+                                                // }
                                                     
                                                 ?>
                                             </span>
                                         </div>
                                         <div class="arrives">
-                                            Arrives: <span> <?php echo $delivery;?></span>
+                                            Arrives: <span> <?php //echo $delivery;?></span>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </td>
                                 <td class="quantity-column" >
                                     <div class="quantity-container"> 
@@ -230,27 +231,27 @@ add_action('woocommerce_before_cart', function(){
                                                 ?>
                                             </div>
                                         </div>
-                                        <div class="availability-container">
+                                        <!-- <div class="availability-container">
                                             
                                             <div class="availability">
                                                 <i class="fa-solid fa-cube"></i>
                                                 Availability: 
                                                 <span>
                                                     <?php 
-                                                    if( $availability['class']=== 'in-stock'){ 
-                                                        echo "In stock"; 
-                                                    }
-                                                    else{ 
-                                                    echo "Pre order";
-                                                    }
+                                                    // if( $availability['class']=== 'in-stock'){ 
+                                                    //     echo "In stock"; 
+                                                    // }
+                                                    // else{ 
+                                                    // echo "Pre order";
+                                                    // }
                                                         
                                                     ?>
                                                 </span>
                                             </div>
                                             <div class="arrives">
-                                                Arrives: <span> <?php echo $delivery;?></span>
+                                                Arrives: <span> <?php //echo $delivery;?></span>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 
                                 </td>
@@ -336,7 +337,7 @@ add_action('woocommerce_before_cart', function(){
             <?php 
                    }?>
             <!-- checkout button -->
-            <a href="<?php echo wc_get_checkout_url();?>" class="primary-button checkout-btn">CHECKOUT NOW</a>
+            <a href="<?php echo wc_get_checkout_url();?>" class="primary-button cart-checkout-btn">CHECKOUT NOW</a>
         </div>
     <!-- closing the div of above hook -->
     </div>

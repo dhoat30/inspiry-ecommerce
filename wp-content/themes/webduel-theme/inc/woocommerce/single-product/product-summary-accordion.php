@@ -35,6 +35,10 @@ function productDetails(){
             'value'=> $product->get_attribute( 'pa_brand-name' )
         ),
         array(
+            'name'=> 'Brand Name', 
+            'value'=> $product->get_attribute( 'pa_brands' )
+        ),
+        array(
             'name'=> 'Collection', 
             'value'=>  $product->get_attribute( 'pa_collection' )
         ),
@@ -55,6 +59,7 @@ function productDetails(){
     
     foreach($product->get_attributes() as $key => $value){ 
         if( $key !== 'pa_brand-name' 
+        && $key !== 'pa_brands' 
         && $key !== 'pa_collection' 
         && $key !== 'pa_colour'
         && $key !== 'pa_design-name'

@@ -131,3 +131,5 @@ function wc_track_product_view_always() {
 
 remove_action('template_redirect', 'wc_track_product_view', 20);
 add_action( 'template_redirect', 'wc_track_product_view_always', 20 );
+
+// paypal code 
