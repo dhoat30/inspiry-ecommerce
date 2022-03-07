@@ -90,7 +90,7 @@ function wc_offline_gateway_init() {
 			$this->has_fields         = true;
 			$this->method_title       = __( 'Windcave', 'wc-gateway-windcave' );
 			$this->method_description = __( 'Allows Windcave payments.', 'wc-gateway-windcave' );
-        
+        	$this->sessionID = ''; 
 			// Load the settings.
 			$this->init_form_fields();
 			$this->init_settings();
@@ -153,7 +153,7 @@ function wc_offline_gateway_init() {
 				),
 			) );
 		}
-	
+		
 	
 		/**
 		 * Add content to the WC emails.
@@ -177,11 +177,79 @@ function wc_offline_gateway_init() {
             if ( ! is_cart() && ! is_checkout() && ! isset( $_GET['pay_for_order'] ) OR str_contains($actualLink, 'order-received') ) {
                 return;
             }
-        
+			// if our payment gateway is disabled, we do not have to enqueue JS too
+			if ( 'no' === $this->enabled ) {
+				return;
+			}
+			 // get order details
+			 $totalAmount = WC()->cart->total; 
+			
+					// setting up environment variables 
+					$sessionUrl = ""; 
+					$authKey = ""; 
+					if(get_site_url() === "https://inspiry.local"){ 
+						$sessionUrl = "https://uat.windcave.com/api/v1/sessions/"; 
+						$authKey = "Basic SW5zcGlyeV9SZXN0OmI0NGFiMjZmOWFkNzIwNDQ4OTc0MGQ1YWM3NmE5YzE2ZDgzNDJmODUwYTRlYjQ1NTc1NmRiNDgyYjFiYWVjMjk="; 
+					}
+					else{ 
+						$sessionUrl = "https://sec.windcave.com/api/v1/sessions/"; 
+						$authKey = "Basic SW5zcGlyeUxQOmRkYzdhZDg2ZDQ0NDA3NDk3OTNkZWM1OWU5YTk1MmI4ODU3ODlkM2Q0OGE2MzliODMwZWI0OTJhNjAyYmNhNjM=";
+					}
+			 // https request to windcave to create a session 
+			 $ch = curl_init();
+			 curl_setopt($ch, CURLOPT_URL, $sessionUrl);
+			 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+			 curl_setopt($ch, CURLOPT_HEADER, FALSE);
+		  
+			 curl_setopt($ch, CURLOPT_POST, TRUE);
+		  
+			 curl_setopt($ch, CURLOPT_POSTFIELDS, "{
+			 \"type\": \"purchase\",
+			 \"methods\": [
+				\"card\"
+			 ],
+			 \"amount\": \"$totalAmount\",
+			 \"currency\": \"NZD\",
+			 \"callbackUrls\": {
+				\"approved\": \"https://localhost/success\",
+				\"declined\": \"https://localhost/failure\"
+			 }
+			 }");
+		  
+			 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			 "Content-Type: application/json",
+			 "Authorization:".$authKey."" 
+			 ));
+		
+			 $response = curl_exec($ch);
+			 $obj = json_decode($response);
+			 $this->sessionID = $obj->id;
+			 $selected_payment_method_id = WC()->session->get( 'chosen_payment_method' );
+
+			// let's suppose it is our payment processor JavaScript that allows to obtain a token
+			wp_enqueue_script( 'windcave_webduel_js', 'https://dev.windcave.com/js/windcavepayments-seamless-v1.js' );
+			// and this is our custom JS in your plugin directory that works with token.js
+			wp_register_script( 'woocommerce_webduel', plugins_url( 'misha.js', __FILE__ ), array( 'jquery', 'windcave_webduel_js' ) );
+
+			// in most payment processors you have to use PUBLIC KEY to obtain a token
+			wp_localize_script( 'woocommerce_webduel', 'webduel_params', array(
+				'windcaveObj'=> $obj, 
+				"root_url" => get_site_url(),
+      			"nonce" => wp_create_nonce("wp_rest")
+			) );
+
+			wp_enqueue_script( 'woocommerce_webduel' );
          
         }
 
-
+		public function payment_fields(){ 
+			?>
+			<div class="windcave-description">Pay with your Credit or Debit Card via Windcave.</div>
+			<div id="windcave-custom-container"></div>
+			<div class="primary-button windcave-submit-button"> Submit</div>
+			<input id="windcave_session_id" name="windcave_session_id" type="text" value="" hidden/> 
+			<?php
+		}
         /**
         * Output for the order received page.
         */
@@ -198,22 +266,68 @@ function wc_offline_gateway_init() {
 		public function process_payment( $order_id ) {
 
             global $woocommerce;
-        
-            // we need it to get any order detailes
-            $order = wc_get_order( $order_id );
+			$sessionID = $_POST['windcave_session_id']; 
+  
+					// setting up environment variables 
+					$sessionUrl = ""; 
+					$authKey = ""; 
+					if(get_site_url() === "https://inspiry.local"){ 
+						$sessionUrl = "https://uat.windcave.com/api/v1/sessions/"; 
+						$authKey = "Basic SW5zcGlyeV9SZXN0OmI0NGFiMjZmOWFkNzIwNDQ4OTc0MGQ1YWM3NmE5YzE2ZDgzNDJmODUwYTRlYjQ1NTc1NmRiNDgyYjFiYWVjMjk="; 
+					}
+					else{ 
+						$sessionUrl = "https://sec.windcave.com/api/v1/sessions/"; 
+						$authKey = "Basic SW5zcGlyeUxQOmRkYzdhZDg2ZDQ0NDA3NDk3OTNkZWM1OWU5YTk1MmI4ODU3ODlkM2Q0OGE2MzliODMwZWI0OTJhNjAyYmNhNjM=";
+					}
+				
+					
+				$curl = curl_init();
+				
+				curl_setopt_array($curl, array(
+					CURLOPT_URL =>$sessionUrl.$sessionID,
+					CURLOPT_RETURNTRANSFER => true,
+					CURLOPT_ENCODING => '',
+					CURLOPT_MAXREDIRS => 10,
+					CURLOPT_TIMEOUT => 0,
+					CURLOPT_FOLLOWLOCATION => true,
+					CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+					CURLOPT_CUSTOMREQUEST => 'GET',
+					CURLOPT_HTTPHEADER => array(
+					'Content-Type: application/json',
+					"Authorization:".$authKey."" 
+					),
+				));
+				
+				$response = curl_exec($curl);
+				
+				curl_close($curl);
+			
+				$sessionObj = json_decode($response);
+				if($sessionObj->transactions[0]->authorised){ 
 
-                // Mark as on-hold (we're awaiting the payment)
-                $order->update_status( 'processing', __( 'Payment Received', 'wc-gateway-windcave' ) );
-              
-                
-                // Remove cart
-                WC()->cart->empty_cart();
-                // and this is our custom JS in your plugin directory that works with token.js
-                // Redirect to the thank you page
-                return array(
-                    'result' => 'success',
-                    'redirect' => $this->get_return_url( $order )
-                );
+						// we need it to get any order detailes
+						$order = wc_get_order( $order_id );
+
+							// Mark as on-hold (we're awaiting the payment)
+							$order->update_status( 'processing', __( 'Payment Received', 'wc-gateway-windcave' ) );
+						
+							// Remove cart
+							WC()->cart->empty_cart();
+							// and this is our custom JS in your plugin directory that works with token.js
+							// Redirect to the thank you page
+							return array(
+								'result' => 'success',
+								'redirect' => $this->get_return_url( $order )
+							);
+				}
+				else {
+				
+					wc_add_notice(  $sessionObj->transactions[0]->responseText, 'error' );
+
+					return;
+				}
+
+			
 
 		}
 	

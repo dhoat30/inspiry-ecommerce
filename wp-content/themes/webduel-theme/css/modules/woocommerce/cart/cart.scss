@@ -53,6 +53,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    margin-bottom: 50px;
     @media (max-width: 1100px) {
       flex-direction: column;
     }

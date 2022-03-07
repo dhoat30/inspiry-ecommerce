@@ -79,11 +79,12 @@ const coupon = new Coupon()
 const errorModal = new ErrorModal()
 // design board save button 
 const designBoardSaveBtn = new DesignBoardSaveBtn();
+// checkout 
+const checkout = new Checkout()
 
 window.onload = function () {
 
-  // checkout 
-  const checkout = new Checkout()
+
   // enquiry modal 
   const enquiryModal = new EnquiryModal();
   // cart modal 

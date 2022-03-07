@@ -130,7 +130,6 @@ class Windcave {
                 error: (response) => {
                     console.log('this is a board error');
                     console.log(response)
-
                 }
             })
         }

@@ -215,13 +215,16 @@
   position: relative;
   height: 350px;
 }
-.payment-gateway-container button {
-  background: #ee1c25;
+.windcave-submit-button {
+  background: #ee1c25 !important;
   color: white;
   padding: 10px 20px;
   width: 200px;
   margin: 0 auto;
   display: block;
+  text-align: center;
+  border: none !important;
+  display: none;
 }
 @media (max-width: 350px) {
   .payment-gateway-container {
@@ -253,4 +256,12 @@ input.DpsField {
 #payment .error {
   padding: 0 20px 10px 20px;
   margin: 0;
+}
+
+// windcave container
+#windcave-custom-container {
+  iframe {
+    height: 350px;
+    overflow: hidden !important;
+  }
 }

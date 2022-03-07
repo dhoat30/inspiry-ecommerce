@@ -26,7 +26,9 @@ add_action( 'woocommerce_after_shop_loop_item', 'remove_add_to_cart_buttons', 1 
       }
     }
 
-
+// remove product anchor tag and add it right under the thumbnail
+remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
+add_action('woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_link_close', 5 );
 // woocommerce variations 
 
 add_action('woocommerce_shop_loop_item_title', 'wvs_pro_archive_variation_template', 5); 
@@ -42,7 +44,7 @@ add_action('woocommerce_shop_loop_item_title', function() {
    ?> 
    </a>
    <?php 
-}, 20); 
+}, 30); 
 
 // add product attributes on product loop product page
 add_action("woocommerce_after_shop_loop_item_title", "add_product_attributes", 1); 

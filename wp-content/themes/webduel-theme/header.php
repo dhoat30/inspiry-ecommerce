@@ -43,8 +43,8 @@
         <noscript><img height="1" width="1" style="display:none"
         src="https://www.facebook.com/tr?id=828264374302518&ev=PageView&noscript=1"
         /></noscript>
-<!-- End Facebook Pixel Code -->
-<?php 
+    <!-- End Facebook Pixel Code -->
+    <?php 
     // get user email address 
     $pinterestUserEmail; 
     if(is_user_logged_in()){ 
@@ -52,9 +52,8 @@
         $pinterestUserEmail = $current_user->user_email; 
         $hashedPinterestEmail = wp_hash($pinterestUserEmail); 
     }
-   
     ?>
-<!-- pinterest Tag -->
+    <!-- pinterest Tag -->
         <!-- Pinterest Tag -->
         <script>
         !function(e){if(!window.pintrk){window.pintrk = function () {
