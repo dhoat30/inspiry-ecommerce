@@ -311,9 +311,19 @@ register_post_type("trade-professionals", array(
 
 add_action("init", "register_custom_type2"); 
 
-
-//custom taxonomy
+//Banner taxonomy
 function wpdocs_register_private_taxonomy() {
+
+   // banner taxonomy 
+   $argsBanner = array(
+      'label'        => __( 'Banner Categories', 'textdomain' ),
+      'public'       => true,
+      'rewrite'      => true,
+      'hierarchical' => true,
+      'show_in_rest' => true
+  );
+   
+  register_taxonomy( 'banners_categories', 'banners', $argsBanner );
 
    // project taxonomy 
    $argsProject = array(
@@ -333,9 +343,9 @@ function wpdocs_register_private_taxonomy() {
    'rewrite'      => true,
    'hierarchical' => true,
    'show_in_rest' => true
-);
+   );
 
-register_taxonomy( 'trade_professional_categories', 'trade-professionals', $ardsTradeProfessional );
+   register_taxonomy( 'trade_professional_categories', 'trade-professionals', $ardsTradeProfessional );
 
  // trade professional taxonomy  Tag
  $ardsTradeProfessional = array(
@@ -343,17 +353,17 @@ register_taxonomy( 'trade_professional_categories', 'trade-professionals', $ards
    'public'       => true,
    'rewrite'      => true,
    'show_in_rest' => true
-);
+   );
 
-register_taxonomy( 'trade_professional_tags', 'trade-professionals', $ardsTradeProfessional );
+   register_taxonomy( 'trade_professional_tags', 'trade-professionals', $ardsTradeProfessional );
 
-   // covid taxonomy 
-   $argsModal = array(
-      'label'        => __( 'Modal Categories', 'textdomain' ),
-      'public'       => true,
-      'rewrite'      => true,
-      'hierarchical' => true
-  );
+      // covid taxonomy 
+      $argsModal = array(
+         'label'        => __( 'Modal Categories', 'textdomain' ),
+         'public'       => true,
+         'rewrite'      => true,
+         'hierarchical' => true
+   );
    
   register_taxonomy( 'modal-categories', 'modal', $argsModal );
 
@@ -376,56 +386,56 @@ register_taxonomy( 'trade_professional_tags', 'trade-professionals', $ardsTradeP
    
   register_taxonomy( 'blog-category', 'blogs', $argsBlog );
 
-//   taxonomy for Typewriter effect
-$argsTypewriter = array(
-   'label'        => __( 'Typewriter Categories', 'textdomain' ),
-   'public'       => true,
-   'rewrite'      => true,
-   'hierarchical' => true,
-   'show_in_rest' => true
-);
-register_taxonomy( 'typewriter-category', 'typewriter_effect', $argsTypewriter );
+   //   taxonomy for Typewriter effect
+   $argsTypewriter = array(
+      'label'        => __( 'Typewriter Categories', 'textdomain' ),
+      'public'       => true,
+      'rewrite'      => true,
+      'hierarchical' => true,
+      'show_in_rest' => true
+   );
+   register_taxonomy( 'typewriter-category', 'typewriter_effect', $argsTypewriter );
 
 
-//   taxonomy for sliders
-$argsSliders = array(
-   'label'        => __( 'Slider Categories', 'textdomain' ),
-   'public'       => true,
-   'rewrite'      => true,
-   'show_in_rest' => true,
-   'hierarchical' => true,
-);
-register_taxonomy( 'slider-category', 'sliders', $argsSliders );
+   //   taxonomy for sliders
+   $argsSliders = array(
+      'label'        => __( 'Slider Categories', 'textdomain' ),
+      'public'       => true,
+      'rewrite'      => true,
+      'show_in_rest' => true,
+      'hierarchical' => true,
+   );
+   register_taxonomy( 'slider-category', 'sliders', $argsSliders );
 
-//   taxonomy for tri images
-$argsTriImages = array(
-   'label'        => __( 'Tri Images Categories', 'textdomain' ),
-   'public'       => true,
-   'rewrite'      => true,
-   'show_in_rest' => true,
-   'hierarchical' => true,
-);
-register_taxonomy( 'tri-Images-category', 'tri-images', $argsTriImages );
+   //   taxonomy for tri images
+   $argsTriImages = array(
+      'label'        => __( 'Tri Images Categories', 'textdomain' ),
+      'public'       => true,
+      'rewrite'      => true,
+      'show_in_rest' => true,
+      'hierarchical' => true,
+   );
+   register_taxonomy( 'tri-Images-category', 'tri-images', $argsTriImages );
 
-//   taxonomy for home page cards
-$argsHomePageCards = array(
-   'label'        => __( 'Home Page Card Categories', 'textdomain' ),
-   'public'       => true,
-   'rewrite'      => true,
-   'show_in_rest' => true,
-   'hierarchical' => true,
-);
-register_taxonomy( 'home-page-card-category', 'homepage-cards', $argsHomePageCards );
+   //   taxonomy for home page cards
+   $argsHomePageCards = array(
+      'label'        => __( 'Home Page Card Categories', 'textdomain' ),
+      'public'       => true,
+      'rewrite'      => true,
+      'show_in_rest' => true,
+      'hierarchical' => true,
+   );
+   register_taxonomy( 'home-page-card-category', 'homepage-cards', $argsHomePageCards );
 
-//   taxonomy for Videos
-$argsVideos = array(
-   'label'        => __( 'Video Category', 'textdomain' ),
-   'public'       => true,
-   'rewrite'      => true,
-   'show_in_rest' => true,
-   'hierarchical' => true,
-);
-register_taxonomy( 'video-category', 'videos', $argsVideos );
+   //   taxonomy for Videos
+   $argsVideos = array(
+      'label'        => __( 'Video Category', 'textdomain' ),
+      'public'       => true,
+      'rewrite'      => true,
+      'show_in_rest' => true,
+      'hierarchical' => true,
+   );
+   register_taxonomy( 'video-category', 'videos', $argsVideos );
 
 
 

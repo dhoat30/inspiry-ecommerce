@@ -122,7 +122,9 @@ body {
 h3 {
   font-family: var(--openSans) !important;
 }
-
+h1 {
+  margin: 0 !important;
+}
 /*flex container*/
 .flex-row {
   display: flex;

@@ -3,15 +3,12 @@
  function inspiry_config(){ 
     register_nav_menus( 
        array(
-          "my-account-nav-top" => "My Account Top Navbar",
+         "my-account-nav-top" => "My Account Top Navbar",
            "top-navbar" => "Top Navbar (under logo)",
           "inspiry_main_menu" => "Inspiry Main Menu",
-          "inspiry_footer_menu" => "Inspiry Footer Menu", 
-          "footer-trade-menu" => "Footer Trade Menu", 
+          "footer-services" => "Footer Services", 
           "footer-help-info" => "Footer Help & info", 
-          "footer-ideas-inspiration" => "Footer Ideas & Inspiration", 
           "footer-store" => "Footer Store", 
-          "footer-ways-to-shop" => "Footer Ways To Shop",
           "customer-service-sidebar" => "Customer Service Sidebar"
        )
        );  

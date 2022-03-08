@@ -27,11 +27,7 @@ class EveryOwlCarousel {
         // // owl carousel 
 
         let className = '.banner-container .owl-carousel';
-
-
         let args = {
-
-
             lazyLoad: true,
             autoplay: true,
             autoplayTimeout: 5000,
@@ -42,7 +38,6 @@ class EveryOwlCarousel {
             responsive: {
                 0: {
                     items: 1,
-
                     dots: false
                 }
 
