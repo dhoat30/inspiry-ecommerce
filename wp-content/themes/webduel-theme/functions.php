@@ -70,6 +70,7 @@ require get_theme_file_path('/inc/woocommerce/cart/google-analytics-cart.php');
 require get_theme_file_path('/inc/short-codes/social-share.php');
 require get_theme_file_path('/inc/short-codes/related-products-shortcode.php');
 require get_theme_file_path('/inc/short-codes/archive-page-shortcode.php');
+require get_theme_file_path('/inc/short-codes/general-shortcodes.php');
 
 // design board 
 require get_theme_file_path('/inc/design-board-modal/design-board-modal.php');

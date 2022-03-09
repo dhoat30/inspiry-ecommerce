@@ -2088,6 +2088,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_Woocommerce_Cart_Coupon__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./modules/Woocommerce/Cart/Coupon */ "./src/modules/Woocommerce/Cart/Coupon.js");
 /* harmony import */ var _modules_ErrorModal_ErrorModal__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./modules/ErrorModal/ErrorModal */ "./src/modules/ErrorModal/ErrorModal.js");
 /* harmony import */ var _modules_Woocommerce_Checkout_Checkout__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./modules/Woocommerce/Checkout/Checkout */ "./src/modules/Woocommerce/Checkout/Checkout.js");
+/* harmony import */ var _modules_Header__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./modules/Header */ "./src/modules/Header.js");
  // form 
 
  // owl carousel 
@@ -2127,6 +2128,8 @@ __webpack_require__.r(__webpack_exports__);
 // modals 
 
 
+ // header 
+
 
 let $ = jQuery;
 $(document).on('click', '.ppc-button', () => {
@@ -2155,7 +2158,9 @@ const errorModal = new _modules_ErrorModal_ErrorModal__WEBPACK_IMPORTED_MODULE_2
 
 const designBoardSaveBtn = new _modules_DesignBoardSaveBtn__WEBPACK_IMPORTED_MODULE_5__["default"](); // checkout 
 
-const checkout = new _modules_Woocommerce_Checkout_Checkout__WEBPACK_IMPORTED_MODULE_26__["default"]();
+const checkout = new _modules_Woocommerce_Checkout_Checkout__WEBPACK_IMPORTED_MODULE_26__["default"](); // header 
+
+const header = new _modules_Header__WEBPACK_IMPORTED_MODULE_27__["default"]();
 
 window.onload = function () {
   // enquiry modal 
@@ -3051,6 +3056,36 @@ class GeneralFormProcessor {
 
 /***/ }),
 
+/***/ "./src/modules/Header.js":
+/*!*******************************!*\
+  !*** ./src/modules/Header.js ***!
+  \*******************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+const $ = jQuery;
+
+class Header {
+  constructor() {
+    this.events();
+  }
+
+  events() {
+    $('.useful-links-container .sign-in-container').hover(this.showSignInModal);
+  }
+
+  showSignInModal() {
+    console.log('show modal');
+    $('.useful-links-container .sign-in-modal').toggle();
+  }
+
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Header);
+
+/***/ }),
+
 /***/ "./src/modules/OwlCarousel/EveryOwlCarousel.js":
 /*!*****************************************************!*\
   !*** ./src/modules/OwlCarousel/EveryOwlCarousel.js ***!
@@ -3303,7 +3338,7 @@ class PopUpCart {
     $('.variable-item').on('click', () => {
       let formData = $('form.cart').data('product_variations');
     });
-    $('.header .shopping-cart .cart-items-header').on('click', this.openCart);
+    $('.header .shopping-cart').on('click', this.openCart);
     $(document).on('click', '.cart-box .cont-shopping a', this.closeCart);
     $(document).on('click', '.dark-overlay', this.closeCart);
     $(document).on('click', '.cart-popup-container .title-section i', this.closeCart); // $('.cart-popup-container .fa-times').on('click', this.closeCart)

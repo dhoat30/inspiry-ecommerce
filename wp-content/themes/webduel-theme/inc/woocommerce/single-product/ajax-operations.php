@@ -37,7 +37,7 @@ function woocommerce_ajax_add_to_cart() {
         global $woocommerce;
         ob_start();
         ?>
-        <span class="cart-item-count">Cart (<?php echo WC()->cart->get_cart_contents_count(); ?>)</span>
+        <span class="cart-item-count"><?php echo WC()->cart->get_cart_contents_count(); ?></span>
         <?php
         $fragments['span.cart-item-count'] = ob_get_clean();
         return $fragments;

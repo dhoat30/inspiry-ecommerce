@@ -50,10 +50,7 @@ class EveryOwlCarousel {
         // // owl carousel 
         // $('.single-product .flex-control-thumbs').addClass('splide');
         let className = '.woocommerce-product-gallery .owl-carousel';
-
-
         let args = {
-
             margin: 20,
             autoplay: true,
             autoplayTimeout: 2000,

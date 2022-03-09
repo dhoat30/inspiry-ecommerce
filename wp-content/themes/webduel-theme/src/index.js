@@ -48,6 +48,10 @@ import Coupon from './modules/Woocommerce/Cart/Coupon'
 // modals 
 import ErrorModal from "./modules/ErrorModal/ErrorModal";
 import Checkout from "./modules/Woocommerce/Checkout/Checkout";
+
+// header 
+import Header from './modules/Header'
+
 let $ = jQuery;
 $(document).on('click', '.ppc-button', () => {
   console.log('this is paypal')
@@ -81,7 +85,8 @@ const errorModal = new ErrorModal()
 const designBoardSaveBtn = new DesignBoardSaveBtn();
 // checkout 
 const checkout = new Checkout()
-
+// header 
+const header = new Header();
 window.onload = function () {
 
 

@@ -12,7 +12,7 @@ class PopUpCart {
             let formData = $('form.cart').data('product_variations')
         })
 
-        $('.header .shopping-cart .cart-items-header').on('click', this.openCart)
+        $('.header .shopping-cart').on('click', this.openCart)
         $(document).on('click', '.cart-box .cont-shopping a', this.closeCart)
         $(document).on('click', '.dark-overlay', this.closeCart)
         $(document).on('click', '.cart-popup-container .title-section i', this.closeCart)
